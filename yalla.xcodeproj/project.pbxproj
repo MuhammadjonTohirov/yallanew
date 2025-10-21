@@ -6,14 +6,52 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5267884F2E9E629D0004CB10 /* NetworkMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 5267884E2E9E629D0004CB10 /* NetworkMonitor */; };
+		526788522E9E66170004CB10 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 526788512E9E66170004CB10 /* FirebaseCore */; };
+		526788542E9E66170004CB10 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 526788532E9E66170004CB10 /* FirebaseCrashlytics */; };
+		526788562E9E66170004CB10 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 526788552E9E66170004CB10 /* FirebaseMessaging */; };
+		526788592E9E66300004CB10 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 526788582E9E66300004CB10 /* Kingfisher */; };
+		526788602E9E68F40004CB10 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5267885F2E9E68F40004CB10 /* FirebaseAnalytics */; };
+		5267887C2E9F7A280004CB10 /* Yalla.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5267887B2E9F7A280004CB10 /* Yalla.xcconfig */; };
+		5275198D2E98C93E002C726B /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 5275198C2E98C93E002C726B /* Core */; };
+		5275198F2E98C93E002C726B /* IldamSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5275198E2E98C93E002C726B /* IldamSDK */; };
+		527519912E98C93E002C726B /* NetworkLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 527519902E98C93E002C726B /* NetworkLayer */; };
+		527519932E98C93E002C726B /* YallaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 527519922E98C93E002C726B /* YallaKit */; };
+		527519962E98CA8D002C726B /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 527519952E98CA8D002C726B /* BottomSheet */; };
+		52EAE1C22EA20B8E005C9E1E /* YallaUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 52EAE1C12EA20B8E005C9E1E /* YallaUtils */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		5267887B2E9F7A280004CB10 /* Yalla.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Yalla.xcconfig; sourceTree = "<group>"; };
 		527519772E98C76E002C726B /* yalla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yalla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5275198A2E98C847002C726B /* Exceptions for "packages" folder in "yalla" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				BottomSheet,
+				NetworkMonitor,
+				YallaStore,
+				YallaUtils,
+			);
+			target = 527519762E98C76E002C726B /* yalla */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		527519792E98C76E002C726B /* yalla */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = yalla;
+			sourceTree = "<group>";
+		};
+		527519882E98C812002C726B /* packages */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5275198A2E98C847002C726B /* Exceptions for "packages" folder in "yalla" target */,
+			);
+			path = packages;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +61,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				526788562E9E66170004CB10 /* FirebaseMessaging in Frameworks */,
+				5267884F2E9E629D0004CB10 /* NetworkMonitor in Frameworks */,
+				527519962E98CA8D002C726B /* BottomSheet in Frameworks */,
+				527519912E98C93E002C726B /* NetworkLayer in Frameworks */,
+				526788592E9E66300004CB10 /* Kingfisher in Frameworks */,
+				5275198D2E98C93E002C726B /* Core in Frameworks */,
+				52EAE1C22EA20B8E005C9E1E /* YallaUtils in Frameworks */,
+				526788602E9E68F40004CB10 /* FirebaseAnalytics in Frameworks */,
+				526788522E9E66170004CB10 /* FirebaseCore in Frameworks */,
+				526788542E9E66170004CB10 /* FirebaseCrashlytics in Frameworks */,
+				5275198F2E98C93E002C726B /* IldamSDK in Frameworks */,
+				527519932E98C93E002C726B /* YallaKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,7 +82,10 @@
 		5275196E2E98C76E002C726B = {
 			isa = PBXGroup;
 			children = (
+				5267887B2E9F7A280004CB10 /* Yalla.xcconfig */,
+				527519882E98C812002C726B /* packages */,
 				527519792E98C76E002C726B /* yalla */,
+				527519942E98CA8D002C726B /* Frameworks */,
 				527519782E98C76E002C726B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +96,13 @@
 				527519772E98C76E002C726B /* yalla.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		527519942E98CA8D002C726B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -62,9 +122,22 @@
 			);
 			fileSystemSynchronizedGroups = (
 				527519792E98C76E002C726B /* yalla */,
+				527519882E98C812002C726B /* packages */,
 			);
 			name = yalla;
 			packageProductDependencies = (
+				5275198C2E98C93E002C726B /* Core */,
+				5275198E2E98C93E002C726B /* IldamSDK */,
+				527519902E98C93E002C726B /* NetworkLayer */,
+				527519922E98C93E002C726B /* YallaKit */,
+				527519952E98CA8D002C726B /* BottomSheet */,
+				5267884E2E9E629D0004CB10 /* NetworkMonitor */,
+				526788512E9E66170004CB10 /* FirebaseCore */,
+				526788532E9E66170004CB10 /* FirebaseCrashlytics */,
+				526788552E9E66170004CB10 /* FirebaseMessaging */,
+				526788582E9E66300004CB10 /* Kingfisher */,
+				5267885F2E9E68F40004CB10 /* FirebaseAnalytics */,
+				52EAE1C12EA20B8E005C9E1E /* YallaUtils */,
 			);
 			productName = yalla;
 			productReference = 527519772E98C76E002C726B /* yalla.app */;
@@ -91,9 +164,17 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				uz,
+				"uz-Cyrl",
 			);
 			mainGroup = 5275196E2E98C76E002C726B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */,
+				526788502E9E66170004CB10 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				526788572E9E66300004CB10 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 527519782E98C76E002C726B /* Products */;
 			projectDirPath = "";
@@ -109,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5267887C2E9F7A280004CB10 /* Yalla.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +267,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -242,12 +325,14 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		527519832E98C774002C726B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5267887B2E9F7A280004CB10 /* Yalla.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -256,30 +341,43 @@
 				DEVELOPMENT_TEAM = 68M23B49C7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "yalla/Resources/Yalla-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Yalla;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to the camera to scan cards.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "We need to acces your contacts to invite your friends";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App needs to use gps inorder  to work properly";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The application need access current location in order to find nearby taxi drivers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uz.royal.yalla;
+				PRODUCT_BUNDLE_IDENTIFIER = uz.ildam.taxiclient2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		527519842E98C774002C726B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5267887B2E9F7A280004CB10 /* Yalla.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -288,25 +386,37 @@
 				DEVELOPMENT_TEAM = 68M23B49C7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "yalla/Resources/Yalla-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Yalla;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to the camera to scan cards.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "We need to acces your contacts to invite your friends";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App needs to use gps inorder  to work properly";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The application need access current location in order to find nearby taxi drivers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uz.royal.yalla;
+				PRODUCT_BUNDLE_IDENTIFIER = uz.ildam.taxiclient2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -332,6 +442,93 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		526788502E9E66170004CB10 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.4.0;
+			};
+		};
+		526788572E9E66300004CB10 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.0;
+			};
+		};
+		5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MuhammadjonTohirov/yallakit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5267884E2E9E629D0004CB10 /* NetworkMonitor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkMonitor;
+		};
+		526788512E9E66170004CB10 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 526788502E9E66170004CB10 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		526788532E9E66170004CB10 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 526788502E9E66170004CB10 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		526788552E9E66170004CB10 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 526788502E9E66170004CB10 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		526788582E9E66300004CB10 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 526788572E9E66300004CB10 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		5267885F2E9E68F40004CB10 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 526788502E9E66170004CB10 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		5275198C2E98C93E002C726B /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */;
+			productName = Core;
+		};
+		5275198E2E98C93E002C726B /* IldamSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */;
+			productName = IldamSDK;
+		};
+		527519902E98C93E002C726B /* NetworkLayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */;
+			productName = NetworkLayer;
+		};
+		527519922E98C93E002C726B /* YallaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */;
+			productName = YallaKit;
+		};
+		527519952E98CA8D002C726B /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BottomSheet;
+		};
+		52EAE1C12EA20B8E005C9E1E /* YallaUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = YallaUtils;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5275196F2E98C76E002C726B /* Project object */;
 }
