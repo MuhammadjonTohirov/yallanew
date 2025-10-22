@@ -51,7 +51,7 @@ enum AppDestination: Hashable, @MainActor ScreenRoute {
         case .permissions:
             PermissionsView()
         case .auth:
-            AuthView()
+            LoginView()
         default:
             EmptyView()
         }

@@ -34,7 +34,7 @@ actor InitialLoadingViewModel: ObservableObject {
                     return
                 }
                 
-                mainModel?.navigate(to: .auth)
+                mainModel?.navigate(to: .home)
             }
         }
     }

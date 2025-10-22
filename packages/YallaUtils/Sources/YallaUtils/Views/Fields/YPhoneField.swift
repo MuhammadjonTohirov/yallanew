@@ -7,28 +7,29 @@
 
 import Foundation
 import SwiftUI
-import Core
 
-struct YPhoneField: View, TextFieldProtocol {
-    @Binding<String> var text: String
-    
+public struct YPhoneField: View, TextFieldProtocol {
+    @Binding<String> public var text: String
+    private var font: Font
+
     private var placeholder: String = ""
     private var format: String = "XX XXX-XX-XX"
     private var onEditingChanged: (Bool) -> Void
     private var onCommit: () -> Void
     
-    private(set) var left: () -> any View
-    private(set) var right: () -> any View
+    public private(set) var left: () -> any View
+    public private(set) var right: () -> any View
     
-    init(
+    public init(
         text: Binding<String>,
+        font: Font = .system(size: 14),
         placeholder: String,
         left: (() -> any View)? = nil,
         right: (() -> any View)? = nil,
         onEditingChanged: ((Bool) -> Void)? = nil,
         onCommit: (() -> Void)? = nil
     ) {
-        
+        self.font = font
         self._text = text
         
         self.placeholder = placeholder
@@ -45,7 +46,7 @@ struct YPhoneField: View, TextFieldProtocol {
         self.onCommit = onCommit ?? {}
     }
     
-    var body: some View {
+    public var body: some View {
         HStack(spacing: 0) {
             AnyView(left())
             
@@ -53,8 +54,8 @@ struct YPhoneField: View, TextFieldProtocol {
                 .placeholder(placeholder, when: text.isEmpty)
                 .keyboardType(.numberPad)
                 .frame(height: 56)
-                .font(.inter(.regular, size: 14))
-
+                .font(font)
+            
             AnyView(right())
         }
         .onAppear {
@@ -64,7 +65,7 @@ struct YPhoneField: View, TextFieldProtocol {
     
     @ViewBuilder var textField: some View {
         TextField(
-            "".localize,
+            "",
             text: $text,
             onEditingChanged: { changed in
                 onEditingChanged(changed)
@@ -78,35 +79,35 @@ struct YPhoneField: View, TextFieldProtocol {
         }
     }
     
-    func set(hintColor: Color) -> YPhoneField {
+    public func set(hintColor: Color) -> YPhoneField {
         return self
     }
     
-    func set(font: Font) -> YPhoneField {
+    public func set(font: Font) -> YPhoneField {
         return self
     }
     
-    func set(format: String) -> YPhoneField {
+    public func set(format: String) -> YPhoneField {
         return self
     }
     
-    func set(placeholderAlignment align: Alignment) -> YPhoneField {
+    public func set(placeholderAlignment align: Alignment) -> YPhoneField {
         return self
     }
     
-    func set(formatter: NumberFormatter) -> YPhoneField {
+    public func set(formatter: NumberFormatter) -> YPhoneField {
         return self
     }
     
-    func set(height: CGFloat) -> YPhoneField {
+    public func set(height: CGFloat) -> YPhoneField {
         return self
     }
     
-    func set(haveTitle: Bool) -> YPhoneField {
+    public func set(haveTitle: Bool) -> YPhoneField {
         return self
     }
     
-    func keyboardType(_ type: UIKeyboardType) -> YPhoneField {
+    public func keyboardType(_ type: UIKeyboardType) -> YPhoneField {
         return self
     }
 }

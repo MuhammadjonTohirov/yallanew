@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension Font {
+public extension Font {
     // MARK: - Title
     /// Title / XLarge — SF Pro Text, Bold, 30px
     static var titleXLargeBold: Font {

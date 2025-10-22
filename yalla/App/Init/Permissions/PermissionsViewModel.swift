@@ -98,7 +98,7 @@ final class PermissionsViewModel: ObservableObject {
     
     private func checkInitialPermissions() {
         Task { @MainActor in
-            let locationStatus = await interactor.checkLocationStatus()
+            let locationStatus = interactor.checkLocationStatus()
             
             if locationStatus == .authorized {
                 currentPermission = .notification

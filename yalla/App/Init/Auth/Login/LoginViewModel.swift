@@ -44,7 +44,7 @@ enum AuthRoute: @MainActor ScreenRoute, Hashable {
     }
 }
 
-class AuthViewModel: ObservableObject {
+class LoginViewModel: ObservableObject {
     var route: AuthRoute? {
         didSet {
             pushRoute = route != nil

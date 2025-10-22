@@ -7,13 +7,14 @@
 
 import Foundation
 import SwiftUI
+import YallaUtils
 
 public struct YRoundedTextField<Content: View>: View {
     @FocusState var isFocused: Bool
     var textField: () -> Content
     var onFocusChanged: ((Bool) -> Void)?
     
-    var borderColor: Color = .secondary
+    var borderColor: Color = .red
     
     public init(
         focused: Bool = false,
@@ -30,8 +31,13 @@ public struct YRoundedTextField<Content: View>: View {
                     isFocused = true
                 }
                 .modifier(
-                    YTextFieldBorderStyle()
-                        .set(borderColor: isFocused ? .gray : borderColor)
+                    YTextFieldBorderStyle(
+                        padding: 0,
+                        borderRadius: 10,
+                        borderColor: borderColor,
+                        backgroundColor: .clear
+                    )
+                    .set(borderColor: borderColor)
                 )
                 .focused($isFocused)
                 .onChange(of: isFocused) { val in
@@ -47,7 +53,7 @@ public struct YRoundedTextField<Content: View>: View {
     }
 }
 
-extension YRoundedTextField {
+public extension YRoundedTextField {
     func set(borderColor: Color) -> Self {
         var v = self
         v.borderColor = borderColor

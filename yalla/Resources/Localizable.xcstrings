@@ -1,6 +1,35 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "birth_date" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birth date"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата рождения"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tug’ulgan sana"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Туғулган сана"
+          }
+        }
+      }
+    },
     "code_security" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12,7 +41,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Код безопасности"
           }
         },
@@ -41,7 +70,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Введите %@-значный код, который мы отправили на номер %@"
           }
         },
@@ -53,7 +82,7 @@
         },
         "uz-Cyrl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Калит сўзини олиш учун %@ рақмига юборилган ҳабарни ўқинг. "
           }
         }
@@ -84,6 +113,122 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сизнинг вақтингиз - бизнинг тезлик"
+          }
+        }
+      }
+    },
+    "insert.first_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insert name"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите имя"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ism kiriting"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Исм киритинг"
+          }
+        }
+      }
+    },
+    "insert.last_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insert surname"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите фамилию"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Familya kiriting"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фамиля киритинг"
+          }
+        }
+      }
+    },
+    "login.phone.field.descr" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An SMS with a confirmation code will be sent to your number."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "На ваш номер будет отправлено SMS с кодом подтверждения"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raqamingizga tasdiqlash kodi bilan SMS yuboriladi."
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рақамингизга тасдиқлаш коди билан СМС юборилади. "
+          }
+        }
+      }
+    },
+    "login.title.caption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter your phone number to continue"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Укажите свой номер телефона, чтобы продолжить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Davom etish uchun telefon raqamingizni kiriting."
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Давом этиш учун телефон рақамингизни киритинг. "
           }
         }
       }
@@ -432,6 +577,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ дан сўнг қайта сўров юбориш мумкин.  "
+          }
+        }
+      }
+    },
+    "welcome" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добро пожаловать"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush kelibsiz"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳуш келибсиз"
           }
         }
       }
