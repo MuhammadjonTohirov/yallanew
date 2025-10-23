@@ -31,11 +31,11 @@ struct LanguageRowView: View {
     private func image(for language: LanguageProtocol) -> Image? {
         switch language {
         case is LanguageUz:
-            return .init("icon_uzbekistán")
+            return .init("icon_uzbekistan")
         case is LanguageRu:
             return .init("icon_russia")
         case is LanguageUzCryl:
-            return .init("icon_uzbekistán")
+            return .init("icon_uzbekistan")
         case is LanguageEn:
             return .init("icon_united kingdom")
         default:
