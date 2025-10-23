@@ -47,10 +47,6 @@ struct HomeSavedAddressesCard: View {
             .frame(height: 120.scaled)
             .overlay {
                 ZStack(alignment: .bottomTrailing) {
-                    Image("img_address_card_background")
-                        .resizable()
-                        .frame(height: 120.scaled)
-                        
                     Image("img_map_pin")
                         .resizable()
                         .frame(width: 94.scaled, height: 94.scaled)
@@ -69,19 +65,13 @@ struct HomeSavedAddressesCard: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Image(systemName: "plus.circle.fill")
-                        .resizable()
-                        .frame(width: 40.scaled, height: 40.scaled)
-                        .foregroundStyle(Color.iPrimary)
-                        .background(
-                            Circle()
-                                .fill(Color.white)
-                                .shadow(color: .black.opacity(0.15), radius: 6, y: 2)
-                        )
-                        .padding(10)
+                    addButton
                         .onClick {
                             onAddAddress?()
                         }
+                        .modifier(WaveEffectModifier(largeningPercentage: 1))
+                        .padding(10)
+                        .zIndex(0)
                 }
             }
             .cornerRadius(20, corners: .allCorners)
@@ -142,20 +132,33 @@ struct HomeSavedAddressesCard: View {
         } label: {
             RoundedRectangle(cornerRadius: 20.scaled, style: .continuous)
                 .fill(cardBackground)
-                .frame(width: 120.scaled, height: 120.scaled)
                 .overlay {
                     Circle()
                         .fill(Color.white)
                         .frame(width: 48.scaled, height: 48.scaled)
-                        .shadow(color: .black.opacity(0.15), radius: 6, y: 2)
                         .overlay {
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 20.scaled, weight: .semibold))
-                                .foregroundStyle(Color.iPrimary)
+                            addButton
                         }
+                        .modifier(WaveEffectModifier(largeningPercentage: 0.5, waveCount: 2))
                 }
+                .frame(width: 120.scaled, height: 120.scaled)
+                
+                .cornerRadius(20.scaled, corners: .allCorners)
         }
         .buttonStyle(.plain)
+    }
+    
+    private var addButton: some View {
+        Image(systemName: "plus.circle.fill")
+            .resizable()
+            .frame(width: 40.scaled, height: 40.scaled)
+            .foregroundStyle(Color.iPrimary)
+            .background {
+                Circle()
+                    .padding(0.5)
+                    .foregroundStyle(.white)
+                    .shadow(color: .black.opacity(0.15), radius: 6, x: 0, y: 2)
+            }
     }
 }
 

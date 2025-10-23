@@ -23,7 +23,6 @@ public struct InteractivePopGestureEnabler: UIViewControllerRepresentable {
             super.viewDidAppear(animated)
             guard let nav = navigationController,
                   let pop = nav.interactivePopGestureRecognizer else { return }
-            // Ensure the gesture works even when the back button is hidden
             pop.isEnabled = true
             pop.delegate = self
             // Optional: keep the bar hidden but gesture alive
