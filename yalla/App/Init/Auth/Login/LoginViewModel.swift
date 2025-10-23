@@ -45,6 +45,7 @@ enum AuthRoute: @MainActor ScreenRoute, Hashable {
 }
 
 class LoginViewModel: ObservableObject {
+    // Route used for non-OTP flows (e.g., register)
     var route: AuthRoute? {
         didSet {
             pushRoute = route != nil
@@ -52,6 +53,10 @@ class LoginViewModel: ObservableObject {
     }
     
     @Published var pushRoute = false
+    
+    // Controls OTP bottom sheet presentation
+    @Published var presentOTP: Bool = false
+    @Published var otpViewModelForSheet: OTPViewModel?
     @Published var shouldShowAlert: Bool = false
     @Published var isLoading: Bool = false
     
@@ -118,12 +123,15 @@ class LoginViewModel: ObservableObject {
         self.otpViewModel.onCheckOTP = { otp in
             return await self.checkOTP(withCode: otp)
         }
-        
-        self.route = .confirmOTP(vm: self.otpViewModel)
+        // Present OTP as a bottom sheet instead of navigation push
+        self.otpViewModelForSheet = self.otpViewModel
+        self.presentOTP = true
     }
     
     private func onSuccessConfirmOTP(_ isNewClient: Bool) {
         DispatchQueue.main.async {
+            // Dismiss OTP sheet before next navigation
+            self.presentOTP = false
             
             if isNewClient {
                 Logging.l(tag: "AuthViewModel", "Show register profile (new \(isNewClient))")
@@ -136,7 +144,7 @@ class LoginViewModel: ObservableObject {
     
     private func showMain() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-            mainModel?.navigate(to: .loading)
+            mainModel?.navigate(to: .home)
         }
     }
     

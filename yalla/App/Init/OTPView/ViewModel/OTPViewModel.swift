@@ -13,7 +13,14 @@ import Combine
 class OTPViewModel: ObservableObject {
     @Published var shouldShowAlert: Bool = false
     @MainActor
-    @Published var otpValue: String = ""
+    @Published var otpValue: String = "" {
+        didSet {
+            // Auto-submit when the OTP reaches required length
+            if otpValue.count == otpCount && !isLoading {
+                onClickValidate()
+            }
+        }
+    }
     @MainActor
     @Published var isLoading: Bool = false
     

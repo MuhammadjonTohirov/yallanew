@@ -92,7 +92,8 @@ final class PermissionsViewModel: ObservableObject {
         case .location:
             currentPermission = .notification
         case .notification:
-            mainModel?.navigate(to: .home)
+            OnboardingFlags.didShowPermissions = true
+            mainModel?.navigate(to: .auth)
         }
     }
     
@@ -120,7 +121,8 @@ final class PermissionsViewModel: ObservableObject {
         switch status {
         case .authorized, .denied:
             await MainActor.run {
-                mainModel?.navigate(to: .home)
+                OnboardingFlags.didShowPermissions = true
+                mainModel?.navigate(to: .auth)
             }
         case .notDetermined:
             hasError = true
