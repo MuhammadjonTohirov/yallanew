@@ -22,18 +22,24 @@ actor InitialLoadingViewModel: ObservableObject {
         
         Task {
             _ = await NotificationPermissionManager.shared.checkStatus()
-            
-            var isLanguageSelected: Bool {
-                UserSettings.shared.isLanguageSelected ?? false
-            }
+
+            let isLanguageSelected = UserSettings.shared.isLanguageSelected ?? false
+            let didShowPermissions = await OnboardingFlags.didShowPermissions
+            let hasAccessToken = UserSettings.shared.accessToken?.nilIfEmpty != nil
 
             await MainActor.run {
                 if !isLanguageSelected {
                     mainModel?.navigate(to: .language)
-                    
                     return
                 }
-                
+                if !didShowPermissions {
+                    mainModel?.navigate(to: .permissions)
+                    return
+                }
+                if !hasAccessToken {
+                    mainModel?.navigate(to: .auth)
+                    return
+                }
                 mainModel?.navigate(to: .home)
             }
         }
