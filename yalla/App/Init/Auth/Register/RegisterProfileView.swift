@@ -125,26 +125,29 @@ struct RegisterProfileView: View {
                 }
             }
             .padding(.horizontal, AppParams.Padding.large)
-            
-            HStack {
-                RadioButton(
-                    title: Text("male".localize)
-                        .foregroundStyle(gender == .male ? .iLabel : .iLabelSubtle),
-                    isSelected: gender == .male,
-                ) { // Мужчина
-                    gender = .male
-                }
-                .frame(width: 160.f.w, height: 60)
-                
-                RadioButton(
-                    title: Text("female".localize),
-                    isSelected: gender == .female
-                ) {
-                    gender = .female
-                }
-                .frame(width: 160.f.w, height: 60)
+         
+           HStack {
+               Button {
+                   gender = .male
+               } label: {
+                   pillButton(text: "male".localize, isSelected: gender == .male)
+                       .frame(maxWidth: .infinity)
+                       .contentShape(Rectangle())
+               }
+               .buttonStyle(.plain)
+
+               Button {
+                   gender = .female
+               } label: {
+                   pillButton(text: "female".localize, isSelected: gender == .female)
+                       .frame(maxWidth: .infinity)
+                       .contentShape(Rectangle())
+               }
+               .buttonStyle(.plain)
             }
-            
+           .padding(.vertical, 16)
+           .padding(.horizontal)
+
             Spacer()
             
             SubmitButtonFactory.primary(title: "next".localize) {
@@ -154,7 +157,32 @@ struct RegisterProfileView: View {
             .padding(.horizontal)
         }
     }
+
+    func pillButton(text: String, isSelected: Bool) -> some View {
+        HStack(spacing: 8) {
+            Text(text)
+                .font(.system(size: 15, weight: .medium))
+                .foregroundColor(Color.iLabel)
+            
+            Spacer()
+            
+            Circle()
+                .fill(isSelected ? Color.iPrimary : Color.iPrimary.opacity(0.25))
+                .frame(width: 24, height: 24)
+                .overlay(
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.white)
+                        .opacity(isSelected ? 1 : 0)
+                )
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 15)
+        .background(Color(hex: "F7F7F7"))
+        .cornerRadius(18)
+    }
     
+
     private var datePickerView: some View {
         VStack(spacing: 0) {
             HStack {
@@ -181,3 +209,5 @@ struct RegisterProfileView: View {
 #Preview(body: {
     RegisterProfileView()
 })
+
+ 

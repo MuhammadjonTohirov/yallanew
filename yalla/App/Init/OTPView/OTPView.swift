@@ -23,52 +23,61 @@ struct SecurityCodeInputView: View {
     @State private var showError: Bool = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: AppParams.Padding.extraLarge.scaled) {
-            
-            VStack(alignment: .leading, spacing: 0) {
-                Text("code_security".localize)
-                    .font(.titleXLargeBold)
-                
-                Text(viewModel.descriptionText)
-                    .multilineTextAlignment(.leading)
-                    .font(.bodySmallRegular)
-                    .foregroundStyle(Color.iLabel)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, AppParams.Padding.large)
-            
-            OTPField(
-                text: $viewModel.otpValue,
-                numberOfFields: viewModel.otpCount,
-                isFocused: _otpFieldFocus
-            )
-            
-            Text("send_code_after".localize(arguments: "00:\(String(format: "%02d", secondsRemaining))"))
-                .font(.caption)
-                .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-                    if secondsRemaining > 0 {
-                        secondsRemaining -= 1
+        ZStack(alignment: .topLeading) {
+            ScrollView(.vertical) {
+                VStack(alignment: .leading, spacing: AppParams.Padding.extraLarge.scaled) {
+                    
+                    VStack(alignment: .leading, spacing: 0) {
+                        DismissCircleButton()
+                            .padding(.bottom, 15)
+                        
+                        Text("code_security".localize)
+                            .font(.titleXLargeBold)
+                        
+                        Text(viewModel.descriptionText)
+                            .multilineTextAlignment(.leading)
+                            .font(.bodySmallRegular)
+                            .foregroundStyle(Color.iLabel)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, AppParams.Padding.large)
+                    
+                    OTPField(
+                        text: $viewModel.otpValue,
+                        numberOfFields: viewModel.otpCount,
+                        isFocused: _otpFieldFocus
+                    )
+                    
+                    Text("send_code_after".localize(arguments: "00:\(String(format: "%02d", secondsRemaining))"))
+                        .font(.caption)
+                        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+                            if secondsRemaining > 0 {
+                                secondsRemaining -= 1
+                            }
+                        }
+                        .foregroundStyle(Color.iLabel)
+                        .font(.bodySmallRegular)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    Spacer()
+                    
+                    SubmitButtonFactory.primary(title: "next".localize) {
+                        self.viewModel.onClickValidate()
+                    }
+                    .set(isEnabled: viewModel.isValid)
+                    .set(isLoading: viewModel.isLoading)
+                    .disabled(viewModel.isLoading)
                 }
-                .foregroundStyle(Color.iLabel)
-                .font(.bodySmallRegular)
-                .frame(maxWidth: .infinity, alignment: .center)
-            
-            Spacer()
-            
-            SubmitButtonFactory.primary(title: "next".localize) {
-                self.viewModel.onClickValidate()
             }
-            .set(isEnabled: viewModel.isValid)
-            .set(isLoading: viewModel.isLoading)
-            .disabled(viewModel.isLoading)
+            .padding([.horizontal, .bottom], 20)
+            
+           
         }
         .onChange(of: otpFieldFocus, perform: { value in
             if !value {
                 self.otpFieldFocus = true
             }
         })
-        .padding([.horizontal, .bottom], 20)
         .onAppear {
             self.code =  Array(repeating: "", count: viewModel.otpCount)
             self.otpFieldFocus = true
@@ -78,6 +87,7 @@ struct SecurityCodeInputView: View {
             viewModel.otpValue = "23"
             #endif
         }
+        .navigationBarHidden(true)
     }
     
     private func showErrorAlert() {
@@ -88,10 +98,5 @@ struct SecurityCodeInputView: View {
 #Preview {
     NavigationStack {
         SecurityCodeInputView(viewModel: OTPViewModel(otpCount: 6))
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    DismissCircleButton()
-                }
-            }
     }
 }
