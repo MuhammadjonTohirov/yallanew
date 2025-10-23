@@ -18,7 +18,6 @@
 		5275198F2E98C93E002C726B /* IldamSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5275198E2E98C93E002C726B /* IldamSDK */; };
 		527519912E98C93E002C726B /* NetworkLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 527519902E98C93E002C726B /* NetworkLayer */; };
 		527519932E98C93E002C726B /* YallaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 527519922E98C93E002C726B /* YallaKit */; };
-		527519962E98CA8D002C726B /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 527519952E98CA8D002C726B /* BottomSheet */; };
 		52EAE1C22EA20B8E005C9E1E /* YallaUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 52EAE1C12EA20B8E005C9E1E /* YallaUtils */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +30,6 @@
 		5275198A2E98C847002C726B /* Exceptions for "packages" folder in "yalla" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				BottomSheet,
 				NetworkMonitor,
 				YallaStore,
 				YallaUtils,
@@ -63,7 +61,6 @@
 			files = (
 				526788562E9E66170004CB10 /* FirebaseMessaging in Frameworks */,
 				5267884F2E9E629D0004CB10 /* NetworkMonitor in Frameworks */,
-				527519962E98CA8D002C726B /* BottomSheet in Frameworks */,
 				527519912E98C93E002C726B /* NetworkLayer in Frameworks */,
 				526788592E9E66300004CB10 /* Kingfisher in Frameworks */,
 				5275198D2E98C93E002C726B /* Core in Frameworks */,
@@ -130,7 +127,6 @@
 				5275198E2E98C93E002C726B /* IldamSDK */,
 				527519902E98C93E002C726B /* NetworkLayer */,
 				527519922E98C93E002C726B /* YallaKit */,
-				527519952E98CA8D002C726B /* BottomSheet */,
 				5267884E2E9E629D0004CB10 /* NetworkMonitor */,
 				526788512E9E66170004CB10 /* FirebaseCore */,
 				526788532E9E66170004CB10 /* FirebaseCrashlytics */,
@@ -519,10 +515,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */;
 			productName = YallaKit;
-		};
-		527519952E98CA8D002C726B /* BottomSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = BottomSheet;
 		};
 		52EAE1C12EA20B8E005C9E1E /* YallaUtils */ = {
 			isa = XCSwiftPackageProductDependency;
