@@ -34,6 +34,8 @@ struct SideMenuBody: View {
                 sectionTwo
                 
                 sectionThree
+                
+                becomeDriverRow
             }
             .padding()
             .scrollable(axis: .vertical)
@@ -165,17 +167,6 @@ struct SideMenuBody: View {
             }
             .visibility(false)
             
-            // Стать водителем
-            row(
-                icon: Image("icon_drive"),
-                title: "become.driver".localize
-            )
-            .padding(.horizontal, AppParams.Padding.default)
-            .onClick {
-                viewModel.onClick(menu: .driver)
-            }
-            .visibility(false)
-            
             divider
             
             // Связаться с нами
@@ -193,17 +184,55 @@ struct SideMenuBody: View {
             // Связаться с нами
             row(
                 icon: Image("icon_notification"),
-                title: "news.and.notifs".localize
+                title: "news.and.notifs".localize,
+                rightView: AnyView(
+                    Circle()
+                        .foregroundStyle(Color.init(uiColor: .systemRed))
+                        .frame(width: 24, height: 24)
+                        .overlay {
+                            Text(verbatim: "0")
+                                .foregroundStyle(.white)
+                                .font(.bodySmallBold)
+                        }
+                )
             )
             .padding(.horizontal, AppParams.Padding.default)
             .onClick {
                 viewModel.onClick(menu: .notification)
             }
+            
         }
         .background {
             RoundedRectangle(cornerRadius: AppParams.Padding.default)
                 .foregroundStyle(Color.iBackgroundSecondary)
         }
+    }
+    
+    private var becomeDriverRow: some View {
+        Image("img_become_driver_bg")
+            .resizable()
+            .frame(height: 64)
+            .overlay {
+                ZStack {
+                    Image("img_become_driver")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 64)
+                        .horizontal(alignment: .leading)
+                    
+                    Text("become.driver".localize)
+                        .font(.titleBaseBold)
+                        .foregroundStyle(.white)
+                    
+
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 20, weight: .bold))
+                        .horizontal(alignment: .trailing)
+                        .foregroundStyle(.white)
+                        .padding()
+                }
+            }
+            .cornerRadius(16, corners: .allCorners)
     }
     
     private var divider: some View {
@@ -235,7 +264,13 @@ struct SideMenuBody: View {
         }
     }
     
-    private func row(icon: Image, title: String, detail: String? = nil, renderingMode: Image.TemplateRenderingMode = .template) -> some View {
+    private func row(
+        icon: Image,
+        title: String,
+        detail: String? = nil,
+        renderingMode: Image.TemplateRenderingMode = .template,
+        rightView: (AnyView)? = nil
+    ) -> some View {
         HStack(spacing: 10) {
             icon
                 .renderingMode(renderingMode)
@@ -253,6 +288,11 @@ struct SideMenuBody: View {
                 }
             }
             Spacer()
+            
+            if let rightView {
+                rightView
+            }
+            
             Image(systemName: "chevron.right")
                 .font(.system(size: 14))
         }
@@ -300,29 +340,11 @@ struct SideMenuBody: View {
     }
     
     private func paymentTypeRow() -> some View {
-        HStack(spacing: 10) {
-            Image("icon_cash3d")
-            
-            VStack(alignment: .leading, spacing: 2) {
-                Text("payment.methods".localize)
-                    .font(.bodyLargeMedium)
-                    .foregroundStyle(Color.label)
-                
-                Text(viewModel.paymentMethod)
-                    .font(.bodyCaptionMedium)
-                    .foregroundStyle(Color.init(uiColor: .label))
-            }
-            
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-                .font(.system(size: 14))
-        }
-        .frame(height: 60)
-        .overlay {
-            Rectangle()
-                .foregroundStyle(Color.background.opacity(0.01))
-        }
+        row(
+            icon: .init("icon_cash3d"),
+            title: "payment.methods".localize,
+            renderingMode: .original
+        )
     }
 }
 
