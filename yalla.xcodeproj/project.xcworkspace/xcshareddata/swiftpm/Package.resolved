@@ -1,5 +1,5 @@
 {
-  "originHash" : "012f11353de036a0d1ac9d81afcad9379551cf9dc5d6c0a2ba42ceca461d5ef3",
+  "originHash" : "acbcb2daadcc2fef68580452b7522baaf85f489996392d57af0b14b1843f668b",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -160,7 +160,7 @@
       "location" : "https://github.com/MuhammadjonTohirov/yallakit",
       "state" : {
         "branch" : "main",
-        "revision" : "3a8ffd69d112561ec560aada68e530dab3ee3e3a"
+        "revision" : "4507a1ef3fd5d8ba900b16918e21cc59a1111fe6"
       }
     }
   ],

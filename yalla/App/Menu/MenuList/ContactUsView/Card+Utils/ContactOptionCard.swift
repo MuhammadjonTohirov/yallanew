@@ -19,11 +19,12 @@ struct ContactOptionCard: View {
             HStack(spacing: 20) {
                 // Icon container
                 VStack(alignment: .leading, spacing: 10) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20)
+                    
+                    ZStack(alignment: .center) {
+                        RoundedRectangle(cornerRadius: 13)
                             .fill(Color.iPrimary)
                             .opacity(0.15)
-                            .frame(width: 70, height: 70)
+                            .frame(width: 44, height: 44)
                         
                         Image(icon)
                         .resizable()
@@ -44,8 +45,14 @@ struct ContactOptionCard: View {
             .padding(.vertical, 20)
             .background(
                 RoundedRectangle(cornerRadius: 25)
-                    .fill(Color(red: 0.95, green: 0.95, blue: 0.97))
+                    .fill(Color.iBackgroundSecondary)
             )
         }
+    }
+}
+
+#Preview {
+    ContactOptionCard(icon: "icon_telegramm", title: "asdsad") {
+        
     }
 }

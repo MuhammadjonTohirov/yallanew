@@ -16,6 +16,7 @@ struct NotificationsView: View {
     var viewModel: NotificationsViewModel = .init()
     
     var body: some View {
+        emptyNotificationsView
         PageableScrollView(
             title: "news.and.notifs".localize,
             onReachedBottom: {
@@ -45,13 +46,16 @@ struct NotificationsView: View {
     private var notificationListView: some View {
         LazyVStack(spacing: 20) {
             ForEach(viewModel.notifications) { notif in
-                NotificationItemView(
-                    imageUrl: notif.image ?? "",
-                    date: notif.date,
-                    title: notif.title,
-                    descr: "",
-                    isRead: notif.isRead
-                )
+
+                NotificationCard(
+                    notification: NotifItem(
+                        id: notif.id,
+                        title: notif.title,
+                        type: notif.type ?? "",
+                        date: notif.date,
+                        content: notif.content,
+                        isRead: notif.isRead
+                    ))
                 .onTapGesture {
                     viewModel.showNotificationDetails(notif.id)
                 }
@@ -81,7 +85,7 @@ struct NotificationsView: View {
 }
 
 #Preview {
-//    UserSettings.shared.accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiMzM0NTllNWJhMzYxNjBlYjAyZTc4MGMwZDkwMWI0OTM0YTExMzJkZjA2ZWZkMzJmNWYyZjQ1MmRmOGIyMmI2MTlkYjMzZDIzYTU2ZmQyNTkiLCJpYXQiOjE3NDQ4NzU4ODUuOTE0ODI5LCJuYmYiOjE3NDQ4NzU4ODUuOTE0ODMxLCJleHAiOjE3NzY0MTE4ODUuOTA4NTgsInN1YiI6IjI0MjAzNSIsInNjb3BlcyI6WyJjbGllbnQiXX0.eTkG-iZYxU0tCZGsZS6VD4NlUeTRP4bYKfwrQv_YLiQJ0ma_9y5pgDaZ4yr0QX2P_GyiVMnyYAeVSc18sE3rfpeQbJfXe50L3rry9YSWza-ZhQFKodD0WtJ4aUqwOvQjLVeYOQUb0YFgfY2nCrGZqX5q2IiX7Coq9injWHz_l47FpPKhWsc8vtcbhF9O4u3CiB9sIMX6k5yrNxhGF3p93073Kf3A-zOZg-ADX5rsktR22eaHbJXCgp-xfMkX94m7fm55TmhO7YGoreyoSg9TwBWEZD-FJGPVcFDnnJ2w7BA6X0QmrSzhhgIk00flDLrT1-IyHoResBdoDMIcvYMYF2S0whoJEZbNxLM38Ju5_VuVyj6dVvIuw2I3J2EtkE7vmtRLXn_XY7YYp0FsvvKNws3Zo_zsyQFEf28jzxNQT8nPq3NsLbSyBqNp-1KGn_3f6zKLhQ2vztQNEJp_tmCvEVa-t7K1o-E-_U70Trqj2Fzo9Z-kGOqWqyt_9I2nbPob1HVy2PngMLLUPeo3joRD4YHyMSatZAgey_E5o6b6w_nH3eFXekQtja1176_bXj1aBqsL7LuDUtyt_np9faPM9zcvs6wMhC1FYshW47OD0qJaS9EO5SzwKpwc7HTTd4OmTvv-cI6aJEdjBnZBWrZ3KBchvL7ws9ZxZ2h_lgkYeFA"
-//    UserSettings.shared.setupForTest()
-//    return NotificationsView()
+    UserSettings.shared.accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiOTEwNTI4MTRhMGMyZGIzMzJhMDEzNGQ0MDZmMjdiNjUwMTk0NjY0OTM0NWVkNWMwMWU3NGFmMjhhMTY1MWRhMzgyZmMwNzE5MzhiMmExMWIiLCJpYXQiOjE3NjEzMDMxOTEuNzMyNTE4LCJuYmYiOjE3NjEzMDMxOTEuNzMyNTIsImV4cCI6MTc5MjgzOTE5MS43MjgzODYsInN1YiI6IjU5OTgiLCJzY29wZXMiOlsiY2xpZW50Il19.kuDDavJIR1IhTNE7Sj32qOs1WpU9wjR3uOaLIZ-GOya6LzjfB1zyuoj-38D-d8Dyot-PrINqD_7q7Rc9BxQaIlhpPbq07F01G19pw_nEU0mp3OvRhP8M0nzLsd0eGpHJg0E95DrIkaMcZu692EIC3LJN0SbaAqBuLa9xShhWPYJ4Un21D14FYI8a50PruhYE04tphJp9SBumJMleyau-Pr2lVAxkHOR2QQrMQzFw_nlQ9Bqs2E_51HuEjhdDwI1ss_py9h5EdrKvkyvh_b-2QOzN1jdgNzLJ_FPs5PtFKvNPgyK18femuRp2smtPssDAhccRuVwkhrqVIWICWeDONAX6h4aZmLJCxq_PA0Gk2Mc89HZFNwNE2j80838TZhJzERCmkB5V7MQmbCQrnEDQ5qHa_sxRMv8ZfGnjWhG27fjmL_bQO-Y-pO85X_EWBUCYL0nO11jODp45eT6Z9Q5MVfTUzIC7D614v6XeV3TwImyI4egM9_0QkKmfE-cj13i8y9nqu9RLMeKuvM5ftyZqRBzcul4uo8lgrFOAnP2nsxcDzC8r1NYAgmhRMgQBDIsw1fMnKMsueGl_VrGNy3tSlehT19WOmsN5s0nMPye5lrY87gpIctC8ZqwZl7H1UiBwcWEImV5TenhL6XBHRRVPnv9RVVhudeAuldK1lt079Is"
+    UserSettings.shared.setupForTest()
+    return NotificationsView()
 }

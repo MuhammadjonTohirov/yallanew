@@ -37,8 +37,7 @@ struct NotificationItemView: View {
             .placeholder {
                 Image("img_placeholder")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 105, height: 72, alignment: .center)
+                    .aspectRatio(contentMode: .fill)
             }
             .resizable()
             .aspectRatio(contentMode: .fill)

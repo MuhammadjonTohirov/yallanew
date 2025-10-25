@@ -5,7 +5,6 @@
 //  Created by Muhammadjon Tohirov on 22/04/25.
 //
 
-import Foundation
 import SwiftUI
 import IldamSDK
 import YallaUtils
