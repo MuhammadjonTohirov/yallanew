@@ -237,32 +237,12 @@ struct EditProfileView: View {
 extension EditProfileView {
     private var menuView: some View {
         VStack(alignment: .leading, spacing: 10.scaled) {
-            HStack(spacing: 12.scaled) {
-                Image("icon_trash")
-                Text("delete.account".localize) // Удалить аккаунт
-                    .font(.bodyBaseMedium)
-            }
-            .frame(maxWidth: .infinity, alignment: .init(horizontal: .leading, vertical: .center))
-            .frame(height: 60)
-            .padding(.horizontal, 16.scaled)
-            .background {
-                RoundedRectangle(cornerRadius: 16.scaled).foregroundStyle(.iBackgroundSecondary)
-            }
+            rowItemView(image: Image("icon_trash"), text: "delete.account".localize)
             .onClick {
                 viewModel.onClickShowDeleteAccountSheet()
             }
  
-            HStack(spacing: 12.scaled) {
-                Image.icon("icon_logout")
-                Text("logout".localize)
-                    .font(.bodyBaseMedium)
-            }
-            .frame(maxWidth: .infinity, alignment: .init(horizontal: .leading, vertical: .center))
-            .frame(height: 60)
-            .padding(.horizontal, 16.scaled)
-            .background {
-                RoundedRectangle(cornerRadius: 16.scaled).foregroundStyle(.iBackgroundSecondary)
-            }
+            rowItemView(image: Image.icon("icon_logout"), text: "logout".localize)
             .onClick {
                 viewModel.onClickLogoutAccount()
             }
@@ -329,7 +309,7 @@ extension EditProfileView {
         }
     }
     
-    private func rowItemView(image: Image, text: String) -> some View {
+    private func rowItemView(image: some View, text: String) -> some View {
         HStack(spacing: 12.scaled) {
             image
             Text(text) // Удалить аккаунт
