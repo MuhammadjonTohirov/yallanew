@@ -328,6 +328,20 @@ extension EditProfileView {
             .padding(.horizontal, AppParams.Padding.default)
         }
     }
+    
+    private func rowItemView(image: Image, text: String) -> some View {
+        HStack(spacing: 12.scaled) {
+            image
+            Text(text) // Удалить аккаунт
+                .font(.bodyBaseMedium)
+        }
+        .frame(maxWidth: .infinity, alignment: .init(horizontal: .leading, vertical: .center))
+        .frame(height: 60)
+        .padding(.horizontal, 16.scaled)
+        .background {
+            RoundedRectangle(cornerRadius: 16.scaled).foregroundStyle(.iBackgroundSecondary)
+        }
+    }
 }
 
 #Preview {
