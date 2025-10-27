@@ -13,7 +13,6 @@
 		526788562E9E66170004CB10 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 526788552E9E66170004CB10 /* FirebaseMessaging */; };
 		526788592E9E66300004CB10 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 526788582E9E66300004CB10 /* Kingfisher */; };
 		526788602E9E68F40004CB10 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5267885F2E9E68F40004CB10 /* FirebaseAnalytics */; };
-		5267887C2E9F7A280004CB10 /* Yalla.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5267887B2E9F7A280004CB10 /* Yalla.xcconfig */; };
 		5275198D2E98C93E002C726B /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 5275198C2E98C93E002C726B /* Core */; };
 		5275198F2E98C93E002C726B /* IldamSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5275198E2E98C93E002C726B /* IldamSDK */; };
 		527519912E98C93E002C726B /* NetworkLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 527519902E98C93E002C726B /* NetworkLayer */; };
@@ -25,6 +24,12 @@
 		0552EA7E2EAF8DF50002DD79 /* Demo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Demo.xcodeproj; sourceTree = "<group>"; };
 		0552EAB82EAF8DF50002DD79 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
 		0552EABB2EAF8DF50002DD79 /* iMessageDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iMessageDemo.xcodeproj; sourceTree = "<group>"; };
+		0552EDD52EAF92560002DD79 /* Demo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Demo.xcodeproj; sourceTree = "<group>"; };
+		0552EE0C2EAF92560002DD79 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
+		0552EE0F2EAF92560002DD79 /* iMessageDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iMessageDemo.xcodeproj; sourceTree = "<group>"; };
+		0552EFEA2EAF9EE50002DD79 /* Demo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Demo.xcodeproj; sourceTree = "<group>"; };
+		0552F0212EAF9EE50002DD79 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
+		0552F0242EAF9EE50002DD79 /* iMessageDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iMessageDemo.xcodeproj; sourceTree = "<group>"; };
 		5267887B2E9F7A280004CB10 /* Yalla.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Yalla.xcconfig; sourceTree = "<group>"; };
 		527519772E98C76E002C726B /* yalla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yalla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -94,6 +99,48 @@
 			sourceTree = "<group>";
 		};
 		0552EB172EAF8DF50002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552EE6F2EAF92560002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552EE712EAF92560002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552EE732EAF92560002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552F0842EAF9EE50002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552F0862EAF9EE50002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552F0882EAF9EE50002DD79 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -203,12 +250,36 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 0552EE732EAF92560002DD79 /* Products */;
+					ProjectRef = 0552EDD52EAF92560002DD79 /* Demo.xcodeproj */;
+				},
+				{
 					ProductGroup = 0552EA862EAF8DF50002DD79 /* Products */;
 					ProjectRef = 0552EA7E2EAF8DF50002DD79 /* Demo.xcodeproj */;
 				},
 				{
+					ProductGroup = 0552F0882EAF9EE50002DD79 /* Products */;
+					ProjectRef = 0552EFEA2EAF9EE50002DD79 /* Demo.xcodeproj */;
+				},
+				{
+					ProductGroup = 0552EE6F2EAF92560002DD79 /* Products */;
+					ProjectRef = 0552EE0F2EAF92560002DD79 /* iMessageDemo.xcodeproj */;
+				},
+				{
 					ProductGroup = 0552EB152EAF8DF50002DD79 /* Products */;
 					ProjectRef = 0552EABB2EAF8DF50002DD79 /* iMessageDemo.xcodeproj */;
+				},
+				{
+					ProductGroup = 0552F0862EAF9EE50002DD79 /* Products */;
+					ProjectRef = 0552F0242EAF9EE50002DD79 /* iMessageDemo.xcodeproj */;
+				},
+				{
+					ProductGroup = 0552F0842EAF9EE50002DD79 /* Products */;
+					ProjectRef = 0552F0212EAF9EE50002DD79 /* Pods.xcodeproj */;
+				},
+				{
+					ProductGroup = 0552EE712EAF92560002DD79 /* Products */;
+					ProjectRef = 0552EE0C2EAF92560002DD79 /* Pods.xcodeproj */;
 				},
 				{
 					ProductGroup = 0552EB172EAF8DF50002DD79 /* Products */;
@@ -227,7 +298,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5267887C2E9F7A280004CB10 /* Yalla.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,7 +447,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 68M23B49C7;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "yalla/Resources/Yalla-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Yalla;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = "";
@@ -422,7 +492,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 68M23B49C7;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "yalla/Resources/Yalla-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Yalla;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = "";

@@ -1658,16 +1658,36 @@
         }
       }
     },
-   
-    "Мы в социальных сетях" : {
-
+    "social.networks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We are on social networks"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мы в социальных сетях"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biz ijtimoiy tarmoqlardamiz"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Биз ижтимоий тармоқлардамиз"
+          }
+        }
+      }
     },
-    "О приложении" : {
-
-    },
-    "Оценить приложение" : {
-
-    }
+    
   },
   "version" : "1.1"
 }

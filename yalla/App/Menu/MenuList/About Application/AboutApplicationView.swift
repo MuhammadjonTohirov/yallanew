@@ -58,7 +58,7 @@ struct AboutApplicationView: View {
     private var footer: some View {
         VStack(alignment: .leading) {
             
-            Text("О приложении")
+            Text("about.app".localize)
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.iLabel)
                 .padding(.vertical)
@@ -75,7 +75,7 @@ struct AboutApplicationView: View {
            .padding(.horizontal,5)
 
             
-            Text("Мы в социальных сетях")
+            Text("social.networks".localize)
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.iLabel)
                 .padding(.vertical)
@@ -99,7 +99,7 @@ struct AboutApplicationView: View {
             Spacer()
             
             SubmitButton(backgroundColor: Color.iPrimary, height: 60) {
-                Text("Оценить приложение")
+                Text("rate.app".localize)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(.white)
                     .padding(.leading)
