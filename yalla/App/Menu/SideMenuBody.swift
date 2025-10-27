@@ -190,7 +190,7 @@ struct SideMenuBody: View {
                         .foregroundStyle(Color.init(uiColor: .systemRed))
                         .frame(width: 24, height: 24)
                         .overlay {
-                            Text(verbatim: "0")
+                            Text(verbatim: "0".localize)
                                 .foregroundStyle(.white)
                                 .font(.bodySmallBold)
                         }

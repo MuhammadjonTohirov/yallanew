@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		521A835F2EAF717F00DF1244 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 521A835E2EAF717F00DF1244 /* SwiftMessages */; };
 		5267884F2E9E629D0004CB10 /* NetworkMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 5267884E2E9E629D0004CB10 /* NetworkMonitor */; };
 		526788522E9E66170004CB10 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 526788512E9E66170004CB10 /* FirebaseCore */; };
 		526788542E9E66170004CB10 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 526788532E9E66170004CB10 /* FirebaseCrashlytics */; };
@@ -31,6 +32,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				NetworkMonitor,
+				SwiftMessages,
 				YallaStore,
 				YallaUtils,
 			);
@@ -69,6 +71,7 @@
 				526788522E9E66170004CB10 /* FirebaseCore in Frameworks */,
 				526788542E9E66170004CB10 /* FirebaseCrashlytics in Frameworks */,
 				5275198F2E98C93E002C726B /* IldamSDK in Frameworks */,
+				521A835F2EAF717F00DF1244 /* SwiftMessages in Frameworks */,
 				527519932E98C93E002C726B /* YallaKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +137,7 @@
 				526788582E9E66300004CB10 /* Kingfisher */,
 				5267885F2E9E68F40004CB10 /* FirebaseAnalytics */,
 				52EAE1C12EA20B8E005C9E1E /* YallaUtils */,
+				521A835E2EAF717F00DF1244 /* SwiftMessages */,
 			);
 			productName = yalla;
 			productReference = 527519772E98C76E002C726B /* yalla.app */;
@@ -470,6 +474,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		521A835E2EAF717F00DF1244 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftMessages;
+		};
 		5267884E2E9E629D0004CB10 /* NetworkMonitor */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NetworkMonitor;
