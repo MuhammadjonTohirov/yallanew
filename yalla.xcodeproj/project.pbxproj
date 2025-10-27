@@ -31,6 +31,9 @@
 		0552EFEA2EAF9EE50002DD79 /* Demo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Demo.xcodeproj; sourceTree = "<group>"; };
 		0552F0212EAF9EE50002DD79 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
 		0552F0242EAF9EE50002DD79 /* iMessageDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iMessageDemo.xcodeproj; sourceTree = "<group>"; };
+		0552F5642EAFA1D50002DD79 /* Demo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Demo.xcodeproj; sourceTree = "<group>"; };
+		0552F59B2EAFA1D50002DD79 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
+		0552F59E2EAFA1D50002DD79 /* iMessageDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iMessageDemo.xcodeproj; sourceTree = "<group>"; };
 		5267887B2E9F7A280004CB10 /* Yalla.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Yalla.xcconfig; sourceTree = "<group>"; };
 		527519772E98C76E002C726B /* yalla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yalla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -149,6 +152,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0552F5FB2EAFA1D50002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552F5FD2EAFA1D50002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552F5FF2EAFA1D50002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5275196E2E98C76E002C726B = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +281,10 @@
 					ProjectRef = 0552EDD52EAF92560002DD79 /* Demo.xcodeproj */;
 				},
 				{
+					ProductGroup = 0552F5FF2EAFA1D50002DD79 /* Products */;
+					ProjectRef = 0552F5642EAFA1D50002DD79 /* Demo.xcodeproj */;
+				},
+				{
 					ProductGroup = 0552EA862EAF8DF50002DD79 /* Products */;
 					ProjectRef = 0552EA7E2EAF8DF50002DD79 /* Demo.xcodeproj */;
 				},
@@ -269,12 +297,20 @@
 					ProjectRef = 0552EE0F2EAF92560002DD79 /* iMessageDemo.xcodeproj */;
 				},
 				{
+					ProductGroup = 0552F5FD2EAFA1D50002DD79 /* Products */;
+					ProjectRef = 0552F59E2EAFA1D50002DD79 /* iMessageDemo.xcodeproj */;
+				},
+				{
 					ProductGroup = 0552EB152EAF8DF50002DD79 /* Products */;
 					ProjectRef = 0552EABB2EAF8DF50002DD79 /* iMessageDemo.xcodeproj */;
 				},
 				{
 					ProductGroup = 0552F0862EAF9EE50002DD79 /* Products */;
 					ProjectRef = 0552F0242EAF9EE50002DD79 /* iMessageDemo.xcodeproj */;
+				},
+				{
+					ProductGroup = 0552F5FB2EAFA1D50002DD79 /* Products */;
+					ProjectRef = 0552F59B2EAFA1D50002DD79 /* Pods.xcodeproj */;
 				},
 				{
 					ProductGroup = 0552F0842EAF9EE50002DD79 /* Products */;
