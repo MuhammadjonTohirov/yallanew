@@ -22,7 +22,7 @@ struct SettingsView: View {
             VStack {
                 row(
                     icon: "icon_language-square",
-                    title: "app_language".localize,
+                    title: "app.language".localize,
                     detail: Language.language(UserSettings.shared.language ?? "ru").name)
                 .padding(.horizontal)
                 .onTapped(.background) {
@@ -30,7 +30,7 @@ struct SettingsView: View {
                 }
                 
                 row(icon: "icon_mask",
-                    title: "theme".localize,
+                    title: "app.theme".localize,
                     detail: themeName)
                 .padding(.horizontal )
                 .onTapped(.background) {
@@ -66,7 +66,7 @@ struct SettingsView: View {
                         .foregroundStyle(Color.background)
                         .frame(width: 24, height: 24)
                     
-                    Text(title)
+                    Text(title.localize)
                         .font(.inter(.bold, size: 16))
                         .foregroundStyle(Color.label)
                 }

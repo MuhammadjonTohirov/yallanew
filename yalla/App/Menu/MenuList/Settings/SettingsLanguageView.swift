@@ -16,79 +16,61 @@ struct SettingsLanguageView: View {
             UserSettings.shared.language = language
         }
     }
+    
+    @State
+    private var selectedLanguage: String = "uz"
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 30) {
            
             headerView
-            
-            VStack(spacing: 18) {
-                languageItem(
-                    icon: "",
-                    title: "O'zbekcha", detail: "", isSelected: language == Language.uzbek.code
-                )
-                .padding(.horizontal)
-                .onTapped(.background, action: {
-                    language = Language.uzbek.code
-                    mainModel?.navigate(to: .loading)
-                })
-
-                languageItem(
-                    icon: "",
-                    title: "Русский",
-                    detail: "", isSelected: language == Language.russian.code)
-                    .padding(.horizontal)
-                    .onTapped(.background, action: {
-                        language = Language.russian.code
-                        mainModel?.navigate(to: .loading)
-                    })
-            }
-
-            Spacer()
-
+            languagesView
         }
-        .frame(height: 60)
-
+        .frame(height: 180)
     }
     
-    func languageItem(icon: String ,title: String, detail: String, isSelected: Bool) -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 3) {
-               HStack {
-                    Text(title)
-                        .font(.inter(.semibold, size: 16))
-                    
-                    Text(detail)
-                        .font(.inter(.regular, size: 12))
-                        .foregroundStyle(Color.label)
-                        .visibility(!detail.isEmpty)
-                    
-                    Spacer()
-                    
-                    Circle()
-                        .frame(width: 30, height: 30)
-                        .foregroundStyle(isSelected ? Color.iPrimary : .init(uiColor: .systemGray4))
-                        .overlay {
-                            Image("icon_check")
-                                .renderingMode(.template)
-                                .foregroundStyle(.white)
-                    }
+    private var languagesView: some View {
+        VStack(spacing: 18.scaled) {
+            LanguageRowView(language: LanguageUz(), selected: .init(get: {
+                selectedLanguage == LanguageUz().code
+            }, set: { selected in
+                if selected {
+                    selectLanguage(LanguageUz())
                 }
-               .padding(.horizontal)
-            }
-        
+            }))
+            
+            LanguageRowView(language: LanguageUzCryl(), selected: .init(get: {
+                selectedLanguage == LanguageUzCryl().code
+            }, set: { selected in
+                if selected {
+                    selectLanguage(LanguageUzCryl())
+                }
+            }))
+            
+            LanguageRowView(language: LanguageRu(), selected: .init(get: {
+                selectedLanguage == LanguageRu().code
+            }, set: { selected in
+                if selected {
+                    selectLanguage(LanguageRu())
+                }
+            }))
+            
+            LanguageRowView(language: LanguageEn(), selected: .init(get: {
+                selectedLanguage == LanguageEn().code
+            }, set: { selected in
+                if selected {
+                    selectLanguage(LanguageEn())
+                }
+            }))
         }
-        .frame(height: 60)
-        .background(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(isSelected ? Color.iBackgroundSecondary : Color.background)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(isSelected ? Color.iBackgroundSecondary : Color.iBorderDisabled, lineWidth: isSelected ? 0 : 2)
-        )
-        .animation(nil, value: UUID())
     }
+    
+    private func selectLanguage(_ language: any LanguageProtocol) {
+        UserSettings.shared.language = language.code
+        
+        selectedLanguage = language.code
+    }
+    
     
     var headerView: some View {
         ZStack {

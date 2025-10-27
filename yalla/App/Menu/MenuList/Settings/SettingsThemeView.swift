@@ -28,6 +28,7 @@ struct SettingsThemeView: View {
         VStack(alignment: .center,spacing: 18) {
        
             headerView
+            
             VStack(spacing: 18) {
                 rowItem(icon: "icon_sun", title: AppTheme.system.name, isSelected: theme == .system)
                     .padding(.horizontal)
@@ -51,7 +52,7 @@ struct SettingsThemeView: View {
             Spacer()
             
         }
-        .frame(height: 60)
+        .frame(height: 180)
         
         .onAppear {
             theme = UserSettings.shared.theme ?? .system
@@ -64,12 +65,13 @@ struct SettingsThemeView: View {
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundStyle(Color.label)
             HStack {
+                
                 DismissCircleButton()
-                    .padding(.leading)
                 Spacer()
             }
         }
         .padding(.horizontal)
+        .padding(.vertical)
     }
     
     func rowItem(icon: String, title: String, isSelected: Bool) -> some View {
