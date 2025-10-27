@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		521A835F2EAF717F00DF1244 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 521A835E2EAF717F00DF1244 /* SwiftMessages */; };
 		5267884F2E9E629D0004CB10 /* NetworkMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 5267884E2E9E629D0004CB10 /* NetworkMonitor */; };
 		526788522E9E66170004CB10 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 526788512E9E66170004CB10 /* FirebaseCore */; };
 		526788542E9E66170004CB10 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 526788532E9E66170004CB10 /* FirebaseCrashlytics */; };
@@ -23,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0552EA7E2EAF8DF50002DD79 /* Demo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Demo.xcodeproj; sourceTree = "<group>"; };
+		0552EAB82EAF8DF50002DD79 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
+		0552EABB2EAF8DF50002DD79 /* iMessageDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iMessageDemo.xcodeproj; sourceTree = "<group>"; };
 		5267887B2E9F7A280004CB10 /* Yalla.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Yalla.xcconfig; sourceTree = "<group>"; };
 		527519772E98C76E002C726B /* yalla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yalla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -32,7 +34,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				NetworkMonitor,
-				SwiftMessages,
 				YallaStore,
 				YallaUtils,
 			);
@@ -71,7 +72,6 @@
 				526788522E9E66170004CB10 /* FirebaseCore in Frameworks */,
 				526788542E9E66170004CB10 /* FirebaseCrashlytics in Frameworks */,
 				5275198F2E98C93E002C726B /* IldamSDK in Frameworks */,
-				521A835F2EAF717F00DF1244 /* SwiftMessages in Frameworks */,
 				527519932E98C93E002C726B /* YallaKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +79,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0552EA862EAF8DF50002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552EB152EAF8DF50002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0552EB172EAF8DF50002DD79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5275196E2E98C76E002C726B = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +158,6 @@
 				526788582E9E66300004CB10 /* Kingfisher */,
 				5267885F2E9E68F40004CB10 /* FirebaseAnalytics */,
 				52EAE1C12EA20B8E005C9E1E /* YallaUtils */,
-				521A835E2EAF717F00DF1244 /* SwiftMessages */,
 			);
 			productName = yalla;
 			productReference = 527519772E98C76E002C726B /* yalla.app */;
@@ -181,6 +201,20 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 527519782E98C76E002C726B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0552EA862EAF8DF50002DD79 /* Products */;
+					ProjectRef = 0552EA7E2EAF8DF50002DD79 /* Demo.xcodeproj */;
+				},
+				{
+					ProductGroup = 0552EB152EAF8DF50002DD79 /* Products */;
+					ProjectRef = 0552EABB2EAF8DF50002DD79 /* iMessageDemo.xcodeproj */;
+				},
+				{
+					ProductGroup = 0552EB172EAF8DF50002DD79 /* Products */;
+					ProjectRef = 0552EAB82EAF8DF50002DD79 /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				527519762E98C76E002C726B /* yalla */,
@@ -474,10 +508,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		521A835E2EAF717F00DF1244 /* SwiftMessages */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SwiftMessages;
-		};
 		5267884E2E9E629D0004CB10 /* NetworkMonitor */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NetworkMonitor;

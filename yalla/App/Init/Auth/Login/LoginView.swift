@@ -12,8 +12,8 @@ import YallaUtils
 
 struct LoginView: View {
     @State private var focus: Bool = false
-    @StateObject var viewModel: LoginViewModel = .init()
     @FocusState private var isFocused: Bool
+    @StateObject var viewModel: LoginViewModel = .init()
     var body: some View {
         NavigationStack {
             ZStack {

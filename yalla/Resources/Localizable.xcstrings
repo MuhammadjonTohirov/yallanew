@@ -7,7 +7,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "About app"
+            "value" : "About the app"
           }
         },
         "ru" : {
@@ -19,13 +19,71 @@
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dastur xaqida"
+            "value" : "Ilova haqida"
           }
         },
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Дастур хақида"
+            "value" : "Илова ҳақида"
+          }
+        }
+      }
+    },
+    "app.language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App language"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык приложения"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ilova tili"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Илова тили"
+          }
+        }
+      }
+    },
+    "app.theme" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App theme"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тема приложения"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ilova mavzusi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Илова мавзуси"
           }
         }
       }
@@ -36,7 +94,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Become driver"
+            "value" : "Become a driver"
           }
         },
         "ru" : {
@@ -48,13 +106,42 @@
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Haydovchi bo'lish"
+            "value" : "Haydovchi bo‘ling"
           }
         },
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ҳайдовчи бўлиш"
+            "value" : "Ҳайдовчи бўлинг"
+          }
+        }
+      }
+    },
+    "become.driver.descr" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Submit a request and we will contact you shortly"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оставьте заявку, и мы свяжемся с вами в ближайшее время"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So‘rov qoldiring, biz tez orada siz bilan bog‘lanamiz"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сўров қолдиринг, биз тез орада сиз билан боғланамиз"
           }
         }
       }
@@ -208,6 +295,93 @@
         }
       }
     },
+    "contact_us_call" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Call"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Позвонить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qo‘ng‘iroq qilish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қўнғироқ қилиш"
+          }
+        }
+      }
+    },
+    "contact_us_support" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поддержка"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qo‘llab-quvvatlash"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қўллаб-қувватлаш"
+          }
+        }
+      }
+    },
+    "contact_us_telegram" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telegram"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telegram"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telegram"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telegram"
+          }
+        }
+      }
+    },
     "contact.us" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -232,7 +406,36 @@
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Йордам хизмати"
+            "value" : "Қўллаб-қувватлаш хизмати"
+          }
+        }
+      }
+    },
+    "dark" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark theme"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тёмная тема"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qorong‘i mavzu"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қоронғи мавзу"
           }
         }
       }
@@ -440,6 +643,35 @@
         }
       }
     },
+    "light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light theme"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Светлая тема"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yorug‘ mavzu"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ёруғ мавзу"
+          }
+        }
+      }
+    },
     "login.phone.field.descr" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -639,6 +871,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Кейинги"
+          }
+        }
+      }
+    },
+    "no.notifs.descr" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No current notifications"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет текущих уведомлений"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hozircha bildirishnomalar yo‘q"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳозирча билдиришномалар йўқ"
           }
         }
       }
@@ -933,6 +1194,35 @@
         }
       }
     },
+    "rate.app" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rate the app"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оценить приложение"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ilovani baholang"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Иловани баҳоланг"
+          }
+        }
+      }
+    },
     "save" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1078,6 +1368,35 @@
         }
       }
     },
+    "submit.application" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Submit application"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отправить заявку"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ariza yuborish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ариза юбориш"
+          }
+        }
+      }
+    },
     "want.delete.account" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1103,6 +1422,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Чиндан ҳисобни ўчиришни истайсизми?"
+          }
+        }
+      }
+    },
+    "support.service" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support service"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Служба поддержки"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qo‘llab-quvvatlash xizmati"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қўллаб-қувватлаш хизмати"
           }
         }
       }
@@ -1136,6 +1484,35 @@
         }
       }
     },
+    "system" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Системная"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tizim mavzusi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тизим мавзуси"
+          }
+        }
+      }
+    },
     "want.logout" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1161,6 +1538,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Чиндан чиқишни истайсизми?"
+          }
+        }
+      }
+    },
+    "user.region" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your region"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш регион"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hududingiz"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳудудингиз"
           }
         }
       }
@@ -1222,6 +1628,45 @@
           }
         }
       }
+    },
+    "yalla" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yalla"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yalla"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yalla"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yalla"
+          }
+        }
+      }
+    },
+   
+    "Мы в социальных сетях" : {
+
+    },
+    "О приложении" : {
+
+    },
+    "Оценить приложение" : {
+
     }
   },
   "version" : "1.1"
