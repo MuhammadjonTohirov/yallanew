@@ -14,21 +14,35 @@ struct HomeView: View {
     @StateObject
     private var viewModel: HomeViewModel = .init()
     
+    @StateObject
+    private var navigator: Navigator = .init()
+    
     var body: some View {
-        ZStack {
-            Image("image_map_example")
-                .resizable()
-                .frame(width: UIApplication.shared.screenFrame.width)
-                .ignoresSafeArea()
-            
-            innerBody
+        NavigationStack(path: $navigator.path) {
+            ZStack {
+                Image("image_map_example")
+                    .resizable()
+                    .frame(width: UIApplication.shared.screenFrame.width)
+                    .ignoresSafeArea()
+                
+                innerBody
+            }
+            .navigationDestination(for: HomeRoute.self) { route in
+                route.scene
+                    .environmentObject(navigator)
+            }
+        }
+        .onAppear {
+            viewModel.setNavigator(navigator)
         }
     }
     
     var innerBody: some View {
         VStack {
-            HomeHeaderView()
-                .padding(.horizontal, AppParams.Padding.default)
+            HomeHeaderView(onClickMenu: {
+                viewModel.showMenu()
+            })
+            .padding(.horizontal, AppParams.Padding.default)
             
             Spacer()
             

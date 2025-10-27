@@ -7,8 +7,10 @@
 
 import Foundation
 import SwiftUI
+import YallaUtils
 
 struct HomeHeaderView: View {
+    var onClickMenu: () -> Void = { }
     var body: some View {
         HStack {
             Circle()
@@ -19,7 +21,7 @@ struct HomeHeaderView: View {
                     Image("icon_hamburger")
                         .renderingMode(.template)
                         .foregroundStyle(.iLabel)
-
+                        .onClick(perform: onClickMenu)
                 }
             
             Spacer()

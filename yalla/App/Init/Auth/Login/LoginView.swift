@@ -29,6 +29,24 @@ struct LoginView: View {
                 viewModel.route?.screen
                     .environmentObject(viewModel)
             }
+
+            .sheet(isPresented: $viewModel.presentOTP) {
+                if let vm = viewModel.otpViewModelForSheet {
+                    NavigationStack {
+                        SecurityCodeInputView(viewModel: vm)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar {
+                                ToolbarItem(placement: .topBarLeading) {
+                                    DismissCircleButton()
+                                }
+                            }
+                    }
+                    .presentationDetents([.large])
+                    .presentationDragIndicator(.visible)
+                    .presentationCornerRadius(40)
+                    .interactiveDismissDisabled(false)
+                }
+            }
         }
     }
     
@@ -37,7 +55,8 @@ struct LoginView: View {
             BackCircleButton()
                 .colorScheme(.dark)
                 .padding(.leading, AppParams.Padding.large)
-
+                .visibility(false)
+            
             titleView
                 .foregroundStyle(Color.white)
                 .padding(AppParams.Padding.large)
