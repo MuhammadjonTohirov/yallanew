@@ -126,27 +126,23 @@ struct RegisterProfileView: View {
             }
             .padding(.horizontal, AppParams.Padding.large)
          
-           HStack {
-               Button {
-                   gender = .male
-               } label: {
-                   pillButton(text: "male".localize, isSelected: gender == .male)
-                       .frame(maxWidth: .infinity)
-                       .contentShape(Rectangle())
-               }
-               .buttonStyle(.plain)
-
-               Button {
-                   gender = .female
-               } label: {
-                   pillButton(text: "female".localize, isSelected: gender == .female)
-                       .frame(maxWidth: .infinity)
-                       .contentShape(Rectangle())
-               }
-               .buttonStyle(.plain)
+            HStack {
+                pillButton(text: "male".localize, isSelected: gender == .male) {
+                    gender = .male
+                    
+                }
+                .frame(maxWidth: .infinity)
+                .contentShape(Rectangle())
+                
+                
+                pillButton(text: "female".localize, isSelected: gender == .female) {
+                    gender = .female
+                }
+                .frame(maxWidth: .infinity)
+                .contentShape(Rectangle())
             }
-           .padding(.vertical, 16)
-           .padding(.horizontal)
+            .padding(.vertical, 16)
+            .padding(.horizontal)
 
             Spacer()
             
@@ -158,28 +154,12 @@ struct RegisterProfileView: View {
         }
     }
 
-    func pillButton(text: String, isSelected: Bool) -> some View {
-        HStack(spacing: 8) {
-            Text(text)
-                .font(.system(size: 15, weight: .medium))
-                .foregroundColor(Color.iLabel)
-            
-            Spacer()
-            
-            Circle()
-                .fill(isSelected ? Color.iPrimary : Color.iPrimary.opacity(0.25))
-                .frame(width: 24, height: 24)
-                .overlay(
-                    Image(systemName: "checkmark")
-                        .font(.system(size: 12, weight: .semibold))
-                        .foregroundColor(.white)
-                        .opacity(isSelected ? 1 : 0)
-                )
-        }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 15)
-        .background(Color(hex: "F7F7F7"))
-        .cornerRadius(18)
+    func pillButton(text: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
+        RadioButton(title: text, isSelected: isSelected, checkmarkColor: .iPrimary, action: action)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 15)
+            .background(Color.iBackgroundSecondary)
+            .cornerRadius(18)
     }
     
 

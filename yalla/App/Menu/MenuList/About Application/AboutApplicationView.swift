@@ -42,7 +42,7 @@ struct AboutApplicationView: View {
                 Spacer()
             
             VStack(spacing: 8) {
-                Text("Yalla")
+                Text("yalla".localize)
                     .font(.system(size: 22, weight: .bold))
                     .foregroundColor(.white)
                 
