@@ -59,7 +59,7 @@ struct EditProfileView: View {
         }), title: viewModel.sheetRoute?.title ?? "", sheetContent: {
             switch viewModel.sheetRoute {
             case .changePhoto:
-                Text("Change")
+                photoPickSheetView
             case .menu:
                 menuView
             case .deleteAccount:
@@ -235,6 +235,15 @@ struct EditProfileView: View {
 }
 
 extension EditProfileView {
+    private var photoPickSheetView: some View {
+        VStack(alignment: .leading, spacing: 10.scaled) {
+            rowItemView(image: Image.icon("icon_camera"), text: "capture.photo".localize)
+            
+            rowItemView(image: Image.icon("icon_gallery"), text: "select.from.gallery".localize)
+        }
+        .padding(.horizontal, 16.scaled)
+    }
+    
     private var menuView: some View {
         VStack(alignment: .leading, spacing: 10.scaled) {
             rowItemView(image: Image("icon_trash"), text: "delete.account".localize)

@@ -216,3 +216,9 @@ extension String {
         return self
     }
 }
+
+public extension String {
+    var identifier: String {
+        self
+    }
+}

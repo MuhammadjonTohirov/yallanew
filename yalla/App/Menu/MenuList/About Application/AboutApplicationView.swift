@@ -81,7 +81,7 @@ struct AboutApplicationView: View {
                     .font(.system(size: 22, weight: .bold))
                     .foregroundColor(.white)
                 
-                Text("Version: 1.21")
+                Text(verbatim: "Version: 1.21")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.white.opacity(0.9))
             }
@@ -110,7 +110,6 @@ struct AboutApplicationView: View {
                    .fill(Color(UIColor.iBackgroundSecondary))
            )
            .padding(.horizontal,5)
-
             
             Text("social.networks".localize)
                 .font(.system(size: 20, weight: .bold))
