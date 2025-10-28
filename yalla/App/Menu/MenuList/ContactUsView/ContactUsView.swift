@@ -68,9 +68,14 @@ struct ContactUsView: View {
                     UIApplication.shared.open(url)
                 }
             }
+            
+            Spacer()
         }
         .padding(.horizontal, 20)
         .padding(.top, 20)
+        .navigationTitle("support.service".localize)
+        .navigationBarTitleDisplayMode(.large)
+
     }
 }
 
@@ -78,5 +83,4 @@ struct ContactUsView: View {
     NavigationView {
         ContactUsView()
     }
-    .navigationTitle("support.service".localize)
 }

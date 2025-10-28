@@ -9,11 +9,27 @@ import Foundation
 import SwiftUI
 import Core
 import YallaUtils
+import IldamSDK
 
 struct AboutApplicationView: View {
+    let appConfigUseCase: any AppConfigUseCase = AppConfigUseCaseImpl()
+
     @Environment(\.dismiss) var dismiss
     @State
     private var startPoint: UnitPoint = .topLeading
+    private var hasTelegram: Bool {
+        appConfigUseCase.appConfig?.hasTelegram ?? false
+    }
+    var telegram: String {
+        guard hasTelegram else {
+            return ""
+        }
+        
+        return appConfigUseCase.appConfig?.setting?.supportTelegramNickname ?? ""
+    }
+    private var hasInstagram: Bool {
+        appConfigUseCase.appConfig?.hasInstagram ?? false
+    }
     
     var body: some View {
         ZStack {
@@ -29,19 +45,38 @@ struct AboutApplicationView: View {
                 containView
             }
         }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
-    
+
     private var headerView: some View {
         VStack(alignment: .center, spacing: 20) {
-            Spacer()
+            HStack {
+                SubmitButton(
+                    backgroundColor: Color.iBackgroundSecondary) {
+                        
+                        Image("icon_backarrow")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 18, height: 18)
+
+                    }
+                action: {
+                    dismiss()
+                }
+            }
+            .frame(width: 42, height: 42)
+            .cornerRadius(21, corners: .allCorners)
+            .horizontal(alignment: .leading)
+            .padding(.leading)
             
-            Image("splash_logo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 150, height: 100)
-                Spacer()
+                Image("splash_logo")
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 120, height: 80)
             
-            VStack(spacing: 8) {
+                    
+            VStack(spacing: 4) {
+                
                 Text("yalla".localize)
                     .font(.system(size: 22, weight: .bold))
                     .foregroundColor(.white)
@@ -50,45 +85,43 @@ struct AboutApplicationView: View {
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.white.opacity(0.9))
             }
+            .vertical(alignment: .bottom)
+            
         }
-        .frame(height: 280)
+        .frame(height: 260)
         .padding(.bottom,20)
-     }
+    }
     
     private var footer: some View {
         VStack(alignment: .leading) {
             
-            Text(verbatim: "О приложении")
+            Text("about.app".localize)
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.iLabel)
                 .padding(.vertical)
             
            VStack(spacing: 0) {
-                rowItem(title: "Политика конфиденциальности")
+               rowItem(title: "privacy.policy".localize)
                Divider()
-                rowItem(title: "Лицензионное соглашение")
+               rowItem(title: "user.agreement".localize)
             }
            .background(
                RoundedRectangle(cornerRadius: 16)
                    .fill(Color(UIColor.iBackgroundSecondary))
            )
            .padding(.horizontal,5)
-
             
-            Text(verbatim: "Мы в социальных сетях")
+            Text("social.networks".localize)
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.iLabel)
                 .padding(.vertical)
 
             VStack(spacing: 0) {
-               
-                rowItem(
-                    icon: "image_instagramm",
-                    title: "Instagram")
+               rowItem(icon: "image_instagramm", title: "Instagram")
                 
-                Divider()
+               Divider()
                 
-                rowItem(icon: "image_telegramm",title: "Telegram")
+               rowItem(icon: "image_telegramm", title: "Telegram")
             }
             .background(
                 RoundedRectangle(cornerRadius: 16)
@@ -99,7 +132,7 @@ struct AboutApplicationView: View {
             Spacer()
             
             SubmitButton(backgroundColor: Color.iPrimary, height: 60) {
-                Text(verbatim: "Оценить приложение")
+                Text("rate.app".localize)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(.white)
                     .padding(.leading)
@@ -129,32 +162,48 @@ struct AboutApplicationView: View {
     }
     
     func rowItem(icon: String? = nil, title: String) -> some View {
+        Button(action: {
+            // Handle action here
+        }) {
+            HStack(spacing: 20) {
+                if let icon = icon {
+                    Image(icon)
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                }
+        
+                    // Title
+                    Text(title.localize)
+                        .font(.system(size: 18, weight: .regular))
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                 
 
-        HStack(spacing: 12) {
-            if let icon = icon {
-                Image(icon)
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
+                Spacer()
             }
-            
-            Text(title)
-                .font(.system(size: 17, weight: .regular))
-                .foregroundColor(.black)
-            
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(.gray)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 20)
         }
-        .padding(.horizontal, 20)
-        .frame(height: 56)
-        .animation(nil, value: UUID())
     }
+    
+    private func openTelegram() {
+        let telegram = appConfigUseCase.appConfig?.setting?.supportTelegramNickname ?? ""
+        UIApplication.shared.open(URL(string: telegram)!)
+    }
+    
+    private func openInstagram() {
+        let instagram = appConfigUseCase.appConfig?.setting?.supportInstagramNickname ?? ""
+        
+        UIApplication.shared.open(URL(string: instagram)!)
+    }
+    
+    
 }
 
 #Preview {
-    AboutApplicationView()
+    NavigationStack {
+        AboutApplicationView()
+    }
 }

@@ -17,6 +17,8 @@ final class NotificationsViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     private var hasNextPage: Bool = true
     @Published var push: Bool = false
+    @Published var showBottomSheet: Bool = false
+    @Published var selectedNotificationId: Int?
     
     var route: NotificationsRoute? {
         didSet {
@@ -65,7 +67,8 @@ final class NotificationsViewModel: ObservableObject {
     
     func showNotificationDetails(_ id: Int) {
         self.notifications.first(where: {$0.id == id})?.isRead = true
-        self.route = .details(id: id)
+        self.selectedNotificationId = id
+        self.showBottomSheet = true
     }
 }
 

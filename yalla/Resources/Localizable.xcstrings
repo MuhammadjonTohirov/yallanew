@@ -320,7 +320,7 @@
         }
       }
     },
-    "change.photo" : {
+ "change.photo" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1538,6 +1538,35 @@
         }
       }
     },
+    "social.networks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We are on social networks"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мы в социальных сетях"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biz ijtimoiy tarmoqlardamiz"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Биз ижтимоий тармоқлардамиз"
+          }
+        }
+      }
+    },
     "submit.application" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1827,7 +1856,66 @@
           }
         }
       }
+    },
+    "privacy.policy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Политика конфиденциальности"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maxfiylik siyosati"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Махфийлик сиёсати"
+          }
+        }
+      }
+    },
+    "user.agreement" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "License agreement"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лицензионное соглашение"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Litsenziya shartnomasi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лицензия шартномаси"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"
 }
+

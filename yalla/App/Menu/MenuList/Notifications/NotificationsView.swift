@@ -16,7 +16,6 @@ struct NotificationsView: View {
     var viewModel: NotificationsViewModel = .init()
     
     var body: some View {
-        emptyNotificationsView
         PageableScrollView(
             title: "news.and.notifs".localize,
             onReachedBottom: {
@@ -32,9 +31,14 @@ struct NotificationsView: View {
                 }
             }
         )
-        .navigationDestination(isPresented: $viewModel.push, destination: {
-            viewModel.route?.screen
-        })
+        .appSheet(
+            isPresented: $viewModel.showBottomSheet,
+            title: "news.and.notifs".localize
+        ) {
+            if let notificationId = viewModel.selectedNotificationId {
+                NotificationDetailsView(notificationId: notificationId)
+            }
+        }
         .overlay(content: {
             CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
         })

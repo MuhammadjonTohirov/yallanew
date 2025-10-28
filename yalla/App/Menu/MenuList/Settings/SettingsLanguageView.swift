@@ -22,11 +22,9 @@ struct SettingsLanguageView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
-           
-            headerView
             languagesView
         }
-        .frame(height: 180)
+        .padding(.horizontal)
     }
     
     private var languagesView: some View {

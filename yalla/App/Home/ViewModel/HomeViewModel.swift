@@ -45,6 +45,10 @@ actor HomeViewModel: ObservableObject {
     @MainActor
     func showMenu() {
         guard let navigator else { return }
-        navigator.push(HomeRoute.menu(model: .init()))
+        let menuViewModel = SideMenuViewModel()
+        Task { @MainActor in
+            await menuViewModel.setNavigator(navigator)
+        }
+        navigator.push(HomeRoute.menu(model: menuViewModel))
     }
 }

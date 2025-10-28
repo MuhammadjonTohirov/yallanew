@@ -23,37 +23,23 @@ struct SettingsThemeView: View {
     }
     
     var body: some View {
-        
-        
-        VStack(alignment: .center,spacing: 18) {
-       
-            headerView
-            
-            VStack(spacing: 18) {
-                rowItem(icon: "icon_sun", title: AppTheme.system.name, isSelected: theme == .system)
-                    .padding(.horizontal)
-                    .onTapped(.background) {
-                        theme = .system
-                    }
-                
-                rowItem(icon: "icon_moon", title: AppTheme.light.name, isSelected: theme == .light)
-                    .padding(.horizontal)
-                    .onTapped(.background) {
-                        theme = .light
-                    }
-                
-                rowItem(icon: "icon_theme_setting", title: AppTheme.dark.name, isSelected: theme == .dark)
-                    .padding(.horizontal)
-                    .onTapped(.background) {
-                        theme = .dark
+        VStack(alignment: .center, spacing: 18) {
+            rowItem(icon: "icon_sun", title: AppTheme.system.name, isSelected: theme == .system)
+                .onTapped(.background) {
+                    theme = .system
                 }
-            }
             
-            Spacer()
+            rowItem(icon: "icon_moon", title: AppTheme.light.name, isSelected: theme == .light)
+                .onTapped(.background) {
+                    theme = .light
+                }
             
+            rowItem(icon: "icon_theme_setting", title: AppTheme.dark.name, isSelected: theme == .dark)
+                .onTapped(.background) {
+                    theme = .dark
+                }
         }
-        .frame(height: 180)
-        
+        .padding(.horizontal)
         .onAppear {
             theme = UserSettings.shared.theme ?? .system
         }
