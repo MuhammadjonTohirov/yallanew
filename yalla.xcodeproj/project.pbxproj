@@ -19,6 +19,7 @@
 		5275198F2E98C93E002C726B /* IldamSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5275198E2E98C93E002C726B /* IldamSDK */; };
 		527519912E98C93E002C726B /* NetworkLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 527519902E98C93E002C726B /* NetworkLayer */; };
 		527519932E98C93E002C726B /* YallaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 527519922E98C93E002C726B /* YallaKit */; };
+		527D50142EB0DB4500427DC7 /* SQBCardScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 527D50132EB0DB4500427DC7 /* SQBCardScanner */; };
 		52EAE1C22EA20B8E005C9E1E /* YallaUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 52EAE1C12EA20B8E005C9E1E /* YallaUtils */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 			files = (
 				526788562E9E66170004CB10 /* FirebaseMessaging in Frameworks */,
 				5267884F2E9E629D0004CB10 /* NetworkMonitor in Frameworks */,
+				527D50142EB0DB4500427DC7 /* SQBCardScanner in Frameworks */,
 				527519912E98C93E002C726B /* NetworkLayer in Frameworks */,
 				526788592E9E66300004CB10 /* Kingfisher in Frameworks */,
 				5275198D2E98C93E002C726B /* Core in Frameworks */,
@@ -161,6 +163,7 @@
 				5267885F2E9E68F40004CB10 /* FirebaseAnalytics */,
 				52EAE1C12EA20B8E005C9E1E /* YallaUtils */,
 				521A84212EAF9F9300DF1244 /* SwiftMessages */,
+				527D50132EB0DB4500427DC7 /* SQBCardScanner */,
 			);
 			productName = yalla;
 			productReference = 527519772E98C76E002C726B /* yalla.app */;
@@ -200,6 +203,7 @@
 				5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */,
 				526788502E9E66170004CB10 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				526788572E9E66300004CB10 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				527D50122EB0DB4500427DC7 /* XCRemoteSwiftPackageReference "Card-scanner-SQB" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 527519782E98C76E002C726B /* Products */;
@@ -508,6 +512,14 @@
 				kind = branch;
 			};
 		};
+		527D50122EB0DB4500427DC7 /* XCRemoteSwiftPackageReference "Card-scanner-SQB" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Khushnid/Card-scanner-SQB.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -563,6 +575,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */;
 			productName = YallaKit;
+		};
+		527D50132EB0DB4500427DC7 /* SQBCardScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 527D50122EB0DB4500427DC7 /* XCRemoteSwiftPackageReference "Card-scanner-SQB" */;
+			productName = SQBCardScanner;
 		};
 		52EAE1C12EA20B8E005C9E1E /* YallaUtils */ = {
 			isa = XCSwiftPackageProductDependency;
