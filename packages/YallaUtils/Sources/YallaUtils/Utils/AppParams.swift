@@ -15,6 +15,9 @@ public enum AppParams {
         /// 20
         public static let medium: CGFloat = 20
         
+        /// 16
+        public static let `default`: CGFloat = 16
+        
         /// 10
         public static let small: CGFloat = 10
     }

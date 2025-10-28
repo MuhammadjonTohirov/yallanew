@@ -46,7 +46,7 @@ struct AboutApplicationView: View {
                     .font(.system(size: 22, weight: .bold))
                     .foregroundColor(.white)
                 
-                Text("Version: 1.21")
+                Text(verbatim: "Version: 1.21")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.white.opacity(0.9))
             }
@@ -58,7 +58,7 @@ struct AboutApplicationView: View {
     private var footer: some View {
         VStack(alignment: .leading) {
             
-            Text("О приложении")
+            Text(verbatim: "О приложении")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.iLabel)
                 .padding(.vertical)
@@ -75,7 +75,7 @@ struct AboutApplicationView: View {
            .padding(.horizontal,5)
 
             
-            Text("Мы в социальных сетях")
+            Text(verbatim: "Мы в социальных сетях")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.iLabel)
                 .padding(.vertical)
@@ -99,7 +99,7 @@ struct AboutApplicationView: View {
             Spacer()
             
             SubmitButton(backgroundColor: Color.iPrimary, height: 60) {
-                Text("Оценить приложение")
+                Text(verbatim: "Оценить приложение")
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(.white)
                     .padding(.leading)
