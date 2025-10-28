@@ -233,6 +233,9 @@ struct SideMenuBody: View {
                 }
             }
             .cornerRadius(16, corners: .allCorners)
+            .onClick {
+                viewModel.onClick(menu: .driver)
+            }
     }
     
     private var divider: some View {
