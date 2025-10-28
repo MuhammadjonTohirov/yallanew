@@ -19,6 +19,12 @@ struct EditProfileView: View {
     @State
     private var pickerSize: CGRect = .zero
     
+    @State
+    private var showCamera = false
+    
+    @State
+    private var showPhotoLibrary = false
+    
     var body: some View {
         ZStack {
             innerBody
@@ -73,6 +79,18 @@ struct EditProfileView: View {
         .onChange(of: viewModel.birthDate) { newValue in
             viewModel.birthDateValue = newValue.toExtendedString(format: "dd.MM.yyyy", timezone: .current)
         }
+        .sheet(isPresented: $showCamera) {
+            CameraView(selectedImage: $viewModel.selectedImage) { image in
+                viewModel.selectedImage = image
+                viewModel.sheetRoute = nil
+            }
+        }
+        .sheet(isPresented: $showPhotoLibrary) {
+            PhotoLibraryView(selectedImage: $viewModel.selectedImage) { image in
+                viewModel.selectedImage = image
+                viewModel.sheetRoute = nil
+            }
+        }
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -86,7 +104,7 @@ struct EditProfileView: View {
                             .scaledToFill()
                             .frame(width: 120.scaled, height: 120.scaled)
                             .clipShape(Circle())
-                            
+                        
                     } else {
                         KFImage(UserSettings.shared.userInfo?.imageURL)
                             .placeholder {
@@ -107,13 +125,13 @@ struct EditProfileView: View {
                             .clipShape(Circle())
                     }
                 }
-
+                
                 Text("change.photo".localize)
                     .onClick {
                         viewModel.onClickChangePhoto()
                     }
             }
-                .font(.bodySmallMedium)
+            .font(.bodySmallMedium)
             
             VStack(spacing: 16.scaled) {
                 YRoundedTextField {
@@ -157,13 +175,13 @@ struct EditProfileView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .contentShape(Rectangle())
-
+                    
                     pillButton(text: "female".localize, isSelected: viewModel.gender == .female) {
                         viewModel.gender = .female
                     }
                     .frame(maxWidth: .infinity)
                     .contentShape(Rectangle())
-                 }
+                }
             }
             
             Spacer()
@@ -232,14 +250,23 @@ struct EditProfileView: View {
         .presentationCornerRadius(AppParams.Radius.large)
         .presentationDetents([.height(pickerSize.height)])
     }
-}
-
-extension EditProfileView {
     private var photoPickSheetView: some View {
         VStack(alignment: .leading, spacing: 10.scaled) {
             rowItemView(image: Image.icon("icon_camera"), text: "capture.photo".localize)
+                .onTapGesture {
+                    viewModel.sheetRoute = nil
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        showCamera = true
+                    }
+                }
             
             rowItemView(image: Image.icon("icon_gallery"), text: "select.from.gallery".localize)
+                .onTapGesture {
+                    viewModel.sheetRoute = nil
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        showPhotoLibrary = true
+                    }
+                }
         }
         .padding(.horizontal, 16.scaled)
     }
@@ -247,15 +274,15 @@ extension EditProfileView {
     private var menuView: some View {
         VStack(alignment: .leading, spacing: 10.scaled) {
             rowItemView(image: Image("icon_trash"), text: "delete.account".localize)
-            .onClick {
-                viewModel.onClickShowDeleteAccountSheet()
-            }
- 
+                .onClick {
+                    viewModel.onClickShowDeleteAccountSheet()
+                }
+            
             rowItemView(image: Image.icon("icon_logout"), text: "logout".localize)
-            .onClick {
-                viewModel.onClickLogoutAccount()
-            }
-
+                .onClick {
+                    viewModel.onClickLogoutAccount()
+                }
+            
         }
         .padding(.horizontal, 16.scaled)
     }
@@ -282,7 +309,7 @@ extension EditProfileView {
             SubmitButtonFactory.primary(
                 title: "delete.account".localize
             ) {
-                        
+                
             }
             .padding(.top, 48.scaled)
             .padding(.horizontal, AppParams.Padding.default)
@@ -311,7 +338,7 @@ extension EditProfileView {
             SubmitButtonFactory.primary(
                 title: "logout".localize
             ) {
-                        
+                
             }
             .padding(.top, 48.scaled)
             .padding(.horizontal, AppParams.Padding.default)
@@ -332,6 +359,7 @@ extension EditProfileView {
         }
     }
 }
+
 
 #Preview {
     NavigationStack {
