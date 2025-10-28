@@ -48,8 +48,6 @@ struct NotificationItemView: View {
     
     private var header: some View {
         VStack(alignment: .leading, spacing: 12) {
-            DismissCircleButton()
-                .padding(.bottom, 15)
             imageView
             
             HStack {

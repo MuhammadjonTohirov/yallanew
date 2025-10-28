@@ -41,19 +41,24 @@ struct SettingsView: View {
             
             Spacer()
         }
+        .padding(.top,40)
         .onAppear {
             themeName = UserSettings.shared.theme?.name ?? ""
         }
-        .sheet(isPresented: $showLang) {
+        .appSheet(
+            isPresented: $showLang,
+            title: "app.language".localize
+        ) {
             SettingsLanguageView()
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
         }
-        .sheet(isPresented: $showThem) {
+        .appSheet(
+            isPresented: $showThem,
+            title: "app.theme".localize
+        ) {
             SettingsThemeView()
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
         }
+        .navigationTitle("settings".localize)
+        .navigationBarTitleDisplayMode(.large)
     }
     
     func row(icon: String, title: String, detail: String = "") -> some View {
@@ -89,5 +94,4 @@ struct SettingsView: View {
     NavigationStack {
         SettingsView()
     }
-    .navigationTitle("settings".localize)
 }

@@ -31,6 +31,10 @@ struct HomeView: View {
                 route.scene
                     .environmentObject(navigator)
             }
+            .navigationDestination(for: HomePushableRoute.self) { route in
+                route.scene
+                    .environmentObject(navigator)
+            }
         }
         .onAppear {
             viewModel.setNavigator(navigator)

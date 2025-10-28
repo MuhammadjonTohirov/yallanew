@@ -36,6 +36,7 @@ struct ContactOptionCard: View {
                     Text(title.localize)
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.black)
+                        .lineLimit(1)
                 }
                 
                 Spacer()

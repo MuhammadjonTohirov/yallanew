@@ -34,15 +34,18 @@ struct NotificationCard: View {
                 topTrailingRadius: 25
             )
             .fill(Color.iPrimary)
-            .frame(width: 3, height: 70)
+            .frame(width: 3, height: 60)
         }
     }
 
     @ViewBuilder
     private func content(for notification: NotifItem) -> some View {
         VStack(alignment: .leading, spacing: 10) {
+            
             header(for: notification)
+            
             Divider()
+            
             Text(notification.title)
                 .font(.system(size: 17, weight: .semibold))
                 .foregroundColor(.primary)
@@ -67,10 +70,10 @@ struct NotificationCard: View {
     }
 
     private func cardBackground(isRead: Bool) -> some View {
-        RoundedRectangle(cornerRadius: 16)
+        RoundedRectangle(cornerRadius: 10)
             .fill(!isRead ? Color.iBackgroundSecondary : Color.background)
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(Color(UIColor.secondarySystemBackground), lineWidth: 2)
         )
     }

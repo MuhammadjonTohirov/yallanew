@@ -9,6 +9,7 @@ import Foundation
 import IldamSDK
 import Core
 import Combine
+import YallaUtils
 
 enum SideMenuType: String {
     case history = "history"
@@ -36,6 +37,9 @@ protocol SideMenuBodyProtocol: ObservableObject {
 actor SideMenuViewModel: SideMenuBodyProtocol {
     @MainActor
     private var observer: NSObjectProtocol?
+    
+    @MainActor
+    private var navigator: Navigator?
     
     @MainActor
     @Published var userInfo: UserInfo?
@@ -67,8 +71,25 @@ actor SideMenuViewModel: SideMenuBodyProtocol {
     @Published var paymentType: PaymentType = .cash
 
     @MainActor
+    func setNavigator(_ navigator: Navigator) {
+        self.navigator = navigator
+    }
+    
+    @MainActor
     func onClick(menu type: SideMenuType) {
-
+        guard let navigator = navigator else { 
+            Logging.l(tag: "SideMenuViewModel", "Navigator not set")
+            return 
+        }
+        
+        // Convert SideMenuType to HomePushableRoute
+        guard let route = HomePushableRoute.create(fromMenu: type) else {
+            Logging.l(tag: "SideMenuViewModel", "No route found for menu type: \(type)")
+            return
+        }
+        
+        navigator.push(route)
+        Logging.l(tag: "SideMenuViewModel", "Navigating to: \(type.rawValue)")
     }
      
     @MainActor

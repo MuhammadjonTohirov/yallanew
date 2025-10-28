@@ -29,12 +29,11 @@ struct BecomeDriverView: View {
                     .font(.system(size: 16, weight: .bold))
                 
             } action: {
-                
             }
         }
         .padding(.horizontal)
-
     }
+    
     private var headerView: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("become.driver".localize)
@@ -44,9 +43,9 @@ struct BecomeDriverView: View {
             Text("become.driver.descr".localize)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.iLabel)
-
         }
     }
+    
     private var middleView: some View {
         
         VStack(spacing: 10) {
@@ -97,7 +96,6 @@ struct BecomeDriverView: View {
 
         }
         .padding(.vertical)
-
     }
 }
 
