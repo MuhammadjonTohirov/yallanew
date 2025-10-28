@@ -17,7 +17,7 @@ struct NotificationsView: View {
     
     var body: some View {
         PageableScrollView(
-            title: "news.and.notifs".localize,
+            title: "".localize,
             onReachedBottom: {
                 Task {
                     await viewModel.loadNotificationsIfCan()

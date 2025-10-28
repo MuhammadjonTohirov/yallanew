@@ -244,7 +244,7 @@ struct SideMenuBody: View {
     }
     
     private var sectionThree: some View {
-        VStack {
+        VStack(spacing: 0) {
             // Настройки
             row(icon: Image("icon_setting2"), title: "settings".localize)
                 .padding(.horizontal, AppParams.Padding.default)
@@ -311,7 +311,7 @@ struct SideMenuBody: View {
             Image("icon_gold_coin")
             
             VStack(alignment: .leading, spacing: 2) {
-                Text("payment.methods".localize)
+                Text("bonus.and.discounts".localize)
                     .font(.bodyLargeMedium)
                     .foregroundStyle(Color.label)
                 

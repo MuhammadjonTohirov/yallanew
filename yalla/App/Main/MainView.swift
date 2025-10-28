@@ -67,7 +67,11 @@ struct MainView: View {
     
     private func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
+        if #available(iOS 26.0, *) {
+            
+        } else {
+            appearance.configureWithOpaqueBackground()
+        }
         
         let app = UIBarButtonItemAppearance()
         app.normal.backgroundImage = UIImage(named: "icon_back_round")
@@ -76,7 +80,6 @@ struct MainView: View {
         let back = UIBarButtonItemAppearance(style: .done)
         back.normal.backgroundImage = UIImage()
         back.normal.backgroundImagePositionAdjustment = .init(horizontal: 100, vertical: 0)
-        // This completely removes the title - more reliable than offsetting
         back.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
         
         appearance.buttonAppearance = app
@@ -85,18 +88,42 @@ struct MainView: View {
         appearance.shadowImage = UIImage()
         appearance.shadowColor = .clear
         
-//        appearance.setBackIndicatorImage(
-//            UIImage(named: "icon_arrow_back"),
-//            transitionMaskImage: UIImage(named: "icon_arrow_back")
-//        )
+        let atters: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 30, weight: .bold)
+        ]
+        
+        appearance.largeTitleTextAttributes = atters
+//        appearance.titleTextAttributes = atters
+        
+        // if iOS26 use icon_back
+        if #available(iOS 26.0, *) {
+            appearance.setBackIndicatorImage(
+                UIImage(named: "icon_back_smaller"),
+                transitionMaskImage: UIImage(named: "icon_back_smaller")
+            )
+        } else {
+            appearance.setBackIndicatorImage(
+                UIImage(
+                    named: "icon_back"
+                )?.withRenderingMode(.alwaysOriginal),
+                
+                transitionMaskImage: UIImage(
+                    named: "icon_back"
+                )?.withRenderingMode(.alwaysOriginal)
+            )
+            return
+        }
         
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance // Add this for iOS 15+
         
         // For complete removal of back button text for all view controllers
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(
-            UIOffset(horizontal: -1000, vertical: 0), for: .default)
+        UIBarButtonItem.appearance()
+            .setBackButtonTitlePositionAdjustment(
+                UIOffset(horizontal: -1000, vertical: 0),
+                for: .default
+        )
         
         UserSettings.shared.set(
             interfaceStyle: UserSettings.shared.theme?.style ?? .unspecified
