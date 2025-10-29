@@ -1915,7 +1915,7 @@
         }
       }
     },
-    "bonus.conversion.rate" : {
+    "capture.photo" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1927,19 +1927,49 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Курс конверсии бонусов"
+            "value" : "Сделать фото"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bonuslarni almashtirish kursi"
+            "value" : "Suratga olish"
           }
         },
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Бонусларни алмаштириш курси"
+            "value" : "Суратга олиш"
+          }
+        }
+      }
+    },
+
+    "select.from.gallery" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select from gallery"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбрать из галереи"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Galereyadan tanlash"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Галереядан танлаш"
           }
         }
       }

@@ -51,7 +51,7 @@ struct NotificationCard: View {
                 .foregroundColor(.iLabel)
             Text(notification.content)
                 .font(.system(size: 15, weight: .regular))
-                .foregroundColor(.iLabel)
+                .foregroundColor(Color.iLabel)
                 .lineLimit(3)
         }
     }

@@ -26,13 +26,11 @@ struct ContactOptionCard: View {
                             .opacity(0.15)
                             .frame(width: 44, height: 44)
                         
-                        Image(icon)
-                        .resizable()
+                        Image.icon(icon)
                         .frame(width: 24, height: 24)
 
                     }
     
-                    // Title
                     Text(title.localize)
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(Color.iLabel)
