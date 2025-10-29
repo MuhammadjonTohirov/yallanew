@@ -233,16 +233,16 @@ extension EditProfileView {
     
     private var menuView: some View {
         VStack(alignment: .leading, spacing: 10.scaled) {
+            
             rowItemView(image: Image("icon_trash"), text: "delete.account".localize)
             .onClick {
                 viewModel.onClickShowDeleteAccountSheet()
             }
- 
+            
             rowItemView(image: Image.icon("icon_logout"), text: "logout".localize)
             .onClick {
                 viewModel.onClickLogoutAccount()
             }
-
         }
         .padding(.horizontal, 16.scaled)
     }
