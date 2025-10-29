@@ -16,27 +16,32 @@ struct PaymentMethodsView: View {
     @StateObject private var viewModel = PaymentMethodsViewModel()
     
     var body: some View {
-        PageableScrollView(
-            title: viewModel.pageTitle,
-            onReachedBottom: {}, content: {
-                VStack(alignment: .leading, spacing: 0) {
-                    bonusRow
-                    
-                    // Наличные
-                    cashRow
-                        .visibility(
-                            !viewModel.isEditing
-                        )
-                    
-                    cardList
-                    
-                    addCardRow
-                        .visibility(
-                            !viewModel.isEditing
-                        )
-                }
+        VStack(alignment: .leading, spacing: 20) {
+            Text("cards.and.bonuses".localize)
+                .font(.system(size: 20, weight: .bold))
+                .horizontal(alignment: .leading)
+                .padding(.horizontal, AppParams.Padding.default)
+            
+            VStack(spacing: 4) {
+                bonusRow
+                                    
+                cardList
             }
-        )
+            
+            addCardRow
+                .visibility(
+                    !viewModel.isEditing
+                )
+                .visibility(
+                    viewModel.isCardEnabled
+                )
+            
+            cashRow
+                .visibility(
+                    !viewModel.isEditing
+                )
+        }
+        .scrollable(axis: .vertical)
         .animation(.easeInOut, value: viewModel.isEditing)
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
@@ -44,22 +49,38 @@ struct PaymentMethodsView: View {
                     viewModel.toggleEditMode()
                 } label: {
                     Text(
-                        viewModel.isEditing ? "done".localize : "edit".localize
+                        viewModel.isEditing ? "exit".localize : "edit".localize
                     )
+                    .foregroundStyle(.iTextLink)
                     .transaction { transaction in
                         transaction.animation = nil
                     }
+                    .font(.bodySmallBold)
                 }
                 .visibility(viewModel.canEdit)
             }
         })
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(isPresented: $viewModel.addCardView) {
-            AddCardView()
+        .sheet(isPresented: $viewModel.addCardView) {
+            VStack {
+                ZStack {
+                    DismissCircleButton()
+                        .horizontal(alignment: .leading)
+                    
+                    Text("add.card".localize)
+                        .font(.bodyLargeMedium)
+                }
+                .padding(AppParams.Padding.default.scaled)
+                AddCardView()
+            }
         }
+        .appSheet(isPresented: $viewModel.showEditCardSheet, title: "delete.cards".localize, sheetContent: {
+            editCardList
+        })
         .onAppear {
             self.viewModel.onAppear()
         }
+        .navigationBarTitleDisplayMode(.large)
+        .navigationTitle("payment.methods".localize)
     }
 }
 
@@ -86,42 +107,56 @@ extension PaymentMethodsView {
             
             Spacer()
             
-            SwitchViewFactory.default(isOn: .constant(false))
+            SwitchViewFactory.default(isOn: $viewModel.bonusActive)
         }
         .padding(.horizontal, AppParams.Padding.default)
         .frame(height: 60)
-        .onTapped(.background) {
-            
-        }
     }
     
     private var cashRow: some View {
-        row(
-            title: "cash".localize,
-            icon: "icon_cash3d",
-            isSelected: viewModel.selectedPaymentMethodId == "cash",
-            renderingMode: .original
-        )
-        .padding(.horizontal, AppParams.Padding.default)
-        .frame(height: 60)
-        .onTapped(.background) {
-            viewModel.selectPaymentMethod("cash")
+        VStack(spacing: 4.scaled) {
+            Text("other.methods".localize)
+                .font(.system(size: 20, weight: .bold))
+                .horizontal(alignment: .leading)
+                .padding(.horizontal, AppParams.Padding.default)
+
+            row(
+                title: "cash".localize,
+                icon: "icon_cash3d",
+                isSelected: viewModel.selectedPaymentMethodId == "cash",
+                renderingMode: .original
+            )
+            .padding(.horizontal, AppParams.Padding.default)
+            .onTapped(.background) {
+                Task {
+                    await viewModel.selectPaymentMethod("cash")
+                }
+            }
+            .frame(height: 60)
+            .disabled(!viewModel.isCashEnabled)
         }
-        .disabled(!viewModel.isCashEnabled)
     }
    
     private var addCardRow: some View {
-        row(
-            title: "add.card".localize,
-            icon: "icon_add",
-            isSelected: false
-        )
-        .padding(.horizontal, AppParams.Padding.default)
+        HStack {
+            Image(systemName: "plus.circle.fill")
+            Text("add.card".localize)
+            Spacer()
+            Image(systemName: "chevron.right")
+        }
+        .font(.bodySmallMedium)
+        .padding(.horizontal, AppParams.Padding.large)
         .frame(height: 60)
-        .onTapped(.background) {
+        .background(content: {
+            RoundedRectangle(cornerRadius: AppParams.Radius.default)
+                .stroke(lineWidth: 1)
+                .foregroundStyle(Color.iBorderDisabled)
+        })
+        .padding(.horizontal, 2)
+        .padding(.horizontal, AppParams.Padding.default)
+        .onClick {
             viewModel.openAddCardView()
         }
-        .visibility(viewModel.isCardEnabled)
     }
     
     @ViewBuilder
@@ -169,37 +204,74 @@ extension PaymentMethodsView {
 
 extension PaymentMethodsView {
     private var cardList: some View {
-        ForEach(viewModel.cards, id: \.cardId) { card in
-            HStack {
+        VStack(spacing: 4) {
+            ForEach(viewModel.cards, id: \.cardId) { card in
+                let name = card.type.name
                 row(
-                    title: card.miniPan,
-                    icon: card.type.iconName,
-                    isSelected: viewModel.isEditing ? false : viewModel.isSelected(card.cardId),
+                    title: "\(name) ---- " + card.maskedPan.suffix(4),
+                    icon: card.type.newIconName,
+                    isSelected: false,
                     renderingMode: .original
                 )
-                
-                Image("icon_trash")
-                    .renderingMode(.template)
-                    .foregroundStyle(Color.label)
-                    .visibility(viewModel.isEditing)
-            }
-            .padding(.horizontal, AppParams.Padding.default)
-            .frame(height: 60)
-            .onTapped(.background) {
-                if viewModel.isEditing {
-                    viewModel.deleteCard(card.cardId)
-                } else {
-                    viewModel.selectPaymentMethod(card.cardId)
+                .padding(.horizontal, AppParams.Padding.default)
+                .onTapped(.background) {
+                    if viewModel.isEditing {
+                        viewModel.deleteCard(card.cardId)
+                    } else {
+                        Task {
+                            await viewModel.selectPaymentMethod(card.cardId)
+                        }
+                    }
                 }
+                .frame(height: 60.scaled)
+                .overlay(content: {
+                    if !viewModel.isEditing {
+                        Rectangle()
+                            .foregroundStyle(Color.background.opacity(0.5))
+                            .visibility(!viewModel.isCardEnabled)
+                    }
+                })
+                .disabled(!viewModel.isCardEnabled)
             }
-            .overlay(content: {
-                if !viewModel.isEditing {
-                    Rectangle()
-                        .foregroundStyle(Color.background.opacity(0.5))
-                        .visibility(!viewModel.isCardEnabled)
+        }
+    }
+    
+    private var editCardList: some View {
+        VStack {
+            Text("cards".localize)
+                .font(.titleBaseBold)
+                .horizontal(alignment: .leading)
+            ForEach(viewModel.cards, id: \.cardId) { card in
+                let name = card.type.name
+                HStack {
+                    row(
+                        title: "\(name) ---- " + card.maskedPan.suffix(4),
+                        icon: card.type.newIconName,
+                        isSelected: false,
+                        renderingMode: .original
+                    )
+                    
+                    Image("icon_trash")
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.init(uiColor: .systemRed))
+                        .onClick {
+                            viewModel.deleteCard(card.cardId)
+                        }
                 }
-            })
-            .disabled(!viewModel.isCardEnabled)
+                .frame(height: 60)
+            }
+        }
+        .padding(.horizontal, AppParams.Padding.default)
+    }
+}
+
+extension CardType {
+    var newIconName: String {
+        switch self {
+        case .humo:
+            return "icon_humo"
+        case .uzcard:
+            return "icon_uzcard"
         }
     }
 }

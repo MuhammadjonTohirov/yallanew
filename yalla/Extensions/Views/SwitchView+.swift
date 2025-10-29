@@ -10,11 +10,19 @@ import YallaUtils
 import SwiftUI
 
 struct SwitchViewFactory {
-    static func `default`(isOn: Binding<Bool>) -> SwitchView {
-        SwitchView(isOn: isOn, backgroundColor: .iPrimary, handleColor: .white)
+    @ViewBuilder
+    static func `default`(isOn: Binding<Bool>) -> some View {
+        Group {
+            if #available(iOS 26.0, *) {
+                Toggle(isOn: isOn, label: {EmptyView()})
+                    .tint(.iPrimary)
+            } else {
+                SwitchView(isOn: isOn, backgroundColor: .iPrimary, handleColor: .white)
+            }
+        }
     }
 }
 
 #Preview {
-    SwitchViewFactory.default(isOn: .constant(false)) 
+    SwitchViewFactory.default(isOn: .constant(false))
 }

@@ -83,7 +83,7 @@ actor SideMenuViewModel: SideMenuBodyProtocol {
         }
         
         // Convert SideMenuType to HomePushableRoute
-        guard let route = HomePushableRoute.create(fromMenu: type) else {
+        guard let route = SideMenuRoute.create(fromMenu: type) else {
             Logging.l(tag: "SideMenuViewModel", "No route found for menu type: \(type)")
             return
         }

@@ -11,32 +11,54 @@ import IldamSDK
 import Core
 import Combine
 
-class PaymentMethodsViewModel: ObservableObject {
+actor PaymentMethodsViewModel: ObservableObject {
+    @MainActor
     @Published var cards: [CardItem] = []
+    
+    @MainActor
     @Published var isLoading: Bool = false
+    
+    @MainActor
     @Published var selectedPaymentMethodId: String? = "cash"
+    
+    @MainActor
     @Published var addCardView: Bool = false
+    
+    @MainActor
     @Published var isEditing: Bool = false
     
+    @MainActor
+    @Published var showEditCardSheet: Bool = false
+    
+    @MainActor
+    @Published var bonusActive: Bool = false
+    
+    @MainActor
     var pageTitle: String {
         isEditing
         ? "edit.payment.methods".localize
         : "payment.methods".localize
     }
     
+    @MainActor
     var pageDescription: String {
         isEditing
         ? "edit.choose.payment".localize
         : "choose.payment".localize
     }
     
+    @MainActor
     var canEdit: Bool {
         !self.cards.isEmpty
     }
     
+    @MainActor
     var isCardEnabled: Bool = false
+    
+    @MainActor
     var isCashEnabled: Bool = true
     
+    @MainActor
     func onAppear() {
         isCardEnabled = AppConfigUseCaseImpl().appConfig?.isCardPaymentEnabled ?? false
         
@@ -62,40 +84,51 @@ class PaymentMethodsViewModel: ObservableObject {
     }
     
     // Select a payment method
-    @MainActor
-    func selectPaymentMethod(_ id: String?) {
-        if id == "cash" && !isCashEnabled {
-            TaxiOrderConfigProvider.shared.setPayment(type: nil)
-            return
+    func selectPaymentMethod(_ id: String?) async {
+        await MainActor.run {
+            if id == "cash" && !isCashEnabled {
+                    TaxiOrderConfigProvider.shared.setPayment(type: nil)
+                return
+            }
+        }
+
+        await MainActor.run {
+            guard isCardEnabled else { return }
         }
         
-        guard isCardEnabled else { return }
-        
-        selectedPaymentMethodId = id
-        
-        self.cards.forEach { item in
-            item.isDefault = false
-            if item.cardId == id {
-                item.isDefault = true
+        await MainActor.run {
+            selectedPaymentMethodId = id
+        }
+
+        await MainActor.run {
+            self.cards.forEach { item in
+                item.isDefault = false
+                if item.cardId == id {
+                    item.isDefault = true
+                }
             }
         }
         
-        Task {
-            await SyncCardsUseCaseImpl.shared.setDefault(cardId: id ?? "cash")
+        await SyncCardsUseCaseImpl.shared.setDefault(cardId: id ?? "cash")
+        
+        await MainActor.run {
             TaxiOrderConfigProvider.shared.setPayment(type: id)
         }
     }
     
     @MainActor
     func toggleEditMode() {
-        isEditing.toggle()
+//        isEditing.toggle()
+        showEditCardSheet = true
     }
     
     // Open Add Card View
+    @MainActor
     func openAddCardView() {
         addCardView = true
     }
     
+    @MainActor
     func isSelected(_ id: String?) -> Bool {
         id == selectedPaymentMethodId
     }
@@ -111,7 +144,9 @@ class PaymentMethodsViewModel: ObservableObject {
             if try await DeleteCardUseCase().delete(cardId: id) {
                 Task { @MainActor in
                     if self.selectedPaymentMethodId == id {
-                        self.selectPaymentMethod("cash")
+                        Task {
+                            await self.selectPaymentMethod("cash")
+                        }
                     }
                     
                     self.cards.removeAll(where: {$0.cardId == id})

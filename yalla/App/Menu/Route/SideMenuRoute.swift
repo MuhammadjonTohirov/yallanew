@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import YallaUtils
 
-enum HomePushableRoute: @MainActor SceneDestination {
+enum SideMenuRoute: @MainActor SceneDestination {
     case history
     case places
     case bonuses
@@ -58,7 +58,7 @@ enum HomePushableRoute: @MainActor SceneDestination {
         }
     }
     
-    static func create(fromMenu menu: SideMenuType) -> HomePushableRoute? {
+    static func create(fromMenu menu: SideMenuType) -> SideMenuRoute? {
         switch menu {
         case .history:
             return .history
@@ -103,8 +103,7 @@ enum HomePushableRoute: @MainActor SceneDestination {
             EmptyView()
 //            BonusesView()
         case .paymentMethods:
-            EmptyView()
-//            PaymentMethodsView()
+            PaymentMethodsView()
         case .contactUs:
             ContactUsView()
         case .settings:
@@ -130,7 +129,7 @@ enum HomePushableRoute: @MainActor SceneDestination {
         hasher.combine(self.id)
     }
     
-    static func == (lhs: HomePushableRoute, rhs: HomePushableRoute) -> Bool {
+    static func == (lhs: SideMenuRoute, rhs: SideMenuRoute) -> Bool {
         lhs.id == rhs.id
     }
 }
