@@ -20,7 +20,7 @@ struct SideMenuBody: View {
             Color.background.ignoresSafeArea()
             VStack(spacing: 10) {
                 userInfo
-                    .onClick {
+                    .onTapped(.background) {
                         Task { @MainActor in
                             viewModel.onClick(menu: .profile)
                         }
@@ -30,10 +30,13 @@ struct SideMenuBody: View {
                     )
 
                 sectionOne
+                    .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
                 
                 sectionTwo
+                    .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
                 
                 sectionThree
+                    .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
                 
                 becomeDriverRow
             }
@@ -51,7 +54,6 @@ struct SideMenuBody: View {
         ZStack {
             HStack {
                 Circle()
-                    .frame(width: 38, height: 38)
                     .foregroundStyle(.iBackgroundTertiary)
                     .overlay {
                         Image("icon_backarrow")
@@ -63,10 +65,10 @@ struct SideMenuBody: View {
                     .onClick {
                         dismiss.callAsFunction()
                     }
+                    .frame(width: 38, height: 38)
                     .padding(AppParams.Padding.default)
                 Spacer()
                 Circle()
-                    .frame(width: 38, height: 38)
                     .foregroundStyle(.iBackgroundTertiary)
                     .overlay {
                         Image("icon_brush")
@@ -78,6 +80,7 @@ struct SideMenuBody: View {
                     .onClick {
                         
                     }
+                    .frame(width: 38, height: 38)
                     .padding(AppParams.Padding.default)
             }
             .vertical(alignment: .top)
@@ -119,7 +122,7 @@ struct SideMenuBody: View {
         VStack(spacing: 0) {
             paymentTypeRow()
                 .padding(.horizontal, AppParams.Padding.default)
-                .onClick {
+                .onTapped(.iBackgroundSecondary) {
                     viewModel.onClick(menu: .paymentMethods)
                 }
             
@@ -128,7 +131,7 @@ struct SideMenuBody: View {
             
             bonusesRow()
             .padding(.horizontal, AppParams.Padding.default)
-            .onClick {
+            .onTapped(.iBackgroundSecondary) {
                 viewModel.onClick(menu: .bonuses)
             }
             .visibility(viewModel.isDiscountVisible)
@@ -143,7 +146,7 @@ struct SideMenuBody: View {
         VStack(spacing: 0) {
             row(icon: Image("icon_task"), title: "journey.history".localize)
                 .padding(.horizontal, AppParams.Padding.default)
-                .onClick {
+                .onTapped(.iBackgroundSecondary) {
                     viewModel.onClick(menu: .history)
                 }
             
@@ -152,7 +155,7 @@ struct SideMenuBody: View {
             // Мои места
             row(icon: Image("icon_location_tick"), title: "my.places".localize)
                 .padding(.horizontal, AppParams.Padding.default)
-                .onClick {
+                .onTapped(.iBackgroundSecondary) {
                     viewModel.onClick(menu: .places)
                 }
 
@@ -162,7 +165,7 @@ struct SideMenuBody: View {
                 title: "invite.friends".localize
             )
             .padding(.horizontal, AppParams.Padding.default)
-            .onClick {
+            .onTapped(.iBackgroundSecondary) {
                 viewModel.onClick(menu: .invite)
             }
             .visibility(false)
@@ -175,7 +178,7 @@ struct SideMenuBody: View {
                 title: "contact.us".localize
             )
             .padding(.horizontal, AppParams.Padding.default)
-            .onClick {
+            .onTapped(.iBackgroundSecondary) {
                 viewModel.onClick(menu: .contactus)
             }
             
@@ -197,7 +200,7 @@ struct SideMenuBody: View {
                 )
             )
             .padding(.horizontal, AppParams.Padding.default)
-            .onClick {
+            .onTapped(.iBackgroundSecondary) {
                 viewModel.onClick(menu: .notification)
             }
             
@@ -233,7 +236,7 @@ struct SideMenuBody: View {
                 }
             }
             .cornerRadius(16, corners: .allCorners)
-            .onClick {
+            .onTapped(.iBackgroundSecondary) {
                 viewModel.onClick(menu: .driver)
             }
     }
@@ -248,7 +251,7 @@ struct SideMenuBody: View {
             // Настройки
             row(icon: Image("icon_setting2"), title: "settings".localize)
                 .padding(.horizontal, AppParams.Padding.default)
-                .onClick {
+                .onTapped(.iBackgroundSecondary) {
                     viewModel.onClick(menu: .settings)
                 }
             
@@ -257,7 +260,7 @@ struct SideMenuBody: View {
             // О приложении
             row(icon: Image("icon_logo"), title: "about.app".localize)
                 .padding(.horizontal, AppParams.Padding.default)
-                .onClick {
+                .onTapped(.iBackgroundSecondary) {
                     viewModel.onClick(menu: .aboutus)
                 }
         }

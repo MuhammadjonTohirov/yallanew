@@ -16,6 +16,7 @@ struct AppSheetModifier<SheetContent: View>: ViewModifier {
     var sheetContent: () -> SheetContent
     
     @State private var rect: CGRect?
+    
     private var radius: CGFloat = AppParams.Radius.large
     init(isPresented: Binding<Bool>, title: String = "", radius: CGFloat = AppParams.Radius.large, sheetContent: @escaping () -> SheetContent) {
         self._isPresented = isPresented
@@ -41,11 +42,19 @@ struct AppSheetModifier<SheetContent: View>: ViewModifier {
                         
                         sheetContent()
                     }
-                    .readRect { rect in
-                        self.rect = rect
+                    .readRect { newRect in
+                        if let oldRect = self.rect {
+                            if abs(oldRect.height - newRect.height) > 1 {
+                                self.rect = newRect
+                            }
+                        } else {
+                            self.rect = newRect
+                        }
                     }
                     .scrollIndicators(.hidden)
                 }
+                .scrollBounceBehavior(.basedOnSize)
+                .background(Color.background.ignoresSafeArea())
                 .presentationDetents([.height(((rect?.height) ?? 0) + UIApplication.shared.safeArea.bottom)])
                 .presentationCornerRadius(radius)
                 .presentationDragIndicator(.visible)
@@ -62,4 +71,11 @@ extension View {
     ) -> some View {
         modifier(AppSheetModifier(isPresented: isPresented, title: title, sheetContent: sheetContent))
     }
+}
+
+#Preview {
+    Text("body")
+        .appSheet(isPresented: .constant(true)) {
+            Text("Come on guys")
+        }
 }

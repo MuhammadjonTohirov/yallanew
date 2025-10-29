@@ -47,9 +47,6 @@ struct EditProfileView: View {
                     }
             }
         })
-        .sheet(isPresented: $viewModel.showDatePicker) {
-            datePickerView
-        }
         .appSheet(isPresented: .init(get: {
             viewModel.sheetRoute != nil
         }, set: { shown in
@@ -66,6 +63,8 @@ struct EditProfileView: View {
                 deleteAccountSheetView
             case .logout:
                 logoutAccountSheetView
+            case .datePicker:
+                datePickerView
             default:
                 EmptyView()
             }
@@ -212,25 +211,13 @@ struct EditProfileView: View {
     }
     
     private var datePickerView: some View {
-        VStack(spacing: 0) {
-            HStack {
-                DismissCircleButton()
-                Spacer()
-            }
-            .padding([.horizontal, .top], 16)
-            
-            DatePicker(
-                selection: $viewModel.birthDate,
-                in: ...Date(),
-                displayedComponents: .date,
-                label: { EmptyView() }
-            )
-            .datePickerStyle(.graphical)
-        }
-        .readRect(rect: $pickerSize)
-        .scrollable()
-        .presentationCornerRadius(AppParams.Radius.large)
-        .presentationDetents([.height(pickerSize.height)])
+        DatePicker(
+            selection: $viewModel.birthDate,
+            in: ...Date(),
+            displayedComponents: .date,
+            label: { EmptyView() }
+        )
+        .datePickerStyle(.graphical)
     }
 }
 
