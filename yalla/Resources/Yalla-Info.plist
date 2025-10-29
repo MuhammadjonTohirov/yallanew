@@ -37,6 +37,7 @@
 		<string>t.me</string>
 		<string>tg</string>
 		<string>tme</string>
+		<string>instagram</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>

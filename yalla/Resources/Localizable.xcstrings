@@ -1914,6 +1914,35 @@
           }
         }
       }
+    },
+    "bonus.conversion.rate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonus conversion rate"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Курс конверсии бонусов"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonuslarni almashtirish kursi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бонусларни алмаштириш курси"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"

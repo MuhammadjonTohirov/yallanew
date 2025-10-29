@@ -100,11 +100,9 @@ enum HomePushableRoute: @MainActor SceneDestination {
         case .becomeDriver:
             BecomeDriverView()
         case .bonuses:
-            EmptyView()
-//            BonusesView()
+            BonusesView()
         case .paymentMethods:
-            EmptyView()
-//            PaymentMethodsView()
+            PaymentMethodsView()
         case .contactUs:
             ContactUsView()
         case .settings:
