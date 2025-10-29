@@ -43,7 +43,7 @@ struct ContactOptionCard: View {
             .padding(.horizontal, 20)
             .padding(.vertical, 20)
             .background(
-                RoundedRectangle(cornerRadius: 25)
+                RoundedRectangle(cornerRadius: 20)
                     .fill(Color.iBackgroundSecondary)
             )
         }

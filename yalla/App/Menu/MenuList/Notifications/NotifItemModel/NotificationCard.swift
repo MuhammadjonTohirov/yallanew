@@ -48,7 +48,7 @@ struct NotificationCard: View {
             
             Text(notification.title)
                 .font(.system(size: 17, weight: .semibold))
-                .foregroundColor(.primary)
+                .foregroundColor(.iLabel)
             Text(notification.content)
                 .font(.system(size: 15, weight: .regular))
                 .foregroundColor(Color.iLabel)
@@ -61,20 +61,20 @@ struct NotificationCard: View {
         HStack {
             Text(notification.type ?? "")
                 .font(.system(size: 17, weight: .semibold))
-                .foregroundColor(.primary)
+                .foregroundColor(.iLabel)
             Spacer()
             Text(notification.date)
                 .font(.system(size: 15, weight: .regular))
-                .foregroundColor(.primary)
+                .foregroundColor(.iLabel)
         }
     }
 
     private func cardBackground(isRead: Bool) -> some View {
-        RoundedRectangle(cornerRadius: 10)
+        RoundedRectangle(cornerRadius: 15)
             .fill(!isRead ? Color.iBackgroundSecondary : Color.background)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color(UIColor.secondarySystemBackground), lineWidth: 2)
+                    .stroke(Color.iBorderDisabled, lineWidth: 1)
         )
     }
 }
