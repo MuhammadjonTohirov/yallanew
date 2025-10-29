@@ -68,7 +68,7 @@ struct SettingsThemeView: View {
                        .frame(width: 24, height: 24)
                    
                     Text(title)
-                        .font(.inter(.semibold, size: 16))
+                        .font(.system(size: 14, weight: .regular))
                         .foregroundStyle(Color.label)
                    
                    
@@ -89,16 +89,17 @@ struct SettingsThemeView: View {
         .padding(.horizontal, 10)
         .frame(height: 60)
         .background(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(isSelected ? Color.iBackgroundSecondary : Color.background)
+            ZStack {
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(isSelected ? Color.iBackgroundSecondary : Color.background)
+                
+                if !isSelected {
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .stroke(Color.iBorderDisabled, lineWidth: 1)
+                }
+            }
         )
-        .overlay(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(isSelected ? Color.iBackgroundSecondary : Color.iBorderDisabled, lineWidth: isSelected ? 0 : 2)
-            
-        )
-        .animation(nil, value: UUID())
-    }
+     }
 }
 
 
