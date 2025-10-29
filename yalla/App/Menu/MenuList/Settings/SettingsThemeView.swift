@@ -64,9 +64,7 @@ struct SettingsThemeView: View {
        
             VStack(alignment: .leading, spacing: 0) {
                HStack (spacing: 10){
-                   Image(icon)
-                       .renderingMode(.original)
-                       .foregroundStyle(Color.background)
+                   Image.icon(icon)
                        .frame(width: 24, height: 24)
                    
                     Text(title)
@@ -80,9 +78,10 @@ struct SettingsThemeView: View {
                        .frame(width: 30, height: 30)
                        .foregroundStyle(isSelected ? Color.iPrimary : Color.background )
                        .overlay {
-                           Image(isSelected ? "icon_check" : "")
+                           Image("icon_check")
                                .renderingMode(.template)
                                .foregroundStyle(.white)
+                               .visibility(isSelected)
                     }
                 }
             }

@@ -66,9 +66,7 @@ struct SettingsView: View {
         HStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Image(icon)
-                        .renderingMode(.original)
-                        .foregroundStyle(Color.background)
+                    Image.icon(icon)
                         .frame(width: 24, height: 24)
                     
                     Text(title.localize)
