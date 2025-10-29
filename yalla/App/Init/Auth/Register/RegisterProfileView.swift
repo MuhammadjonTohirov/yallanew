@@ -37,7 +37,7 @@ struct RegisterProfileView: View {
             
             innerBody
         }
-        .sheet(isPresented: $showDatePicker) {
+        .appSheet(isPresented: $showDatePicker) {
             datePickerView
         }
         .onChange(of: birthDate) { newValue in
@@ -164,26 +164,14 @@ struct RegisterProfileView: View {
     
 
     private var datePickerView: some View {
-        VStack(spacing: 0) {
-            HStack {
-                DismissCircleButton()
-                Spacer()
-            }
-            .padding([.horizontal, .top], 16)
-            
-            DatePicker(
-                selection: $birthDate,
-                in: ...Date(),
-                displayedComponents: .date,
-                label: { EmptyView() }
-            )
-            .datePickerStyle(.graphical)
-        }
-        .readRect(rect: $pickerSize)
-        .scrollable()
-        .presentationCornerRadius(AppParams.Radius.large)
-        .presentationDetents([.height(pickerSize.height)])
-    }
+        DatePicker(
+            selection: $birthDate,
+            in: ...Date(),
+            displayedComponents: .date,
+            label: { EmptyView() }
+        )
+        .datePickerStyle(.graphical)
+   }
 }
 
 #Preview(body: {

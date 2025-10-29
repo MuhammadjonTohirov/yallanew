@@ -21,6 +21,7 @@ enum EditProfileSheetRoute: String, Identifiable, Hashable, Equatable {
     case deleteAccount
     case logout
     case changePhoto
+    case datePicker
     
     var title: String {
         switch self {
@@ -28,8 +29,10 @@ enum EditProfileSheetRoute: String, Identifiable, Hashable, Equatable {
             return "delete.account".localize
         case .logout:
             return "logout".localize
-        default:
+        case .changePhoto:
             return "change.photo".localize
+        default:
+            return ""
         }
     }
 }
@@ -52,9 +55,6 @@ actor EditProfileViewModel: ObservableObject {
     
     @MainActor
     @Published var gender: Gender?
-    
-    @MainActor
-    @Published var showDatePicker: Bool = false
     
     @MainActor
     @Published var isLoading: Bool = false
@@ -215,7 +215,7 @@ extension EditProfileViewModel {
     func onClickBirthday() {
         UIApplication.shared.dismissKeyboard()
         
-        self.showDatePicker = true
+        self.setSheet(.datePicker)
     }
     
     @MainActor
