@@ -177,7 +177,7 @@ struct AboutApplicationView: View {
                     // Title
                     Text(title.localize)
                         .font(.system(size: 18, weight: .regular))
-                        .foregroundColor(.black)
+                        .foregroundColor(Color.iLabel)
                         .lineLimit(1)
                  
 
