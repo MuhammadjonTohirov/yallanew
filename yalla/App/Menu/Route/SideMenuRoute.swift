@@ -100,8 +100,7 @@ enum SideMenuRoute: @MainActor SceneDestination {
         case .becomeDriver:
             BecomeDriverView()
         case .bonuses:
-            EmptyView()
-//            BonusesView()
+            BonusesView()
         case .paymentMethods:
             PaymentMethodsView()
         case .contactUs:
