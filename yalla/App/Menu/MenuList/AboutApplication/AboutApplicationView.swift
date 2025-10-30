@@ -15,7 +15,7 @@ import SwiftMessages
 struct AboutApplicationView: View {
     let appConfigUseCase: any AppConfigUseCase = AppConfigUseCaseImpl()
     private let appRatingUseCase: AppRatingUseCase = AppRatingUseCaseImpl.shared
-    
+        
     private var policyUrl: String {
         let ruUrl = appConfigUseCase.appConfig?.setting?.privacyPolicyRu ?? "https://ildam.uz/privacy-policy"
         let uzUrl = appConfigUseCase.appConfig?.setting?.privacyPolicyUz ?? "https://ildam.uz/privacy-policy"

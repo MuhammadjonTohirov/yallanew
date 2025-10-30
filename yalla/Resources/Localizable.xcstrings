@@ -291,6 +291,35 @@
         }
       }
     },
+    "capture.photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonus conversion rate"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сделать фото"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suratga olish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Суратга олиш"
+          }
+        }
+      }
+    },
     "cash" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -320,7 +349,7 @@
         }
       }
     },
- "change.photo" : {
+    "change.photo" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1306,6 +1335,35 @@
         }
       }
     },
+    "privacy.policy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Политика конфиденциальности"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maxfiylik siyosati"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Махфийлик сиёсати"
+          }
+        }
+      }
+    },
     "promocode" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1393,6 +1451,35 @@
         }
       }
     },
+    "read.all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read all"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прочитать все"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hammasini o‘qish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳаммасини ўқиш"
+          }
+        }
+      }
+    },
     "save" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1476,6 +1563,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Дастур тилини танланг"
+          }
+        }
+      }
+    },
+    "select.from.gallery" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select from gallery"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбрать из галереи"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Galereyadan tanlash"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Галереядан танлаш"
           }
         }
       }
@@ -1650,6 +1766,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тизим мавзуси"
+          }
+        }
+      }
+    },
+    "user.agreement" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "License agreement"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лицензионное соглашение"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Litsenziya shartnomasi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лицензия шартномаси"
           }
         }
       }
@@ -1857,65 +2002,65 @@
         }
       }
     },
-    "privacy.policy" : {
+    "promo.not.exists" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Policy"
+            "value" : "Such promo code does not exist"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Политика конфиденциальности"
+            "value" : "Такого промокода не существует"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Maxfiylik siyosati"
+            "value" : "Bunday promo kod mavjud emas"
           }
         },
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Махфийлик сиёсати"
+            "value" : "Бундай промо код мавжуд эмас"
           }
         }
       }
     },
-    "user.agreement" : {
+    "promo.applied.successfully" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "License agreement"
+            "value" : "Promocode applied successfully"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Лицензионное соглашение"
+            "value" : "Промокод успешно применён"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Litsenziya shartnomasi"
+            "value" : "Promo kod muvaffaqiyatli qo‘llanildi"
           }
         },
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Лицензия шартномаси"
+            "value" : "Промо код муваффақиятли қўлланилди"
           }
         }
       }
     },
-    "capture.photo" : {
+    "bonus.conversion.rate" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1927,49 +2072,19 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сделать фото"
+            "value" : "Курс конверсии бонусов"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suratga olish"
+            "value" : "Bonuslarni almashtirish kursi"
           }
         },
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Суратга олиш"
-          }
-        }
-      }
-    },
-
-    "select.from.gallery" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select from gallery"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Выбрать из галереи"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Galereyadan tanlash"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Галереядан танлаш"
+            "value" : "Бонусларни алмаштириш курси"
           }
         }
       }
@@ -1977,4 +2092,3 @@
   },
   "version" : "1.1"
 }
-

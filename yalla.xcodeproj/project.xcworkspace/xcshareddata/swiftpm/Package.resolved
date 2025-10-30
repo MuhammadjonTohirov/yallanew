@@ -1,5 +1,5 @@
 {
-  "originHash" : "cf6d293cd0c4e675394d90ff268e13c3b2767d7f274dfad760e93e64863467a5",
+  "originHash" : "ee7b22950b10d35022b4f5027a5c200bc01579123dc404be3db6048e384ad4a0",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -101,12 +101,30 @@
       }
     },
     {
+      "identity" : "imap",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MuhammadjonTohirov/imap",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f40bf1801d11d77bbc058e608aa6f77347b95693"
+      }
+    },
+    {
       "identity" : "interop-ios-for-google-sdks",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/interop-ios-for-google-sdks.git",
       "state" : {
         "revision" : "040d087ac2267d2ddd4cca36c757d1c6a05fdbfe",
         "version" : "101.0.0"
+      }
+    },
+    {
+      "identity" : "ios-maps-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googlemaps/ios-maps-sdk",
+      "state" : {
+        "revision" : "02f8f144ef266da44d50a68d1562ca051bac27cc",
+        "version" : "9.4.0"
       }
     },
     {
@@ -128,12 +146,48 @@
       }
     },
     {
+      "identity" : "mapbox-directions-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/flitsmeister/mapbox-directions-swift",
+      "state" : {
+        "revision" : "6c19ecc4e1324887ae3250802b8d13d8d8b3ff2d",
+        "version" : "0.23.3"
+      }
+    },
+    {
+      "identity" : "maplibre-gl-native-distribution",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maplibre/maplibre-gl-native-distribution.git",
+      "state" : {
+        "revision" : "0edf46449e7cc888c7a4d7ed403461915137604b",
+        "version" : "6.19.3"
+      }
+    },
+    {
+      "identity" : "maplibre-navigation-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maplibre/maplibre-navigation-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "443efb00ce665ea62828637c958ee7c335e3facb"
+      }
+    },
+    {
       "identity" : "nanopb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",
       "state" : {
         "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
         "version" : "2.30910.0"
+      }
+    },
+    {
+      "identity" : "polyline",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/raphaelmor/Polyline",
+      "state" : {
+        "revision" : "353f80378dcd8f17eefe8550090c6b1ae3c9da23",
+        "version" : "5.1.0"
       }
     },
     {
@@ -155,6 +209,15 @@
       }
     },
     {
+      "identity" : "solar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ceeK/Solar.git",
+      "state" : {
+        "revision" : "c2b96f2d5fb7f835b91cefac5e83101f54643901",
+        "version" : "3.0.1"
+      }
+    },
+    {
       "identity" : "swift-protobuf",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
@@ -164,12 +227,21 @@
       }
     },
     {
+      "identity" : "turf-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/flitsmeister/turf-swift",
+      "state" : {
+        "revision" : "b05b4658d1b48eac4127a0d9ebbb5a6f965a8251",
+        "version" : "0.2.2"
+      }
+    },
+    {
       "identity" : "yallakit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MuhammadjonTohirov/yallakit",
       "state" : {
         "branch" : "main",
-        "revision" : "4507a1ef3fd5d8ba900b16918e21cc59a1111fe6"
+        "revision" : "b5651b4ff5f254350eaf3dc96d10759db8e8f0ee"
       }
     }
   ],

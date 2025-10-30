@@ -20,6 +20,10 @@ final class NotificationsViewModel: ObservableObject {
     @Published var showBottomSheet: Bool = false
     @Published var selectedNotificationId: Int?
     
+    var hasUnread: Bool {
+        notifications.contains { !$0.isRead }
+    }
+    
     var route: NotificationsRoute? {
         didSet {
             push = route != nil
@@ -70,5 +74,21 @@ final class NotificationsViewModel: ObservableObject {
         self.selectedNotificationId = id
         self.showBottomSheet = true
     }
+    
+    func markAllAsRead() async {
+        let unreadIds = notifications.filter { !$0.isRead }.map(\.id)
+        guard !unreadIds.isEmpty else { return }
+        await MainActor.run { [weak self] in
+            self?.showLoading()
+            self?.notifications.forEach { $0.isRead = true }
+        }
+        defer {
+            Task { @MainActor in
+                self.hideLoading()
+            }
+        }
+        for id in unreadIds {
+            _ = try? await ShowAndReadNotifUseCase().execute(notifId: id)
+        }
+    }
 }
-
