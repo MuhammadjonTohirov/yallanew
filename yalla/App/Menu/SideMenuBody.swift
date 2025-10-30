@@ -12,7 +12,7 @@ import YallaUtils
 import Kingfisher
 
 struct SideMenuBody: View {
-    @ObservedObject var viewModel: SideMenuViewModel
+    @StateObject var viewModel: SideMenuViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -37,11 +37,9 @@ struct SideMenuBody: View {
             }
             .padding()
             .scrollable(axis: .vertical)
-            .onAppear {
-                Task { @MainActor in
-                    await viewModel.onAppear()
-                }
-            }
+        }
+        .onAppear {
+            viewModel.onAppear()
         }
     }
     
@@ -82,7 +80,7 @@ struct SideMenuBody: View {
             }
             .vertical(alignment: .top)
             VStack {
-                KFImage(UserSettings.shared.userInfo?.imageURL)
+                KFImage(viewModel.userInfo?.imageURL)
                     .placeholder {
                         Circle()
                             .frame(width: 80.scaled, height: 80.scaled)
@@ -94,15 +92,16 @@ struct SideMenuBody: View {
                             })
                     }
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 80.scaled, height: 80.scaled)
                     .clipShape(Circle())
                 
                 VStack(alignment: .center, spacing: 2) {
-                    Text(UserSettings.shared.userInfo?.fullName ?? "Guest")
+                    Text(viewModel.userInfo?.fullName ?? "Guest")
                         .font(.titleLargeBold)
                         .foregroundStyle(Color.iLabel)
 
-                    Text(UserSettings.shared.userInfo?.formattedPhone ?? "+998 (91) 123-45-67")
+                    Text(viewModel.userInfo?.formattedPhone ?? "+998 (91) 123-45-67")
                         .font(.bodySmallMedium)
                         .foregroundStyle(Color.iLabel)
                 }
@@ -322,7 +321,7 @@ struct SideMenuBody: View {
             Spacer()
             
             HStack(spacing: 3) {
-                Text(verbatim: "0")
+                Text(viewModel.bonusValue)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(.white)
             }

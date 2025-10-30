@@ -8,8 +8,9 @@
 import Foundation
 import Core
 import IldamSDK
+import Combine
 
-protocol TaxiOrderConfigProviderDelegate: AnyObject {
+protocol TaxiOrderConfigProviderDelegate: AnyObject, Sendable {
     func didUpdateConfig(_ order: TaxiOrderConfig)
     func didClearConfig()
     func didUpdateRoute(_ route: [GRoutePoint])
@@ -29,186 +30,180 @@ extension TaxiOrderConfigProviderDelegate {
     func didUpdateFrom(_ from: GRoutePoint?) {}
 }
 
-protocol TaxiOrderConfigProviderProtocol {
-    var config: TaxiOrderConfig { get }
-    
-    func set(config: TaxiOrderConfig)
-    func set(from: GRoutePoint?)
-    
-    func clear()
-    func addListener(_ listener: TaxiOrderConfigProviderDelegate)
-    func removeListener(_ listener: TaxiOrderConfigProviderDelegate)
-    
-    func setRoute(list route: [GRoutePoint])
-    func setTariff(list tariffs: [TaxiTariff])
-    func setSelectedTariff(_ tariff: TaxiTariff?)
-    func setTariff(options: [Int])
-
-    /// nil if cash
-    func setPayment(type: String?)
-    
-    func appendRoute(_ point: GRoutePoint)
-    func appendRoute(address point: SelectAddressItem)
-    func editRoute(at index: Int, with point: GRoutePoint)
-    
-    func clearRoute()
+actor TaxiOrderConfigChangeSubjects {
+    var passthrough: PassthroughSubject<TaxiOrderConfig, Never> = .init()
 }
 
-final class TaxiOrderConfigProvider: TaxiOrderConfigProviderProtocol {
+protocol TaxiOrderConfigProviderProtocol: Sendable {
+    var config: TaxiOrderConfig { get async }
+    
+    func set(config: TaxiOrderConfig) async
+    func set(from: GRoutePoint?) async
+    
+    func clear() async
+    func addListener(_ listener: TaxiOrderConfigProviderDelegate) async
+    func removeListener(_ listener: TaxiOrderConfigProviderDelegate) async
+    
+    func setRoute(list route: [GRoutePoint]) async
+    func setTariff(list tariffs: [TaxiTariff]) async
+    func setSelectedTariff(_ tariff: TaxiTariff?) async
+    func setTariff(options: [Int]) async
+
+    /// nil if cash
+    func setPayment(type: String?) async
+    
+    func appendRoute(_ point: GRoutePoint) async
+    func appendRoute(address point: SelectAddressItem) async
+    func editRoute(at index: Int, with point: GRoutePoint) async
+    
+    func clearRoute() async
+}
+
+actor TaxiOrderConfigProvider: TaxiOrderConfigProviderProtocol {
     private(set) var config: TaxiOrderConfig = .init()
     
     static var shared: any TaxiOrderConfigProviderProtocol = TaxiOrderConfigProvider()
+    private(set) var changeSubjects: TaxiOrderConfigChangeSubjects = .init()
     
-    private let listenersQueue = DispatchQueue(label: "TaxiConfigProvider.listeners", attributes: .concurrent)
-
     private var listeners = NSHashTable<AnyObject>.weakObjects()
     
-    func set(config: TaxiOrderConfig) {
+    func set(config: TaxiOrderConfig) async {
         self.config = config
-        self.notifyDidUpdateConfig()
+        await self.notifyDidUpdateConfig()
         
         Logging.l(tag: "TaxiOrderConfig", "set(config: ) \(config)")
     }
     
-    func set(from: GRoutePoint?) {
-        self.config.from = from
-        self.notifyDidUpdateFromLocation()
+    @MainActor
+    func set(from: GRoutePoint?) async {
+        await self.config.from = from
+        await self.notifyDidUpdateFromLocation()
     }
     
-    func setTariff(list tariffs: [TaxiTariff]) {
-        self.config.tariffs = tariffs
-        self.notifyDidUpdateTariffs()
+    @MainActor
+    func setTariff(list tariffs: [TaxiTariff]) async {
+        await self.config.tariffs = tariffs
+        await self.notifyDidUpdateTariffs()
     }
     
-    func setSelectedTariff(_ tariff: TaxiTariff?) {
-        self.config.selectedTariff = tariff
-        self.notifyDidUpdateSelectedTariff()
+    @MainActor
+    func setSelectedTariff(_ tariff: TaxiTariff?) async {
+        await self.config.selectedTariff = tariff
+        await self.notifyDidUpdateSelectedTariff()
     }
     
-    func setTariff(options: [Int]) {
-        self.config.setOptions(options)
-        self.notifyDidUpdateTariffOptions()
+    @MainActor
+    func setTariff(options: [Int]) async {
+        await self.config.setOptions(options)
+        await self.notifyDidUpdateTariffOptions()
     }
     
     /// nil if cash
-    func setPayment(type: String?) {
-        if self.config.paymentTypeConfig == nil {
-            self.config.paymentTypeConfig = .init(usingBonusAmount: 0, paymentType: "cash")
+    @MainActor
+    func setPayment(type: String?) async {
+        if await self.config.paymentTypeConfig == nil {
+            await self.config.paymentTypeConfig = .init(usingBonusAmount: 0, paymentType: "cash")
         }
-        
-        self.config.paymentTypeConfig?.paymentType = type ?? "cash"
+
+        await self.config.paymentTypeConfig?.paymentType = type ?? "cash"
     }
     
-    func clear() {
-        self.config.clearOptions()
-        self.config.clearPaymentType()
-        self.config.route = []
-        self.notifyDidClearConfig()
+    @MainActor
+    func clear() async {
+        await self.config.clearOptions()
+        await self.config.clearPaymentType()
+        await self.config.route = []
+        await self.notifyDidClearConfig()
     }
     
-    func clearRoute() {
-        self.config.route = []
-        self.notifyDidUpdatRoute()
+    @MainActor
+    func clearRoute() async {
+        await self.config.route = []
+        await self.notifyDidUpdatRoute()
     }
 
-    func addListener(_ listener: TaxiOrderConfigProviderDelegate) {
-        listenersQueue.async(flags: .barrier) {
-            if self.listeners.contains(listener) {
-                return
-            }
-
-            debugPrint("TaxiOrderConfigProvider", "Listener", listener.self)
-            self.listeners.add(listener)
+    func addListener(_ listener: TaxiOrderConfigProviderDelegate) async {
+        if self.listeners.contains(listener) {
+            return
         }
+        debugPrint("TaxiOrderConfigProvider", "Listener", listener.self)
+        self.listeners.add(listener)
     }
 
-    func removeListener(_ listener: TaxiOrderConfigProviderDelegate) {
+    func removeListener(_ listener: TaxiOrderConfigProviderDelegate) async {
         debugPrint("TaxiOrderConfigProvider", "Remove", listener.self)
-        listenersQueue.async(flags: .barrier) {
-            self.listeners.remove(listener)
+        self.listeners.remove(listener)
+    }
+
+    func notifyDidUpdateConfig() async {
+        for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
+            await listener.didUpdateConfig(config)
         }
     }
 
-    func notifyDidUpdateConfig() {
-
-        listenersQueue.sync {
-            for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
-                listener.didUpdateConfig(config)
-            }
-        }
-    }
-
-    func notifyDidClearConfig() {
-        listenersQueue.sync {
-            for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
-                listener.didClearConfig()
-            }
+    func notifyDidClearConfig() async {
+        for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
+            await listener.didClearConfig()
         }
     }
     
-    func notifyDidUpdatRoute() {
-        listenersQueue.sync {
-            for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
-                listener.didUpdateRoute(config.route)
-            }
+    func notifyDidUpdatRoute() async {
+        for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
+            await listener.didUpdateRoute(config.route)
         }
     }
     
-    func notifyDidUpdateTariffs() {
-        listenersQueue.sync {
-            for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
-                listener.didUpdateTariffs(config.tariffs)
-            }
+    func notifyDidUpdateTariffs() async {
+        for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
+            await listener.didUpdateTariffs(config.tariffs)
         }
     }
     
-    func notifyDidUpdateTariffOptions() {
-        listenersQueue.sync {
-            for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
-                listener.didUpdateTariffOptions(self.config.tariffConfig?.options ?? [])
-            }
+    func notifyDidUpdateTariffOptions() async {
+        for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
+            await listener.didUpdateTariffOptions(self.config.tariffConfig?.options ?? [])
         }
     }
     
-    func notifyDidUpdateSelectedTariff() {
-        listenersQueue.sync {
-            for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
-                listener.didUpdateSelectedTariff(self.config.selectedTariff)
-            }
+    func notifyDidUpdateSelectedTariff() async {
+        for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
+            await listener.didUpdateSelectedTariff(self.config.selectedTariff)
         }
     }
     
-    func notifyDidUpdateFromLocation() {
-        listenersQueue.sync {
-            for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
-                listener.didUpdateFrom(self.config.from)
-            }
+    func notifyDidUpdateFromLocation() async {
+        for listener in listeners.allObjects.compactMap({ $0 as? TaxiOrderConfigProviderDelegate }) {
+            await listener.didUpdateFrom(self.config.from)
         }
     }
 }
 
 extension TaxiOrderConfigProvider {
-    func setRoute(list route: [GRoutePoint]) {
-        self.config.route = route
-        self.notifyDidUpdatRoute()
-        self.notifyDidUpdateConfig()
+    @MainActor
+    func setRoute(list route: [GRoutePoint]) async {
+        await self.config.route = route
+        await self.notifyDidUpdatRoute()
+        await self.notifyDidUpdateConfig()
     }
     
-    func appendRoute(_ point: GRoutePoint) {
-        self.config.route.append(point)
-        self.notifyDidUpdatRoute()
-        self.notifyDidUpdateConfig()
+    @MainActor
+    func appendRoute(_ point: GRoutePoint) async {
+        await self.config.route.append(point)
+        await self.notifyDidUpdatRoute()
+        await self.notifyDidUpdateConfig()
     }
     
-    func appendRoute(address point: SelectAddressItem) {
-        self.config.route.append(.init(id: point.id, order: self.config.route.count, location: point.coordinate, address: point.address))
-        self.notifyDidUpdatRoute()
-        self.notifyDidUpdateConfig()
+    @MainActor
+    func appendRoute(address point: SelectAddressItem) async {
+        await self.config.route.append(.init(id: point.id, order: self.config.route.count, location: point.coordinate, address: point.address))
+        await self.notifyDidUpdatRoute()
+        await self.notifyDidUpdateConfig()
     }
     
-    func editRoute(at index: Int, with point: GRoutePoint) {
-        self.config.route[index] = point
-        self.notifyDidUpdatRoute()
-        self.notifyDidUpdateConfig()
+    @MainActor
+    func editRoute(at index: Int, with point: GRoutePoint) async {
+        await self.config.route[index] = point
+        await self.notifyDidUpdatRoute()
+        await self.notifyDidUpdateConfig()
     }
 }

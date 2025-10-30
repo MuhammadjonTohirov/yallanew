@@ -13,8 +13,9 @@ import YallaUtils
 import SwiftMessages
 
 struct EditProfileView: View {
-    @StateObject var viewModel: EditProfileViewModel = .init()
-    @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel: EditProfileViewModel
+    
+    @EnvironmentObject var navigator: Navigator
     
     @State
     private var pickerSize: CGRect = .zero
@@ -25,6 +26,10 @@ struct EditProfileView: View {
     @State
     private var showPhotoLibrary = false
     
+    init(viewModel: EditProfileViewModel = .init(interactor: EditProfileInteractor())) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some View {
         ZStack {
             innerBody
@@ -33,11 +38,10 @@ struct EditProfileView: View {
             VStack {
                 Spacer()
                 SubmitButtonFactory.primary(title: "save".localize) {
-                    Task {
-                        await submit()
-                    }
+                    viewModel.save()
                 }
                 .set(isEnabled: viewModel.isFormValid())
+                .set(isLoading: viewModel.isLoading)
                 .padding()
             }
         }
@@ -46,6 +50,7 @@ struct EditProfileView: View {
                 Circle()
                     .frame(width: 38.scaled)
                     .foregroundStyle(Color.iBackgroundSecondary)
+                    .opacity(isIOS26 ? 0 : 1)
                     .overlay {
                         Image.icon("icon_more_rounded").onClick {
                             viewModel.onClickShowMenu()
@@ -53,31 +58,34 @@ struct EditProfileView: View {
                     }
             }
         })
-        .appSheet(isPresented: .init(get: {
-            viewModel.sheetRoute != nil
-        }, set: { shown in
-            if !shown {
-                viewModel.sheetRoute = nil
+        .appSheet(
+            isPresented: .init(
+                get: {
+                    viewModel.sheetRoute != nil
+                },
+                set: { shown in
+                    if !shown {
+                        viewModel.sheetRoute = nil
+                    }
+                }
+            ),
+            title: viewModel.sheetRoute?.title ?? "", sheetContent: {
+                switch viewModel.sheetRoute {
+                case .changePhoto:
+                    photoPickSheetView
+                case .menu:
+                    menuView
+                case .deleteAccount:
+                    deleteAccountSheetView
+                case .logout:
+                    logoutAccountSheetView
+                case .datePicker:
+                    datePickerView
+                default:
+                    EmptyView()
+                }
             }
-        }), title: viewModel.sheetRoute?.title ?? "", sheetContent: {
-            switch viewModel.sheetRoute {
-            case .changePhoto:
-                photoPickSheetView
-            case .menu:
-                menuView
-            case .deleteAccount:
-                deleteAccountSheetView
-            case .logout:
-                logoutAccountSheetView
-            case .datePicker:
-                datePickerView
-            default:
-                EmptyView()
-            }
-        })
-        .onChange(of: viewModel.birthDate) { newValue in
-            viewModel.birthDateValue = newValue.toExtendedString(format: "dd.MM.yyyy", timezone: .current)
-        }
+        )
         .sheet(isPresented: $showCamera) {
             CameraView(selectedImage: $viewModel.selectedImage) { image in
                 viewModel.selectedImage = image
@@ -91,6 +99,12 @@ struct EditProfileView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .overlay {
+            CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
+        }
+        .onAppear {
+            viewModel.setNavigator(navigator)
+        }
     }
     
     private var innerBody: some View {
@@ -105,7 +119,7 @@ struct EditProfileView: View {
                             .clipShape(Circle())
                         
                     } else {
-                        KFImage(UserSettings.shared.userInfo?.imageURL)
+                        KFImage(viewModel.userInfo?.imageURL)
                             .placeholder {
                                 Circle()
                                     .foregroundStyle(.iBackgroundSecondary)
@@ -147,9 +161,16 @@ struct EditProfileView: View {
                 
                 YRoundedTextField {
                     HStack {
-                        YTextField(text: $viewModel.birthDateValue, placeholder: "birth_date".localize) // День рождения
-                            .disabled(true)
-                            .padding(.horizontal, AppParams.Padding.default)
+                        YTextField(
+                            text: .init(get: {
+                                viewModel.birthDateValue ?? ""
+                            }, set: { val in
+                                viewModel.birthDateValue = val
+                            }),
+                            placeholder: "birth_date".localize
+                        ) // День рождения
+                        .disabled(true)
+                        .padding(.horizontal, AppParams.Padding.default)
                         
                         Spacer()
                         
@@ -163,7 +184,7 @@ struct EditProfileView: View {
                         viewModel.onClickBirthday()
                     }
                 }
-                .set(borderColor: viewModel.birthDateValue.isEmpty ? .iBorderDisabled : .secondary)
+                .set(borderColor: (viewModel.birthDateValue ?? "").isEmpty ? .iBorderDisabled : .secondary)
                 .onTapGesture {
                     viewModel.onClickBirthday()
                 }
@@ -189,7 +210,9 @@ struct EditProfileView: View {
         .scrollDismissesKeyboard(.interactively)
         .padding(.horizontal, AppParams.Padding.default)
         .onAppear {
-            viewModel.onAppear()
+            Task { @MainActor in
+                await viewModel.onAppear()
+            }
         }
     }
     
@@ -201,28 +224,6 @@ struct EditProfileView: View {
             .cornerRadius(18)
     }
     
-    private func submit() async {
-        if let image = viewModel.selectedImage {
-            await viewModel.changeAvatar(image: image) {
-                Task { @MainActor in
-                    closeProfile()
-                }
-            }
-        } else {
-            await viewModel.updateProfile(
-                name: viewModel.firstName.isEmpty ? nil : viewModel.firstName,
-                surName: viewModel.lastName.isEmpty ? nil : viewModel.lastName,
-                gender: viewModel.gender,
-                birthDate: viewModel.birthDateValue.isEmpty ? nil : viewModel.birthDateValue,
-                image: ""
-            ) {
-                Task { @MainActor in
-                    closeProfile()
-                }
-            }
-        }
-    }
-    
     @MainActor
     private func closeProfile() {
         
@@ -230,7 +231,11 @@ struct EditProfileView: View {
     
     private var datePickerView: some View {
         DatePicker(
-            selection: $viewModel.birthDate,
+            selection: .init(get: {
+                viewModel.birthDate ?? Date()
+            }, set: { date in
+                viewModel.birthDate = date
+            }),
             in: ...Date(),
             displayedComponents: .date,
             label: { EmptyView() }

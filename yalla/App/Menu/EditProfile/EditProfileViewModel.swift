@@ -10,7 +10,9 @@ import Combine
 import Core
 import SwiftUI
 import IldamSDK
+import NetworkLayer
 import YallaUtils
+import SwiftMessages
 
 enum EditProfileSheetRoute: String, Identifiable, Hashable, Equatable {
     var id: String {
@@ -38,6 +40,10 @@ enum EditProfileSheetRoute: String, Identifiable, Hashable, Equatable {
 }
 
 actor EditProfileViewModel: ObservableObject {
+    
+    @MainActor
+    var navigator: Navigator?
+    
     @MainActor
     @Published var firstName: String = ""
     
@@ -45,10 +51,10 @@ actor EditProfileViewModel: ObservableObject {
     @Published var lastName: String = ""
     
     @MainActor
-    @Published var birthDate: Date = Date()
+    @Published var birthDate: Date?
     
     @MainActor
-    @Published var birthDateValue: String = ""
+    @Published var birthDateValue: String?
 
     @MainActor
     @Published var selectedImage: UIImage? = nil
@@ -63,8 +69,27 @@ actor EditProfileViewModel: ObservableObject {
     @Published var sheetRoute: EditProfileSheetRoute?
     
     @MainActor
-    func onAppear() {
+    private(set) var userInfo: UserInfo?
+    
+    private var cancellables: Set<AnyCancellable> = []
+    
+    @MainActor
+    private var didAppear: Bool = false
+    
+    var interactor: (any EditProfileInteractorProtocol)?
+    
+    init(interactor: any EditProfileInteractorProtocol) {
+        self.interactor = interactor
+    }
+    
+    @MainActor
+    func onAppear() async {
+        if didAppear { return }
         
+        didAppear = true
+        
+        await setupBirthDateChange()
+        await setupData()
     }
     
     @MainActor
@@ -73,138 +98,100 @@ actor EditProfileViewModel: ObservableObject {
     }
     
     @MainActor
+    func setNavigator(_ navigator: Navigator?) {
+        self.navigator = navigator
+    }
+    
+    func setInteractor(_ interactor: (any EditProfileInteractorProtocol)?) {
+        self.interactor = interactor
+    }
+    
+    @MainActor
     func isFormValid() -> Bool {
-        false
+        !firstName.isNilOrEmpty
     }
     
-    func changeAvatar(image: UIImage, completion: @escaping @Sendable () -> Void) {
-        guard var imageData = image.jpegData(compressionQuality: 0.8) else {
-            print("Couldn't convert image to data")
-            completion()
-            return
-        }
+    @MainActor
+    func onUpdateSuccess() async {
+        // TODO: Handle update success
+        navigator?.pop()
+        Snackbar.show(message: "profile.update.success".localize, theme: .success)
+    }
+    
+    @MainActor
+    func onUpdateFailure(error: String?) async {
+        // TODO: Handle update failure
+        Snackbar.show(message: error ?? "Ошибка обновления профиля", theme: .error)
+    }
+    
+    @MainActor
+    func save() {
+        self.isLoading = true
+        let img = selectedImage
+        let fn = self.firstName
+        let ln = self.lastName
+        let gender = self.gender
+        let bd = self.birthDateValue
+        let imgUrl = userInfo?.imageURL?.lastPathComponent ?? ""
+        
+        Task.detached { [weak self] in
+            guard let self else { return }
+            do {
+                var result: Bool = false
+                if let img {
+                    result = try await self.interactor?.updateProfile(image: img, name: fn, surName: ln, gender: gender, birthDate: bd) ?? false
+                } else {
+                    result = try await self.interactor?.updateProfile(imageUrl: imgUrl, name: fn, surName: ln, gender: gender, birthDate: bd) ?? false
+                }
+                
+                if !result {
+                    await onUpdateFailure(error: "Failed to update profile")
+                } else {
+                    await onUpdateSuccess()
+                }
+                
+            } catch {
+                await onUpdateFailure(error: error.serverMessage)
+            }
             
-        if imageData.count >= 1 * 1024 * 1024 {
-            if let compressedData = imageCompressor(maxFileSize: 1 * 1024 * 1024, image) {
-                imageData = compressedData
-            } else {
-                completion()
-                return
+            await MainActor.run {
+                self.isLoading = false
             }
         }
-        
-        Task { @MainActor in
-            self.isLoading = true
-        }
-        
+    }
+    
+    private func setupData() {
         Task {
-            let result = await AuthService.shared.changeAvatar(profileAvatar: imageData)
-
-            let success = result.success
-            
-            if let imageUrl = result.result?.image {
-                await self.updateProfile(
-                    name: self.firstName,
-                    surName: self.lastName,
-                    gender: self.gender,
-                    birthDate: self.birthDateValue,
-                    image: imageUrl
-                ) {
-                    Task { @MainActor in
-                        completion()
-                    }
-                }
+            await MainActor.run {
+                self.isLoading = true
             }
             
-            if !success {
-                Task { @MainActor in
-                    self.onUpdateFailure(error: "image_size_error".localize)
-                }
-            } else {
-                Task { @MainActor in
-                    completion()
-                }
+            let info = try await self.interactor?.userInfo()
+                        
+            await MainActor.run {
+                self.userInfo = info
+                self.firstName = info?.givenNames ?? ""
+                self.lastName = info?.surName ?? ""
+                self.gender = Gender.init(rawValue: info?.gender ?? "")
+                self.birthDateValue = info?.birthday ?? "" // dd.MM.yyyy
+                self.birthDate = Date.from(string: info?.birthday ?? "", format: "dd.MM.yyyy")
+            }
+            
+            await MainActor.run {
+                self.isLoading = false
             }
         }
     }
     
-    func updateProfile(name: String? = nil, surName: String? = nil, gender: Gender? = nil, birthDate: String? = nil, image: String, completion: @escaping @Sendable () -> Void) async {
-        await MainActor.run {
-            self.isLoading = true
-        }
-        
-        let success = await AuthService.shared.updateProfile(
-            request: ProfileUpdateRequest(
-                givenNames: name,
-                surname: surName,
-                birthday: birthDateValue,
-                gender: gender,
-                image: image
-            )
-        )
-
-        Task { @MainActor in
-            if success {
-                onUpdateSuccess(completion: completion)
-            } else {
-                onUpdateFailure(error: nil)
+    private func setupBirthDateChange() {
+        self.$birthDate.removeDuplicates().sink { [weak self] bdValue in
+            guard let self else { return }
+            
+            Task { @MainActor in
+                self.birthDateValue = bdValue?.toExtendedString(format: "dd.MM.yyyy")
             }
         }
-    }
-    
-    func imageCompressor(maxFileSize: Int64, _ image: UIImage) -> Data? {
-        var compression: CGFloat = 1.0
-        guard var imageData = image.jpegData(compressionQuality: compression) else {
-            print("Failed to generate JPEG data from image.")
-            return nil
-        }
-        
-        while imageData.count > maxFileSize && compression > 0.01 {
-            compression -= 0.05
-            if let compressedData = image.jpegData(compressionQuality: compression) {
-                imageData = compressedData
-            } else {
-                print("Failed to compress image at quality \(compression).")
-                return nil
-            }
-        }
-        
-        if imageData.count > maxFileSize {
-            print("Unable to compress image to 2 MB.")
-            return nil
-        }
-        return imageData
-    }
-    
-    @MainActor
-    func onUpdateSuccess(completion: @escaping () -> Void) {
-//        Task {
-//            await loadPreqrequisites()
-//            await MainActor.run {
-//                isLoading = false
-//                
-//                completion()
-//            }
-//        }
-    }
-    
-    @MainActor
-    func onUpdateFailure(error: String?) {
-//        Task {
-//            await MainActor.run {
-//                isLoading = false
-//                alertDarta = .init(
-//                    title: "error".localize,
-//                    message: "profile_update_fail".localize,
-//                    actions: [
-//                        CancelAlertButton(title: "ok".localize, action: {
-//                            self.showAlert = false
-//                        })
-//                    ]
-//                )
-//                self.showAlert = true
-//            }
-//        }
+        .store(in: &cancellables)
     }
 }
 
@@ -257,8 +244,4 @@ extension EditProfileViewModel {
             self.sheetRoute = route
         }
     }
-}
-
-extension Gender: @retroactive @unchecked Sendable {
-    
 }

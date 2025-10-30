@@ -8,6 +8,14 @@
 import Foundation
 import SwiftUI
 
+public var isIOS26: Bool {
+    if #available(iOS 26.0, *) {
+        return true
+    } else {
+        return false
+    }
+}
+
 public extension View {
     func onClick(perform action: @escaping () -> Void) -> some View {
         Button(action: action) {
