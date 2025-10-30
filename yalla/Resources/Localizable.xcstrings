@@ -320,6 +320,35 @@
         }
       }
     },
+    "capture.photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonus conversion rate"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сделать фото"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suratga olish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Суратга олиш"
+          }
+        }
+      }
+    },
     "card.number" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1567,6 +1596,64 @@
         }
       }
     },
+    "profile.update.failure" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile update failed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось обновить профиль."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil yangilashda xatolik"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профил янгилашда хатолик"
+          }
+        }
+      }
+    },
+    "profile.update.success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your profile updated successfully"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш профить успено обновлен!"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sahifangiz muvofaqiyatli tahrirlandi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Саҳифангиз мувофақиятли таҳрирланди"
+          }
+        }
+      }
+    },
     "promocode" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1737,6 +1824,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Дастур тилини танланг"
+          }
+        }
+      }
+    },
+    "select.from.gallery" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select from gallery"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбрать из галереи"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Galereyadan tanlash"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Галереядан танлаш"
           }
         }
       }
@@ -2143,123 +2259,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yalla"
-          }
-        }
-      }
-    },
-    "privacy.policy" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Privacy Policy"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Политика конфиденциальности"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maxfiylik siyosati"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Махфийлик сиёсати"
-          }
-        }
-      }
-    },
-    "user.agreement" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "License agreement"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Лицензионное соглашение"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Litsenziya shartnomasi"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Лицензия шартномаси"
-          }
-        }
-      }
-    },
-    "capture.photo" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bonus conversion rate"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Сделать фото"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suratga olish"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Суратга олиш"
-          }
-        }
-      }
-    },
-
-    "select.from.gallery" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select from gallery"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Выбрать из галереи"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Galereyadan tanlash"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Галереядан танлаш"
           }
         }
       }

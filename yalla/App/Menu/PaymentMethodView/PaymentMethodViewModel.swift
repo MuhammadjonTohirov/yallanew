@@ -85,9 +85,9 @@ actor PaymentMethodsViewModel: ObservableObject {
     
     // Select a payment method
     func selectPaymentMethod(_ id: String?) async {
-        await MainActor.run {
+        Task { @MainActor in
             if id == "cash" && !isCashEnabled {
-                    TaxiOrderConfigProvider.shared.setPayment(type: nil)
+                await TaxiOrderConfigProvider.shared.setPayment(type: nil)
                 return
             }
         }
@@ -111,8 +111,8 @@ actor PaymentMethodsViewModel: ObservableObject {
         
         await SyncCardsUseCaseImpl.shared.setDefault(cardId: id ?? "cash")
         
-        await MainActor.run {
-            TaxiOrderConfigProvider.shared.setPayment(type: id)
+        Task { @MainActor in
+            await TaxiOrderConfigProvider.shared.setPayment(type: id)
         }
     }
     
