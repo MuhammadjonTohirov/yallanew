@@ -12,6 +12,8 @@ import YallaKit
 struct AddCardView: View {
     @StateObject private var viewModel: AddCardViewModel = .init()
     @Environment(\.dismiss) private var dismiss
+    @FocusState private var isCardFieldFocused: Bool
+    
     var body: some View {
         VStack {
             innerBody
@@ -46,6 +48,9 @@ struct AddCardView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("new.card".localize)
+        .onAppear {
+            isCardFieldFocused = true
+        }
     }
     
     private var innerBody: some View {
@@ -76,6 +81,7 @@ struct AddCardView: View {
                 })
                 .keyboardType(.numberPad)
                 .set(format: "XXXX XXXX XXXX XXXX")
+                .focused($isCardFieldFocused)
                 .padding(.horizontal)
                 .frame(height: 50)
             }

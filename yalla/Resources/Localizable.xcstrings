@@ -88,6 +88,9 @@
         }
       }
     },
+    "add.card.success" : {
+      "extractionState" : "manual"
+    },
     "app.language" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -320,6 +323,35 @@
         }
       }
     },
+    "cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qaytish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қайтиш"
+          }
+        }
+      }
+    },
     "capture.photo" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -345,6 +377,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Суратга олиш"
+          }
+        }
+      }
+    },
+    "card.delete.success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Card has been deleted successfully"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта была успешно удалена"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karta muvofaqiyatli o'chirildi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта мувофақиятли ўчирилди"
           }
         }
       }
@@ -664,6 +725,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Қоронғи мавзу"
+          }
+        }
+      }
+    },
+    "delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O'chirish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ўчириш"
           }
         }
       }
@@ -2205,6 +2295,64 @@
         }
       }
     },
+    "want.to.delete.card" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete card"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить карту"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kartani o’chirish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Картани ўчириш"
+          }
+        }
+      }
+    },
+    "want.to.delete.card.descr" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you really want to delete the card?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы действительно хотите удалить эту карту?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siz haqiqatan ham kartani o'chirib tashlamoqchimisiz?"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сиз ҳақиқатан ҳам картани ўчириб ташламоқчимисиз?"
+          }
+        }
+      }
+    },
     "welcome" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2259,6 +2407,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yalla"
+          }
+        }
+      }
+    },
+    "you.have.n.cashback" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have %@ points"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У вас %@ баллов"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sizda %@ bal bor"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сизда %@ бал бор"
           }
         }
       }

@@ -30,7 +30,7 @@ extension TaxiOrderConfigProviderDelegate {
     func didUpdateFrom(_ from: GRoutePoint?) {}
 }
 
-actor TaxiOrderConfigChangeSubjects {
+actor TaxiOrderConfigChangeSubjects: Sendable {
     var passthrough: PassthroughSubject<TaxiOrderConfig, Never> = .init()
 }
 
