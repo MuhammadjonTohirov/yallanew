@@ -76,8 +76,6 @@ final class SideMenuViewModel: SideMenuBodyProtocol {
     }()
     
     @Published var paymentType: PaymentType = .cash
-    
-    private(set) var userInfoChangeCancellable: AnyCancellable?
 
     func setNavigator(_ navigator: Navigator) {
         self.navigator = navigator
@@ -104,7 +102,7 @@ final class SideMenuViewModel: SideMenuBodyProtocol {
         Task.detached(priority: .high) { [weak self] in
             guard let self else { return }
             async let task1: () = setUserInfo(UserSettings.shared.userInfo)
-            async let task2: () = setupUserInfoChangeObserver()
+            async let task2: () = syncUserInfo()
             async let task3: () = subscribeConfigChange()
             
             _ = await [task1, task2, task3]
@@ -112,14 +110,14 @@ final class SideMenuViewModel: SideMenuBodyProtocol {
     }
 
     func onDisappear() {
-        removeUserInfoChangeObserver()
+        // Do something
     }
 
     private func subscribeConfigChange() async {
         await TaxiOrderConfigProvider.shared.addListener(self)
     }
     
-    private func setupUserInfoChangeObserver() async {
+    private func syncUserInfo() async {
         do {
             let info = try await MeInfoProvider.shared.syncUserInfo()
             setUserInfo(info)
@@ -130,12 +128,6 @@ final class SideMenuViewModel: SideMenuBodyProtocol {
     private func setUserInfo(_ userInfo: UserInfo?) {
         withAnimation {
             self.userInfo = userInfo
-        }
-    }
-    
-    private func removeUserInfoChangeObserver() {
-        if let userInfoChangeCancellable {
-            userInfoChangeCancellable.cancel()
         }
     }
     
