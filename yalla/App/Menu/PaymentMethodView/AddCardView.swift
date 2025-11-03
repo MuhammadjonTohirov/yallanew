@@ -20,7 +20,9 @@ struct AddCardView: View {
             if viewModel.isLoading {
                 ProgressView()
             }
+            
             Spacer()
+            
             SubmitButtonFactory.primary(title: "add.card".localize) {
                 viewModel.addCardService(
                     cardNumber: viewModel.cardNumber,
@@ -47,7 +49,7 @@ struct AddCardView: View {
     }
     
     private var innerBody: some View {
-        VStack {
+        VStack(spacing: 16.scaled) {
             YRoundedTextField {
                 YTextField(text: $viewModel.cardNumber, placeholder: "card.number".localize, right: {
                     Button {
@@ -65,7 +67,7 @@ struct AddCardView: View {
                             title: Text("permission.required".localize),
                             message: Text(viewModel.alertMessage),
                             primaryButton: .default(Text("go.to.settings".localize), action: viewModel.alertAction),
-                            secondaryButton: .cancel(Text("cansel".localize))
+                            secondaryButton: .cancel(Text("cancel".localize))
                         )
                     }
                     .fullScreenCover(isPresented: $viewModel.showScanner) {
@@ -77,8 +79,7 @@ struct AddCardView: View {
                 .padding(.horizontal)
                 .frame(height: 50)
             }
-            .set(borderColor: .clear)
-            .padding(.horizontal)
+            .set(borderColor: .iBorderDisabled)
             .padding(.top)
             
             YRoundedTextField {
@@ -99,16 +100,10 @@ struct AddCardView: View {
                 .frame(height: 50)
                 .padding(.leading)
             }
-            .set(borderColor: .clear)
-            .padding(.horizontal)
-            .padding(.trailing, 240)
+            .set(borderColor: .iBorderDisabled)
             .padding(.bottom)
         }
         .frame(maxWidth: .infinity)
-        .background(Color.init(uiColor: .tertiarySystemBackground))
-        .cornerRadius(26)
-        .shadow(color: .secondary.opacity(0.3), radius: 5, x: 0, y: 2)
-        .padding(.top, 32)
     }
     
     @ViewBuilder var scanCardView: some View {

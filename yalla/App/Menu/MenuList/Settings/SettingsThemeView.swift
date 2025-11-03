@@ -24,20 +24,17 @@ struct SettingsThemeView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 18) {
-            rowItem(icon: "icon_sun", title: AppTheme.system.name, isSelected: theme == .system)
-                .onTapped(.background) {
-                    theme = .system
-                }
+            rowItem(icon: "icon_sun", title: AppTheme.system.name, isSelected: theme == .system) {
+                theme = .system
+            }
             
-            rowItem(icon: "icon_moon", title: AppTheme.light.name, isSelected: theme == .light)
-                .onTapped(.background) {
-                    theme = .light
-                }
+            rowItem(icon: "icon_moon", title: AppTheme.light.name, isSelected: theme == .light) {
+                theme = .light
+            }
             
-            rowItem(icon: "icon_theme_setting", title: AppTheme.dark.name, isSelected: theme == .dark)
-                .onTapped(.background) {
-                    theme = .dark
-                }
+            rowItem(icon: "icon_theme_setting", title: AppTheme.dark.name, isSelected: theme == .dark) {
+                theme = .dark
+            }
         }
         .padding(.horizontal)
         .onAppear {
@@ -60,7 +57,7 @@ struct SettingsThemeView: View {
         .padding(.vertical)
     }
     
-    func rowItem(icon: String, title: String, isSelected: Bool) -> some View {
+    func rowItem(icon: String, title: String, isSelected: Bool, onClick: @escaping () -> Void) -> some View {
        
             VStack(alignment: .leading, spacing: 0) {
                HStack (spacing: 10){
@@ -81,20 +78,19 @@ struct SettingsThemeView: View {
                            Image("icon_check")
                                .renderingMode(.template)
                                .foregroundStyle(.white)
-                               .visibility(isSelected)
                     }
+                    .visibility(isSelected)
                 }
             }
 
         .padding(.horizontal, 10)
+        .onTapped(isSelected ? Color.iBackgroundSecondary : Color.background, action: onClick)
+        .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
         .frame(height: 60)
         .background(
             ZStack {
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(isSelected ? Color.iBackgroundSecondary : Color.background)
-                
                 if !isSelected {
-                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    RoundedRectangle(cornerRadius: AppParams.Radius.default, style: .continuous)
                         .stroke(Color.iBorderDisabled, lineWidth: 1)
                 }
             }

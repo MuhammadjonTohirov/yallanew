@@ -34,7 +34,7 @@ struct PaymentTypeConfig {
     var paymentType: String
 }
 
-final class TaxiOrderConfig {
+final class TaxiOrderConfig: Sendable {
     var tariffConfig: TariffConfig?
     
     var tariffs: [TaxiTariff] = []

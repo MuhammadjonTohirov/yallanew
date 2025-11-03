@@ -8,7 +8,7 @@
 import Foundation
 import IldamSDK
 import Core
-import Combine
+@preconcurrency import Combine
 import YallaUtils
 
 enum SideMenuType: String {
@@ -31,23 +31,28 @@ enum PaymentType {
 }
 
 protocol SideMenuBodyProtocol: ObservableObject {
-    var userInfo: UserInfo? {get}
+    var userInfo: UserInfo? {get async}
 }
 
-actor SideMenuViewModel: SideMenuBodyProtocol {
-    @MainActor
-    private var observer: NSObjectProtocol?
+final class SideMenuViewModel: SideMenuBodyProtocol {
     
-    @MainActor
     private var navigator: Navigator?
     
-    @MainActor
-    @Published var userInfo: UserInfo?
+    @Published
+    var userInfo: UserInfo?
     
-    @MainActor
-    @Published var bonus: Float = 0
+    var imageUrl: URL? {
+        userInfo?.imageURL
+    }
     
-    @MainActor
+    var fullName: String {
+        userInfo?.fullName ?? ""
+    }
+    
+    var bonus: Float {
+        userInfo?.balance ?? 0
+    }
+    
     var bonusValue: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -56,34 +61,37 @@ actor SideMenuViewModel: SideMenuBodyProtocol {
         formatter.decimalSeparator = ""
         formatter.currencySymbol = ""
         let bonusVal = formatter.string(from: NSNumber(value: bonus)) ?? ""
-        return "you.have.n.cashback".localize(arguments: bonusVal)
+        return bonusVal
+    }
+    
+    var bonusDescription: String {
+        return "you.have.n.cashback".localize(arguments: bonusValue)
     }
 
     // make it true to make discount and bonuses visible
-    @MainActor
     var isDiscountVisible: Bool = true
     
-    @MainActor
     var paymentMethod: String = {
         SyncCardsUseCaseImpl.shared.paymentTypeString
     }()
     
     @Published var paymentType: PaymentType = .cash
+    
+    private(set) var userInfoChangeCancellable: AnyCancellable?
 
-    @MainActor
     func setNavigator(_ navigator: Navigator) {
         self.navigator = navigator
     }
     
     @MainActor
     func onClick(menu type: SideMenuType) {
-        guard let navigator = navigator else { 
+        guard let navigator = navigator else {
             Logging.l(tag: "SideMenuViewModel", "Navigator not set")
-            return 
+            return
         }
         
         // Convert SideMenuType to HomePushableRoute
-        guard let route = HomePushableRoute.create(fromMenu: type) else {
+        guard let route = SideMenuRoute.create(fromMenu: type) else {
             Logging.l(tag: "SideMenuViewModel", "No route found for menu type: \(type)")
             return
         }
@@ -91,82 +99,58 @@ actor SideMenuViewModel: SideMenuBodyProtocol {
         navigator.push(route)
         Logging.l(tag: "SideMenuViewModel", "Navigating to: \(type.rawValue)")
     }
-     
-    @MainActor
-    func onAppear() async {
-        await setupUserInfoChangeObserver()
-        loadBonusValue()
-        await subscribeConfigChange()
+    
+    func onAppear() {
+        Task.detached(priority: .high) { [weak self] in
+            guard let self else { return }
+            async let task1: () = setUserInfo(UserSettings.shared.userInfo)
+            async let task2: () = setupUserInfoChangeObserver()
+            async let task3: () = subscribeConfigChange()
+            
+            _ = await [task1, task2, task3]
+        }
     }
 
     func onDisappear() {
-//        TaxiOrderConfigProvider.shared.removeListener(self)
-    }
-
-    private func subscribeConfigChange() {
-//        TaxiOrderConfigProvider.shared.addListener(self)
-    }
-
-    @MainActor
-    private func loadBonusValue() {
-        bonus = UserSettings.shared.userInfo?.balance ?? 0
-    }
-    
-    @MainActor
-    private func setupUserInfoChangeObserver() async {
         removeUserInfoChangeObserver()
-        Logging.l(tag: "SideMenuViewModel", #function)
-        observer = NotificationCenter.default.addObserver(forName: .userInfoChanged, object: nil, queue: .main) { [weak self] _ in
-            Task { @MainActor in
-                await self?.setUserInfo(UserSettings.shared.userInfo)
-                self?.bonus = self?.userInfo?.balance ?? 0
-                Logging.l(tag: "SideMenuViewModel", "\(#function) update")
-            }
+    }
+
+    private func subscribeConfigChange() async {
+        await TaxiOrderConfigProvider.shared.addListener(self)
+    }
+    
+    private func setupUserInfoChangeObserver() async {
+        do {
+            let info = try await MeInfoProvider.shared.syncUserInfo()
+            setUserInfo(info)
+        } catch {}
+    }
+    
+    @MainActor
+    private func setUserInfo(_ userInfo: UserInfo?) {
+        withAnimation {
+            self.userInfo = userInfo
         }
     }
     
-    @MainActor
-    private func setUserInfo(_ userInfo: UserInfo?) async {
-        self.userInfo = userInfo
-    }
-    
-    @MainActor
     private func removeUserInfoChangeObserver() {
-        if let observer {
-            Logging.l(tag: "SideMenuViewModel", #function)
-            NotificationCenter.default.removeObserver(observer)
+        if let userInfoChangeCancellable {
+            userInfoChangeCancellable.cancel()
         }
- 
     }
     
     deinit {
-//        removeUserInfoChangeObserver()
+        debugPrint("Deinit side menu view model")
     }
 }
 
-extension NSNotification.Name {
-    static let userInfoChanged = NSNotification.Name("UserInfoChanged")
-}
+extension SideMenuViewModel: TaxiOrderConfigProviderDelegate {
+    @MainActor
+    private func reloadPaymentType() {
+        
+    }
+    
+    nonisolated func didUpdateConfig(_ order: TaxiOrderConfig) {
 
-//extension SideMenuViewModel: TaxiOrderConfigProviderDelegate {
-//    @MainActor
-//    private func reloadPaymentType() {
-//        let isCash =  (TaxiOrderConfigProvider.shared.config.paymentTypeConfig?.paymentType ?? "cash") == "cash"
-//        let cardId = TaxiOrderConfigProvider.shared.config.paymentTypeConfig?.paymentType
-//        let cardType = CardType(cardId: cardId ?? "cash")
-//        
-//        self.paymentMethod = SyncCardsUseCaseImpl.shared.paymentTypeString
-//        
-//        if isCash {
-//            paymentType = .cash
-//        } else {
-//            paymentType = cardType == .uzcard ? .card : .humo
-//        }
-//    }
-//    
-//    func didUpdateConfig(_ order: TaxiOrderConfig) {
-//        Task { @MainActor in
-//            self.reloadPaymentType()
-//        }
-//    }
-//}
+    }
+}

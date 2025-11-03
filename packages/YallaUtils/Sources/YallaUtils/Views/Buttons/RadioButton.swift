@@ -40,7 +40,13 @@ public struct RadioButton: View {
                         .foregroundColor(.white)
                         .opacity(isSelected ? 1 : 0)
                 )
-        }.onClick(perform: action)
+        }
+        .overlay(content: {
+            Rectangle()
+                .foregroundStyle(.white.opacity(0.01))
+                .opacity(0.02)
+        })
+        .onClick(perform: action)
     }
 }
 

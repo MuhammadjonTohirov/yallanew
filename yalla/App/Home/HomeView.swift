@@ -31,7 +31,7 @@ struct HomeView: View {
                 route.scene
                     .environmentObject(navigator)
             }
-            .navigationDestination(for: HomePushableRoute.self) { route in
+            .navigationDestination(for: SideMenuRoute.self) { route in
                 route.scene
                     .environmentObject(navigator)
             }
