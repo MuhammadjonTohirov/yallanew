@@ -1,5 +1,5 @@
 {
-  "originHash" : "e149c8c3ff9d33430bb592d7b8032fb98f591c73ea82b35827314cc7370cb066",
+  "originHash" : "f10e740bf7139419bae0d39848763ff3eb333805844b1e67ea2f859938dcfbb6",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -103,7 +103,7 @@
     {
       "identity" : "imap",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/MuhammadjonTohirov/IMap",
+      "location" : "https://github.com/MuhammadjonTohirov/imap",
       "state" : {
         "branch" : "main",
         "revision" : "f40bf1801d11d77bbc058e608aa6f77347b95693"

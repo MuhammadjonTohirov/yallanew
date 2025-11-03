@@ -26,8 +26,15 @@ actor InitialLoadingViewModel: ObservableObject {
             let isLanguageSelected = UserSettings.shared.isLanguageSelected ?? false
             let didShowPermissions = await OnboardingFlags.didShowPermissions
             let hasAccessToken = UserSettings.shared.accessToken?.nilIfEmpty != nil
-
+            
             await MainActor.run {
+                if let isForTest = ProcessInfo.processInfo.environment["testUI"], isForTest.lowercased() == "yes" {
+                    print("isForTest value: \(isForTest)")
+                    mainModel?.navigate(to: .test)
+
+                    return
+                }
+
                 if !isLanguageSelected {
                     mainModel?.navigate(to: .language)
                     return

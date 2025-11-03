@@ -89,9 +89,8 @@ enum SideMenuRoute: @MainActor SceneDestination {
     var scene: some View {
         switch self {
         case .history:
-            EmptyView()
-//            TravelHistoryView()
-//                .navigationBarTitleDisplayMode(.large)
+            TravelHistoryView()
+                .navigationBarTitleDisplayMode(.large)
         case .places:
 //            MyPlacesView()
             EmptyView()

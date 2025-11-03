@@ -6,11 +6,7 @@
 //
 
 import Foundation
-
-enum SelectAddressField {
-    case from
-    case to
-}
+import Combine
 
 struct SelectAddressViewModelInput {
     var fromLocation: SelectAddressItem?

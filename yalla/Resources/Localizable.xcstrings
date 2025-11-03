@@ -175,6 +175,64 @@
         }
       }
     },
+    "appointed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assigned"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назначен"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biriktirilgan"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бириктирилган"
+          }
+        }
+      }
+    },
+    "atAddress" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "На адресе"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzilda"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Манзилда"
+          }
+        }
+      }
+    },
     "become.driver" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -349,6 +407,35 @@
         }
       }
     },
+    "bonus.conversion.rate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonus conversion rate"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Курс конверсии бонусов"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonuslarni almashtirish kursi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бонусларни алмаштириш курси"
+          }
+        }
+      }
+    },
     "camera.access.required" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -403,6 +490,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Қайтиш"
+          }
+        }
+      }
+    },
+    "canceled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canceled"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отменён"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bekor qilingan"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бекор қилинган"
           }
         }
       }
@@ -635,6 +751,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Хавфсизлик кўди"
+          }
+        }
+      }
+    },
+    "completed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завершён"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tugallangan"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тугалланган"
           }
         }
       }
@@ -1045,6 +1190,64 @@
         }
       }
     },
+    "from_location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From location"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Из точки"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shu yerdan"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шу йердан"
+          }
+        }
+      }
+    },
+    "inFetters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In progress"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В пути"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yo‘lda"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Йўлда"
+          }
+        }
+      }
+    },
     "initial.loading.moto" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1364,6 +1567,64 @@
         }
       }
     },
+    "my.trips" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My trips"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мои поездки"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safarlarim"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сафарларим"
+          }
+        }
+      }
+    },
+    "new" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yangi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Янги"
+          }
+        }
+      }
+    },
     "news.and.notifs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1447,6 +1708,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ҳозирча билдиришномалар йўқ"
+          }
+        }
+      }
+    },
+    "not.given" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not given"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не указано"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ko‘rsatilmagan"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кўрсатилмаган"
           }
         }
       }
@@ -1828,6 +2118,64 @@
         }
       }
     },
+    "promo.applied.successfully" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promocode applied successfully"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Промокод успешно применён"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promo kod muvaffaqiyatli qo‘llanildi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Промо код муваффақиятли қўлланилди"
+          }
+        }
+      }
+    },
+    "promo.not.exists" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Such promo code does not exist"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Такого промокода не существует"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bunday promo kod mavjud emas"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бундай промо код мавжуд эмас"
+          }
+        }
+      }
+    },
     "promocode" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1911,6 +2259,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Иловани баҳоланг"
+          }
+        }
+      }
+    },
+    "read.all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read all"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прочитать все"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hammasini o‘qish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳаммасини ўқиш"
           }
         }
       }
@@ -2056,6 +2433,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ дан сўнг қайта сўров юбориш мумкин.  "
+          }
+        }
+      }
+    },
+    "sending" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sending"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отправка"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yuborilmoqda"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Юборилмоқда"
           }
         }
       }
@@ -2466,6 +2872,35 @@
         }
       }
     },
+    "where_to_go" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where to go"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Куда поедете?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qayerga borasiz?"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қайерга борасиз?"
+          }
+        }
+      }
+    },
     "yalla" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2519,7 +2954,7 @@
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сизда %@ бал бор"
+            "value" : "Бундай промо код мавжуд эмас"
           }
         }
       }

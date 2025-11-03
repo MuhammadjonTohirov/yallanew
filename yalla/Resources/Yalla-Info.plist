@@ -74,6 +74,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to the camera to take photos for your profile picture.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App needs to use gps inorder  to work properly</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>We need access to save photos to your photo library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to select photos for your profile picture.</string>
 	<key>SecretKey</key>
 	<string>$(SECRET_KEY)</string>
 	<key>UIAppFonts</key>
@@ -87,17 +95,13 @@
 	</array>
 	<key>UIDesignRequiresCompatibility</key>
 	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need location access for more convenience</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>We need access to the camera to take photos for your profile picture.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need access to your photo library to select photos for your profile picture.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>We need access to save photos to your photo library.</string>
 </dict>
 </plist>
