@@ -89,7 +89,33 @@
       }
     },
     "add.card.success" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Card has been added successfully"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта была успешно добавлена"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karta muvofaqiyatli qo’shildi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта мувофақиятли қўшилди"
+          }
+        }
+      }
     },
     "app.language" : {
       "extractionState" : "manual",
@@ -319,6 +345,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Бонус ва чегирмалар"
+          }
+        }
+      }
+    },
+    "camera.access.required" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera access required"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Требуется доступ к камере"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kameraga kirish huquqi talab qilinadi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Камерага кириш ҳуқуқи талаб қилинади"
           }
         }
       }
@@ -1073,6 +1128,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Фамиля киритинг"
+          }
+        }
+      }
+    },
+    "ivalid.card.info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid card info"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неверные данные карты"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karta ma'lumotlari noto'g'ri"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта маълумотлари нотўғри"
           }
         }
       }
