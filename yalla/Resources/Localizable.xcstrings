@@ -2477,6 +2477,35 @@
         "uz-Cyrl" : { "stringUnit" : { "state" : "translated", "value" : "Юборилмоқда" } }
       }
     },
+    "not.given" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not given"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не указано"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ko‘rsatilmagan"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кўрсатилмаган"
+          }
+        }
+      }
+    }
   },
   "version" : "1.1"
 }
