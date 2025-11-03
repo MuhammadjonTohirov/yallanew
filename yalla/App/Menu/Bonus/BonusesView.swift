@@ -5,25 +5,14 @@
 //  Created by Muhammadjon Tohirov on 27/10/25.
 //
 
-import Foundation
 import SwiftUI
 import Core
 import Combine
 import YallaUtils
-
-final class BonusesViewModel: ObservableObject {
-    @Published var bonus: String = ""
-    @Published var promocode: String = ""
-    
-    func onAppear() {
-        bonus = UserSettings.shared.userInfo?.balance?.asMoney ?? "0"
-    }
-}
+import YallaKit
 
 struct BonusesView: View {
     @StateObject private var viewModel = BonusesViewModel()
-    @State private var showPromocodeView: Bool = false
-    
     var body: some View {
         innerBody
     }
@@ -35,13 +24,14 @@ struct BonusesView: View {
             promocodeView
         }
         .scrollable()
-        .appSheet(isPresented: $showPromocodeView, title: "promocode".localize, sheetContent: {
+        .appSheet(isPresented: $viewModel.showPromocodeView, title: "promocode".localize, sheetContent: {
             promocodeSetupView
         })
         .navigationTitle("bonus.and.promocodes".localize)
         .onAppear {
             self.viewModel.onAppear()
         }
+        // Snackbar feedback handled in ViewModel
     }
     
     private var bonusView: some View {
@@ -77,7 +67,7 @@ struct BonusesView: View {
             }
             .padding(.horizontal, AppParams.Padding.large)
             .onTapGesture {
-                showPromocodeView = true
+                viewModel.showPromocodeView = true
             }
     }
     
@@ -107,36 +97,43 @@ struct BonusesView: View {
     }
     
     private var promocodeSetupView: some View {
-        VStack(spacing: AppParams.Padding.extraLarge.scaled) {
-            Text("enter.promocode".localize)
-                .font(.titleLargeBold)
-            
-            TextField(text: $viewModel.promocode) {
-                Text("enter.code".localize)
-            }
-            .foregroundStyle(.iLabelSubtle)
-            .font(.bodyBaseMedium)
-            .multilineTextAlignment(.center)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .frame(height: 50.scaled)
-            .background {
-                RoundedRectangle(cornerRadius: AppParams.Padding.default.scaled)
-                    .stroke(lineWidth: 1)
-                    .foregroundStyle(.iBorderDisabled)
-            }
-            .padding(.horizontal, AppParams.Padding.large.scaled)
-            
-            Text("promocode.descr".localize)
+        ZStack {
+            VStack(spacing: AppParams.Padding.extraLarge.scaled) {
+                Text("enter.promocode".localize)
+                    .font(.titleLargeBold)
+                
+                TextField(text: $viewModel.promocode) {
+                    Text("enter.code".localize)
+                }
+                .foregroundStyle(.iLabelSubtle)
                 .font(.bodyBaseMedium)
                 .multilineTextAlignment(.center)
-            
-            SubmitButtonFactory.primary(
-                title: "activate".localize,
-                action: {
-                    showPromocodeView = false
+                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(height: 50.scaled)
+                .background {
+                    RoundedRectangle(cornerRadius: AppParams.Padding.default.scaled)
+                        .stroke(lineWidth: 1)
+                        .foregroundStyle(.iBorderDisabled)
                 }
-            )
-            .padding(.horizontal, AppParams.Padding.large)
+                .padding(.horizontal, AppParams.Padding.large.scaled)
+                .disabled(viewModel.isLoading)
+                
+                Text("promocode.descr".localize)
+                    .font(.bodyBaseMedium)
+                    .multilineTextAlignment(.center)
+                
+                SubmitButtonFactory.primary(
+                    title: "activate".localize,
+                    action: {
+                        viewModel.applyPromocode()
+                    }
+                )
+                .set(isEnabled: !viewModel.promocode.isEmpty && !viewModel.isLoading)
+                .padding(.horizontal)
+
+            }
+            CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
+
         }
     }
 }

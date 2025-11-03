@@ -45,6 +45,14 @@ struct NotificationsView: View {
         
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("news.and.notifs".localize)
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("read.all".localize) {
+                    Task { await viewModel.markAllAsRead() }
+                }
+                .disabled(!viewModel.hasUnread || viewModel.isLoading)
+            }
+        })
     }
     
     private var notificationListView: some View {
