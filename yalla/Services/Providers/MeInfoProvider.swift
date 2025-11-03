@@ -11,12 +11,12 @@ import Core
 import Combine
 import CoreLocation
 
-protocol MeInfoProviderProtocol {
+protocol MeInfoProviderProtocol: Sendable {
     // Make the getter async so actor conformers are valid and callers must await.
     var userInfo: YallaKit.UserInfo? { get async }
 }
 
-final actor MeInfoProvider: NSObject, MeInfoProviderProtocol {
+final class MeInfoProvider: MeInfoProviderProtocol {
     static let shared: MeInfoProvider = .init()
     
     var userInfo: YallaKit.UserInfo?

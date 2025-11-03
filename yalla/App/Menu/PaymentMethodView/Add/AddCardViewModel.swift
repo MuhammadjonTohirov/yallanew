@@ -20,7 +20,12 @@ class AddCardViewModel: ObservableObject {
     @Published var shouldShowOTPView: Bool = false
     
     let otpModel = OTPViewModel(otpCount: 6)
-    var key: String = ""
+    private var key: String = ""
+    private let interactor: any AddCardInteractorProtocol
+    
+    init(interactor: any AddCardInteractorProtocol = AddCardMockInteractor()) {
+        self.interactor = interactor
+    }
 
     func onClickScanCard() {
         let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
@@ -66,13 +71,7 @@ class AddCardViewModel: ObservableObject {
                 self.isLoading = true
             }
             do {
-                
-                if let result = try await CardService.shared.addCard(
-                    request: .init(
-                        cardNumber: cardNumber.replacingOccurrences(of: " ", with: ""),    
-                        expiry: expiry.replacingOccurrences(of: "/", with: "")
-                    )
-                ), let key = result.key {
+                if let key = try await interactor.addCard(cardNumber: cardNumber, expiry: expiry) {
                     await self.onSuccessSendOTP(key)
                 } else {
                     await self.onFailSendOTP(message: nil)
@@ -88,16 +87,20 @@ class AddCardViewModel: ObservableObject {
     }
     
     private func checkOTP(withCode code: String, key: String) async -> Bool {
-        
-        let result = try? await CardService.shared.verifyCard(request: .init(key: key, code: code))
-        
-        let isSuccess = result != nil
-        
-        if isSuccess {
-            await onSuccesConfirmOTP(result ?? false)
+        do {
+            let result = try await interactor.verifyCard(key: key, code: code)
+            
+            if result {
+                await onSuccessConfirmOTP(result)
+            }
+            
+            return result
+        } catch {
+            await MainActor.run {
+                Snackbar.show(message: error.serverMessage, theme: .error)
+            }
+            return false
         }
-        
-        return isSuccess
     }
     
     @MainActor
@@ -111,10 +114,11 @@ class AddCardViewModel: ObservableObject {
     }
 
     @MainActor
-    func onSuccesConfirmOTP(_ isCorrect: Bool) async {
+    func onSuccessConfirmOTP(_ isCorrect: Bool) async {
         if isCorrect {
             self.shouldShowOTPView = false
             self.shouldDismiss = true
+            Snackbar.show(message: "card.add.success".localize, theme: .success)
         }
     }
     

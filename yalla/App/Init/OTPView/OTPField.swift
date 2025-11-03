@@ -51,6 +51,7 @@ struct OTPField: View {
                     }
                 }
             }
+            .padding(.horizontal, 2)
 
             // Hidden text field for input
             TextField("".localize, text: $text)

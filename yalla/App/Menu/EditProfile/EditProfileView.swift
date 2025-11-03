@@ -33,8 +33,7 @@ struct EditProfileView: View {
     var body: some View {
         ZStack {
             innerBody
-                .padding(.top, 11.scaled)
-            
+                .padding(.bottom, AppParams.Padding.extraLarge)
             VStack {
                 Spacer()
                 SubmitButtonFactory.primary(title: "save".localize) {
@@ -206,6 +205,7 @@ struct EditProfileView: View {
             
             Spacer()
         }
+        .padding(.top, 12)
         .scrollable()
         .scrollDismissesKeyboard(.interactively)
         .padding(.horizontal, AppParams.Padding.default)
@@ -357,5 +357,6 @@ struct EditProfileView: View {
 #Preview {
     NavigationStack {
         EditProfileView()
+            .environmentObject(Navigator())
     }
 }

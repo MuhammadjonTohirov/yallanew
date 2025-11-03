@@ -30,27 +30,21 @@ struct PaymentMethodsView: View {
             
             addCardRow
                 .visibility(
-                    !viewModel.isEditing
-                )
-                .visibility(
                     viewModel.isCardEnabled
                 )
             
             cashRow
-                .visibility(
-                    !viewModel.isEditing
-                )
         }
         .scrollable(axis: .vertical)
-        .animation(.easeInOut, value: viewModel.isEditing)
+        .overlay {
+            CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
+        }
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     viewModel.toggleEditMode()
                 } label: {
-                    Text(
-                        viewModel.isEditing ? "exit".localize : "edit".localize
-                    )
+                    Text("edit".localize)
                     .foregroundStyle(.iTextLink)
                     .transaction { transaction in
                         transaction.animation = nil
@@ -70,11 +64,29 @@ struct PaymentMethodsView: View {
                         .font(.bodyLargeMedium)
                 }
                 .padding(AppParams.Padding.default.scaled)
+                
                 AddCardView()
             }
         }
         .appSheet(isPresented: $viewModel.showEditCardSheet, title: "delete.cards".localize, sheetContent: {
             editCardList
+                .alert(isPresented: $viewModel.showDeleteCardAlert) {
+                     Alert(
+                        title: Text("want.to.delete.card".localize),
+                        message: Text("want.to.delete.card.descr".localize),
+                        primaryButton: .destructive(
+                            Text("delete".localize)
+                        ) {
+                            Task { @MainActor in
+                                await viewModel.deleteCard(viewModel.deletingCardId)
+                            }
+                        },
+                        secondaryButton: .cancel(Text("cancel".localize))
+                     )
+                }
+                .overlay {
+                    CoveredLoadingView(isLoading: $viewModel.isDeleting, message: "")
+                }
         })
         .onAppear {
             self.viewModel.onAppear()
@@ -87,27 +99,30 @@ struct PaymentMethodsView: View {
 extension PaymentMethodsView {
     
     private var bonusRow: some View {
-        HStack(spacing: 16.scaled) {
-            RoundedRectangle(cornerRadius: 10)
-                .frame(width: 44.scaled, height: 44.scaled)
-                .foregroundStyle(.iBackgroundSecondary)
-                .overlay {
-                    Image("icon_gold_coin")
-                }
-            
-            VStack(alignment: .leading) {
-                Text("bonus".localize)
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.label)
+        ZStack {
+            HStack(spacing: 16.scaled) {
+                RoundedRectangle(cornerRadius: 10)
+                    .frame(width: 44.scaled, height: 44.scaled)
+                    .foregroundStyle(.iBackgroundSecondary)
+                    .overlay {
+                        Image("icon_gold_coin")
+                    }
                 
-                Text("you.have.n.bonus".localize(arguments: 0.description))
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(.label)
+                VStack(alignment: .leading) {
+                    Text("bonus".localize)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.label)
+                    
+                    Text(viewModel.bonusDescription)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.label)
+                }
             }
-            
-            Spacer()
-            
+            .horizontal(alignment: .leading)
+            .padding(.trailing, 72.scaled)
+                    
             SwitchViewFactory.default(isOn: $viewModel.bonusActive)
+                .horizontal(alignment: .trailing)
         }
         .padding(.horizontal, AppParams.Padding.default)
         .frame(height: 60)
@@ -154,6 +169,10 @@ extension PaymentMethodsView {
         })
         .padding(.horizontal, 2)
         .padding(.horizontal, AppParams.Padding.default)
+        .background {
+            RoundedRectangle(cornerRadius: AppParams.Radius.default)
+                .fill(Color.background.opacity(0.001))
+        }
         .onClick {
             viewModel.openAddCardView()
         }
@@ -175,7 +194,7 @@ extension PaymentMethodsView {
                         .resizable()
                         .renderingMode(renderingMode)
                         .scaledToFit()
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.iLabel)
                         .frame(width: 24)
                 }
             
@@ -210,28 +229,18 @@ extension PaymentMethodsView {
                 row(
                     title: "\(name) ---- " + card.maskedPan.suffix(4),
                     icon: card.type.newIconName,
-                    isSelected: false,
-                    renderingMode: .original
+                    isSelected: viewModel.isMainCard(card.cardId),
+                    renderingMode: .template
                 )
                 .padding(.horizontal, AppParams.Padding.default)
                 .onTapped(.background) {
-                    if viewModel.isEditing {
-                        viewModel.deleteCard(card.cardId)
-                    } else {
-                        Task {
-                            await viewModel.selectPaymentMethod(card.cardId)
-                        }
+                    Task {
+                        await viewModel.selectPaymentMethod(card.cardId)
                     }
                 }
                 .frame(height: 60.scaled)
-                .overlay(content: {
-                    if !viewModel.isEditing {
-                        Rectangle()
-                            .foregroundStyle(Color.background.opacity(0.5))
-                            .visibility(!viewModel.isCardEnabled)
-                    }
-                })
                 .disabled(!viewModel.isCardEnabled)
+                .opacity(viewModel.isCardEnabled ? 1.0 : 0.4)
             }
         }
     }
@@ -248,14 +257,16 @@ extension PaymentMethodsView {
                         title: "\(name) ---- " + card.maskedPan.suffix(4),
                         icon: card.type.newIconName,
                         isSelected: false,
-                        renderingMode: .original
+                        renderingMode: .template
                     )
                     
                     Image("icon_trash")
                         .renderingMode(.template)
                         .foregroundStyle(Color.init(uiColor: .systemRed))
                         .onClick {
-                            viewModel.deleteCard(card.cardId)
+                            Task { @MainActor in
+                                await viewModel.deleteCard(card.cardId)
+                            }
                         }
                 }
                 .frame(height: 60)
