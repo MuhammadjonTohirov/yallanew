@@ -20,9 +20,6 @@ struct SideMenuBody: View {
             Color.background.ignoresSafeArea()
             VStack(spacing: 10) {
                 userInfo
-                    .clipShape(
-                        RoundedRectangle(cornerRadius: 24)
-                    )
 
                 sectionOne
                     .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
@@ -34,6 +31,7 @@ struct SideMenuBody: View {
                     .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
                 
                 becomeDriverRow
+                
             }
             .padding()
             .scrollable(axis: .vertical)
@@ -41,44 +39,26 @@ struct SideMenuBody: View {
         .onAppear {
             viewModel.onAppear()
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    Task { @MainActor in
+                        viewModel.onClick(menu: .profile)
+                    }
+                }
+                label: {
+                    Image("icon_brush")
+                        .renderingMode(.template)
+                        .resizable()
+                        .foregroundStyle(.iLabel)
+                        .frame(width: 22, height: 22)
+                }
+            }
+        })
     }
     
     private var userInfo: some View {
         ZStack {
-            HStack {
-                Circle()
-                    .foregroundStyle(.iBackgroundTertiary)
-                    .overlay {
-                        Image("icon_backarrow")
-                            .renderingMode(.template)
-                            .resizable()
-                            .foregroundStyle(.iLabel)
-                            .frame(width: 16, height: 16)
-                    }
-                    .onClick {
-                        dismiss.callAsFunction()
-                    }
-                    .frame(width: 38, height: 38)
-                    .padding(AppParams.Padding.default)
-                Spacer()
-                Circle()
-                    .foregroundStyle(.iBackgroundTertiary)
-                    .overlay {
-                        Image("icon_brush")
-                            .renderingMode(.template)
-                            .resizable()
-                            .foregroundStyle(.iLabel)
-                            .frame(width: 22, height: 22)
-                    }
-                    .onClick {
-                        Task { @MainActor in
-                            viewModel.onClick(menu: .profile)
-                        }
-                    }
-                    .frame(width: 38, height: 38)
-                    .padding(AppParams.Padding.default)
-            }
-            .vertical(alignment: .top)
             VStack {
                 KFImage(viewModel.userInfo?.imageURL)
                     .placeholder {
@@ -106,12 +86,8 @@ struct SideMenuBody: View {
                         .foregroundStyle(Color.iLabel)
                 }
             }
-            .padding(.vertical, AppParams.Padding.large)
+            .padding(.bottom, AppParams.Padding.large)
         }
-        .background(content: {
-            RoundedRectangle(cornerRadius: AppParams.Radius.medium)
-                .fill(Color.iBackgroundSecondary)
-        })
     }
     
     private var sectionOne: some View {
@@ -123,7 +99,6 @@ struct SideMenuBody: View {
                 }
             
             divider
-            
             
             bonusesRow()
             .padding(.horizontal, AppParams.Padding.default)

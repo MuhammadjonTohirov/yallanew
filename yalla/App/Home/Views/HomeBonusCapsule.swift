@@ -29,3 +29,7 @@ struct HomeBonusCapsule: View {
         }
     }
 }
+
+#Preview {
+    HomeBonusCapsule()
+}
