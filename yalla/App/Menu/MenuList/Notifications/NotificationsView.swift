@@ -43,14 +43,21 @@ struct NotificationsView: View {
             CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
         })
         
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.large)
         .navigationTitle("news.and.notifs".localize)
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
-                Button("read.all".localize) {
+                Button {
                     Task { await viewModel.markAllAsRead() }
                 }
-                .disabled(!viewModel.hasUnread || viewModel.isLoading)
+                label: {
+                    Image("icon_check_circle")
+                         .resizable()
+                         .frame(width: 32, height: 32)
+                         .disabled(!viewModel.hasUnread || viewModel.isLoading)
+
+                }
+                
             }
         })
     }

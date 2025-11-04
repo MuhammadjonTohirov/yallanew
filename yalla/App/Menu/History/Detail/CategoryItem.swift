@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Core
 
 struct Category: Identifiable {
     let id = UUID()
@@ -47,6 +48,7 @@ struct TripCategoryView: View {
                 }
             }
         }
+        .padding(.horizontal)
     }
 }
 
@@ -74,7 +76,7 @@ struct CategoryButton: View {
     
     private var backgroundColor: some View {
         RoundedRectangle(cornerRadius: 24)
-            .fill(isSelected ? Color.blue : Color.gray.opacity(0.15))
+            .fill(isSelected ? Color.iPrimary : Color.secondaryBackground)
     }
     
     private var textColor: Color {

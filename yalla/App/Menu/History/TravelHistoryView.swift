@@ -22,11 +22,13 @@ struct TravelHistoryView: View {
             viewModel.loadNextPage()
         } content: {
             LazyVStack(alignment: .leading, spacing: 0) {
+                
                 TripCategoryView()
+                
                 HistorySectionsListView(
                     sections: viewModel.sections,
                     onItemTap: { orderId in
-//                        navigateToOrderDetails(orderId)
+                        navigateToOrderDetails(orderId)
                     }
                 )
                 
@@ -45,6 +47,12 @@ struct TravelHistoryView: View {
         
         .navigationBarTitleDisplayMode(.large)
         .navigationTitle("my.trips".localize)
+    }
+    
+    // MARK: - Helper Methods
+    private func navigateToOrderDetails(_ orderId: Int) {
+        route = .showDetails(orderId)
+        showDetails = true
     }
     
 }

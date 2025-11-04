@@ -26,8 +26,7 @@ struct HistoryListItemView: View {
             HStack(alignment: .top) {
                 toView
                 Spacer()
-                Text(item.status.localize)
-                    .font(.system(size: 13, weight: .regular))
+               
             }
             
             footerView
@@ -144,7 +143,7 @@ extension OrderStatus {
         case .canceled:
             return .red
         case .completed:
-            return .green
+            return .iPrimary
         default:
             return .orange
         }
