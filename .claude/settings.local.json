@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(xcodebuild:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "mcp__figma__get_figma_data",
+      "Bash(swift package:*)"
     ],
     "deny": [],
     "ask": []

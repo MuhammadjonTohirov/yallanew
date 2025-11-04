@@ -95,7 +95,7 @@ struct PickAddressMapView: View {
                 }
             }
             .background {
-                RoundedRectangle(cornerRadius: 30.scaled)
+                RoundedRectangle(cornerRadius: 38.scaled)
                     .foregroundStyle(Color.iBackground)
                     .readRect(rect: $bottomSheetRect)
             }
@@ -124,7 +124,10 @@ struct PickAddressMapView: View {
 #Preview {
     UserSettings.shared.accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiYWVmMTNhOGFiOGU1NTM2ZDg2ZDhiNTNhZmUzMGZjMjhhOTZiYTdhMGE0MWQ3OTNmMjE2Zjk0OGY2ZTM0MDJhNjYxMTA4NjVjMDI0NjFkOWQiLCJpYXQiOjE3NjEyODIwMjQuNjMwODc1LCJuYmYiOjE3NjEyODIwMjQuNjMwODc3LCJleHAiOjE3OTI4MTgwMjQuNjI3NDcxLCJzdWIiOiIyNDIwMzUiLCJzY29wZXMiOlsiY2xpZW50Il19.6xHFtps-thchETiNDsGDbqB2kbHOBv7pi9TssCOMdyTpA-y9Wq-P2r3GHwQYJH3z2K2zm9Cx5Cl7kQPosx8GPOvtYw6hUTZYgtTzahSckDOFO-HUYJ9uIlWk1HESmExrjpeeF6uVjKcrwbg6K4ddRUcDLSIvs3fOFxveHDyyX41DDqFh8GaPu0cXlRhpnkfYWm_XoCH4FtPtJQHJoq3Wwrxk4dzK2EAoA9olqRNs4V2xPdMEqmnHoO36Hb6Z0K0yBuFH5yHTdzNeBEc5NSU9VYqmep6n_vL1lxvtezYOzqjRcr7OzOutR4dMHpJW4gJqcDcu471_cYsw2MeVqnU3wVuf82iJPqR66mGz7JrKymAkOH5FooRv1-UOlYEXUAOksWQVQ4Q--aIZoum3rdkZL8mGeWpyALPYNleelz6oF6w1IhXq1xlYahnBdmuQ1sRRxp8vVc6GKEnuicEmQ6RKS1dwf1wU0o3qO39oNZ7cebN19Rfon_9gEtud43P2oFGgUEt5x2c3N5Bzc-pzOObMNnBMphANg3pPBq0ur4yqzMzF4t6vd_S86PqrI386B6beOEhYwGYUxEfWZa-8tM-u5WhuwiuYAvD-yIxuyuH6oPCHfc_1I8qptn0I4Gkv2hfsC_z0i5mBmatCXyw-8SPLfmJeTkIE4EJO2-cEjgv3HEw"
     
-    UserSettings.shared.userInfo = .init(id: 0, phone: "+998935852415")
+    UserSettings.shared.userInfo = .init(
+        id: 0,
+        phone: "+998935852415"
+    )
     
     return NavigationStack {
         PickAddressMapView()

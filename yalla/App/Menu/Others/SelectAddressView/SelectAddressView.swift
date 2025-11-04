@@ -60,7 +60,8 @@ struct SelectAddressView: View {
     private var addressListView: some View {
         VStack(alignment: .leading, spacing: 20) {
             fieldsView
-                .padding(AppParams.Padding.medium)
+                .padding(.horizontal, AppParams.Padding.large)
+                .padding(.top, AppParams.Padding.default)
 
             ZStack {
                 LazyVStack(spacing: 0) {
@@ -95,13 +96,20 @@ struct SelectAddressView: View {
                     .opacity(viewModel.isLoading ? 1 : 0)
 
                 if !viewModel.isLoading && viewModel.addressList.isEmpty {
-                    VStack {
+                    VStack(spacing: 0) {
+                        Image("img_declined")
+                            .resizable()
+                            .frame(width: 134.scaled, height: 134.scaled)
+                        
                         Text("no.address.found".localize)
-                            .font(.inter(.light, size: 14))
-                            .foregroundStyle(Color.secondary)
+                            .font(.bodySmallMedium)
+                            .foregroundStyle(Color.iLabel)
+                            .multilineTextAlignment(.center)
                             .frame(height: 60)
+                        
                         Spacer()
                     }
+                    .padding(.top, 120.scaled)
                 }
             }
         }

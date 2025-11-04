@@ -281,61 +281,27 @@ struct EditProfileView: View {
     }
     
     private var deleteAccountSheetView: some View {
-        VStack {
-            Image("img_delete_user")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 250.scaled, height: 250.scaled)
-            
-            VStack(alignment: .center, spacing: 12.scaled) {
-                Text("want.delete.account".localize) // Вы действительно хотите удалить свой аккаунт?
-                    .font(.titleBaseBold)
-                    .multilineTextAlignment(.center)
-                
-                Text("want.delete.account.descr".localize) // После удаления аккаунта, восстановить все данные будут невозможны
-                    .font(.bodyBaseMedium)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.iLabelSubtle)
-            }
-            .padding(.top, AppParams.Padding.default)
-            
-            SubmitButtonFactory.primary(
-                title: "delete.account".localize
-            ) {
+        ConfirmationSheet(
+            imageName: "img_delete_user",
+            title: "want.delete.account".localize,
+            bodyText: "want.delete.account.descr".localize,
+            buttonTitle: "delete.account".localize,
+            tapped: {
                 
             }
-            .padding(.top, 48.scaled)
-            .padding(.horizontal, AppParams.Padding.default)
-        }
+        )
     }
     
     private var logoutAccountSheetView: some View {
-        VStack {
-            Image("img_delete_user")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 250.scaled, height: 250.scaled)
-            
-            VStack(alignment: .center, spacing: 12.scaled) {
-                Text("want.logout".localize) // Вы действительно хотите удалить свой аккаунт?
-                    .font(.titleBaseBold)
-                    .multilineTextAlignment(.center)
-                
-                Text("want.logout.descr".localize) // После удаления аккаунта, восстановить все данные будут невозможны
-                    .font(.bodyBaseMedium)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.iLabelSubtle)
-            }
-            .padding(.top, AppParams.Padding.default)
-            
-            SubmitButtonFactory.primary(
-                title: "logout".localize
-            ) {
+        ConfirmationSheet(
+            imageName: "img_delete_user",
+            title: "want.logout".localize,
+            bodyText: "want.logout.descr".localize,
+            buttonTitle: "logout".localize,
+            tapped: {
                 
             }
-            .padding(.top, 48.scaled)
-            .padding(.horizontal, AppParams.Padding.default)
-        }
+        )
     }
     
     private func rowItemView(image: some View, text: String) -> some View {
