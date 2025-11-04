@@ -22,6 +22,10 @@ struct SelectAddressView: View {
     @FocusState var focusState: SelectAddressField?
     
     @Environment(\.dismiss) var dismiss
+    
+    private var isAnythingSearched: Bool {
+        !viewModel.fromAddressText.isEmpty || !viewModel.toAddressText.isEmpty
+    }
         
     var body: some View {
         innerBody
@@ -67,7 +71,7 @@ struct SelectAddressView: View {
                 LazyVStack(spacing: 0) {
                     ForEach(viewModel.addressList) { address in
                         addressItem(
-                            image: Image("icon_circle"),
+                            image: Image("icon_location"),
                             title: address.address,
                             detail: address.name ?? "",
                             distance: address.distanceString
@@ -94,35 +98,46 @@ struct SelectAddressView: View {
                     .scrollable()
                     .id(viewModel.isLoading ? "loading" : "")
                     .opacity(viewModel.isLoading ? 1 : 0)
-
-                if !viewModel.isLoading && viewModel.addressList.isEmpty {
-                    VStack(spacing: 0) {
-                        Image("img_declined")
-                            .resizable()
-                            .frame(width: 134.scaled, height: 134.scaled)
-                        
-                        Text("no.address.found".localize)
-                            .font(.bodySmallMedium)
-                            .foregroundStyle(Color.iLabel)
-                            .multilineTextAlignment(.center)
-                            .frame(height: 60)
-                        
-                        Spacer()
-                    }
-                    .padding(.top, 120.scaled)
-                }
             }
         }
-        .fullScreenCover(isPresented: $viewModel.showMap, content: {
-            PickAddressMapView(viewModel: viewModel.mapModel)
+        .sheet(isPresented: $viewModel.showMap, content: {
+            NavigationView {
+                PickAddressMapView(viewModel: viewModel.mapModel)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Image.icon("icon_back_smaller")
+                                .onClick {
+                                    viewModel.showMap = false
+                                }
+                        }
+                    }
+            }
         })
         .background {
             Rectangle()
                 .ignoresSafeArea(.container)
                 .foregroundStyle(Color.iBackground)
         }
+        .overlay {
+            if viewModel.searchFailed {
+                VStack(spacing: 0) {
+                    Image("img_declined")
+                        .resizable()
+                        .frame(width: 134.scaled, height: 134.scaled)
+                    
+                    Text("no.address.found".localize)
+                        .font(.bodySmallMedium)
+                        .foregroundStyle(Color.iLabel)
+                        .multilineTextAlignment(.center)
+                        .frame(height: 60)
+                }
+                .scrollable()
+                .scrollDisabled(true)
+                .padding(.top, 200.scaled)
+            }
+        }
     }
-
+    
     private var fieldsView: some View {
         VStack(spacing: 10) {
             if viewModel.isFromVisible {
@@ -246,9 +261,7 @@ struct SelectAddressView: View {
                 .frame(width: 42.scaled, height: 42.scaled)
                 .overlay {
                     VStack {
-                        Image("icon_location")
-                            .resizable()
-                            .renderingMode(.template)
+                        Image.icon("icon_location")
                             .foregroundStyle(Color.label)
                             .frame(width: 24.scaled, height: 24.scaled, alignment: .center)
                             .aspectRatio(contentMode: .fit)
@@ -258,44 +271,40 @@ struct SelectAddressView: View {
     }
 
     private func addressItem<Img: View>(image: Img, title: String, detail: String, distance: String) -> some View {
-        HStack(spacing: 0) {
-            if image is EmptyView {
-                Image("icon_circle")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundStyle(Color.gray)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 16, alignment: .center)
-                    .padding([.vertical, .leading], AppParams.Padding.default)
-                    .padding([.trailing], 8)
-            } else {
-                image
-                    .padding([.vertical, .leading], AppParams.Padding.default)
-                    .padding([.trailing], 8)
-            }
+        HStack(spacing: 16.scaled) {
+            RoundedRectangle(cornerRadius: 10.scaled)
+                .frame(width: 44.scaled, height: 44.scaled)
+                .foregroundStyle(.iBackgroundSecondary)
+                .overlay(alignment: .center) {
+                    if image is EmptyView {
+                        Image.icon("icon_location")
+                            .foregroundStyle(Color.gray)
+                            .aspectRatio(contentMode: .fit)
+                    } else {
+                        image
+                    }
+                }
             
             VStack(alignment: .leading, spacing: 1) {
                 Text(title)
-                    .font(.inter(.bold, size: 14))
+                    .font(.bodyBaseBold)
                     .frame(height: 21)
-                    .foregroundStyle(Color.label)
                 
                 if !detail.isEmpty {
                     Text(detail)
-                        .font(.inter(.regular, size: 12))
-                        .foregroundStyle(Color.secondary)
-                        .frame(height: 16)
+                        .font(.bodySmallMedium)
                 }
             }
-            
+            .foregroundStyle(Color.label)
+
             Spacer()
             
             Text(distance)
-                .font(.inter(.regular, size: 12))
-                .foregroundStyle(Color.secondary)
+                .font(.bodySmallMedium)
+                .foregroundStyle(Color.iLabel)
                 .frame(height: 16)
-                .padding(.trailing, AppParams.Padding.default)
         }
+        .padding(.horizontal, AppParams.Padding.default)
     }
 }
 

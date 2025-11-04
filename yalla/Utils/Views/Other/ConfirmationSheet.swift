@@ -69,6 +69,25 @@ extension View {
             )
         })
     }
+    
+    func deleteConfirmationSheet(
+        isPresented: Binding<Bool>,
+        sheetTitle: String = "",
+        title: String,
+        bodyText: String,
+        buttonTitle: String,
+        tapped: @escaping () -> Void
+    ) -> some View {
+        appSheet(isPresented: isPresented, title: sheetTitle, sheetContent: {
+            ConfirmationSheet(
+                imageName: "icon_trash_bin",
+                title: title,
+                bodyText: bodyText,
+                buttonTitle: buttonTitle,
+                tapped: tapped
+            )
+        })
+    }
 }
 
 #Preview {

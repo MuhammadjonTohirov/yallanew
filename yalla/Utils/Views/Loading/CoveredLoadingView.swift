@@ -43,6 +43,7 @@ public struct CoveredLoadingView: View {
                                 .foregroundStyle(Color.iBackground)
                                 .blur(radius: 10)
                         }
+                        .visibility(!message.isEmpty)
                 }
             }.opacity(isLoading ? 1 : 0)
     }

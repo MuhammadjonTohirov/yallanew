@@ -7,10 +7,20 @@
 
 import Foundation
 import SwiftUI
+import SwiftMessages
 import IldamSDK
 import YallaUtils
 import Combine
 import Core
+
+enum MyPlacesSheetState: String, Identifiable {
+    var id: String {
+        self.rawValue.identifier
+    }
+    
+    case menu
+    case delete
+}
 
 enum MyPlacesRouter: SceneDestination {
     case addPlace(type: MyAddressType)
@@ -29,14 +39,15 @@ enum MyPlacesRouter: SceneDestination {
 @MainActor
 class MyPlacesViewModel: ObservableObject {
     @Published var places: [MyPlaceItem] = []
-    @Published var showSnackbar: Bool = false
-    @Published var snackbarMessage: String = ""
-    @Published var clickedPlace: MyPlaceItem?
+    @Published var sheet: MyPlacesSheetState?
+    @Published var isLoading: Bool = false
+    
+    var clickedPlace: MyPlaceItem?
     
     private(set) var navigator: Navigator?
     private let interactor: MyPlacesInteractorProtocol
     
-    init(interactor: MyPlacesInteractorProtocol = MyPlacesInteractor()) {
+    init(interactor: MyPlacesInteractorProtocol = MockMyPlacesInteractor()) {
         self.interactor = interactor
     }
     
@@ -63,12 +74,15 @@ class MyPlacesViewModel: ObservableObject {
     }
     
     private func fetchPlaces() async {
+        await setLoading(true)
         do {
             let fetchedPlaces = try await interactor.fetchPlaces()
             self.places = fetchedPlaces
         } catch {
             print("Failed to fetch places: \(error)")
         }
+        
+        await setLoading(false)
     }
     
     func onClickAddNewPlace(type: MyAddressType) {
@@ -77,20 +91,28 @@ class MyPlacesViewModel: ObservableObject {
     
     func onClickEditPlace() {
         guard let place = clickedPlace else { return }
-        navigator?.push(MyPlacesRouter.updatePlace(item: place))
+        self.navigator?.push(MyPlacesRouter.updatePlace(item: place))
+        setSheet(nil)
     }
     
     func onClickDeletePlace() {
-        guard let place = clickedPlace else { return }
-        deletePlace(place)
+        if sheet == .delete, let clickedPlace {
+            self.deletePlace(clickedPlace)
+            self.setSheet(nil)
+        } else {
+            self.setSheet(.delete)
+        }
     }
     
     func onClickPlace(_ place: MyPlaceItem) {
         clickedPlace = place
+        setSheet(.menu)
     }
     
     private func deletePlace(_ place: MyPlaceItem) {
         Task {
+            await setLoading(true)
+
             do {
                 _ = try await interactor.deletePlace(place)
                 await fetchPlaces()
@@ -98,12 +120,34 @@ class MyPlacesViewModel: ObservableObject {
             } catch {
                 print("Failed to delete place: \(error)")
             }
+            
+            await setLoading(false)
         }
     }
     
     private func showSuccessSnackbar(message: String) {
-        snackbarMessage = message
-        showSnackbar = true
+        Snackbar.show(message: message, theme: .success)
+    }
+    
+    private func setSheet(_ sheet: MyPlacesSheetState?) {
+        if self.sheet != nil {
+            self.sheet = nil
+        } else {
+            self.sheet = sheet
+        }
+        
+        guard sheet != nil else {
+            return
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.sheet = sheet
+        }
+    }
+    
+    @MainActor
+    func setLoading(_ isLoading: Bool) async {
+        self.isLoading = isLoading
     }
 }
 

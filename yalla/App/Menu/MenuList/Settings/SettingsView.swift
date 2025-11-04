@@ -16,34 +16,41 @@ struct SettingsView: View {
     @State private var showDeleteAccount: Bool = false
     @State private var showAccountDeleted: Bool = false
     @State private var themeName: String = ""
+    @State private var languageName: String = ""
     
     var body: some View {
-        VStack(alignment: .leading) {
-            VStack {
+        ZStack {
+            VStack(spacing: 0) {
                 row(
                     icon: "icon_language-square",
                     title: "app.language".localize,
-                    detail: Language.language(UserSettings.shared.language ?? "ru").name)
-                .padding(.horizontal)
-                .onTapped(.background) {
+                    detail: languageName
+                )
+                .onTapped(.iBackgroundSecondary) {
                     self.showLang = true
                 }
+                .frame(height: 64.scaled)
                 
-                row(icon: "icon_mask",
+                Divider()
+                    .padding(.leading, 100.scaled)
+                
+                row(
+                    icon: "icon_mask",
                     title: "app.theme".localize,
-                    detail: themeName)
-                .padding(.horizontal )
-                .onTapped(.background) {
+                    detail: themeName
+                )
+                .onTapped(.iBackgroundSecondary) {
                     self.showThem = true
                 }
+                .frame(height: 64.scaled)
             }
-            .frame(height: 60)
-            
-            Spacer()
         }
-        .padding(.top,40)
+        .clipShape(RoundedRectangle(cornerRadius: 16.scaled))
+        .padding([.horizontal, .top], 20.scaled)
+        .scrollable()
         .onAppear {
             themeName = UserSettings.shared.theme?.name ?? ""
+            languageName = Language.language(UserSettings.shared.language ?? "ru").name
         }
         .appSheet(
             isPresented: $showLang,
@@ -62,29 +69,33 @@ struct SettingsView: View {
     }
     
     func row(icon: String, title: String, detail: String = "") -> some View {
-        
-        HStack {
-            VStack(alignment: .leading) {
-                HStack {
-                    Image.icon(icon)
-                        .frame(width: 24, height: 24)
-                    
-                    Text(title.localize)
-                        .font(.inter(.bold, size: 16))
-                        .foregroundStyle(Color.label)
-                }
+        HStack(spacing: 12) {
+            // Icon
+            Image.icon(icon)
+                .frame(width: 24, height: 24)
+                .foregroundColor(.primary)
+            
+            // Text content
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title.localize)
+                    .font(.system(size: 16, weight: .regular))
+                    .foregroundStyle(Color.primary)
                 
                 if !detail.isEmpty {
                     Text(detail)
-                        .font(.inter(.regular, size: 12))
-                        .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                        .font(.system(size: 13, weight: .regular))
+                        .foregroundStyle(Color.iLabel)
                 }
             }
+            
             Spacer()
- 
+            
             Image(systemName: "chevron.right")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(Color.iLabel)
+                .frame(width: 24.scaled)
         }
-        .frame(height: 60)
+        .padding(.horizontal, 8)
     }
 }
 

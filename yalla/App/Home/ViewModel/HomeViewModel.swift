@@ -20,7 +20,6 @@ enum HomeRoute: SceneDestination {
         switch self {
         case .menu(let model):
             SideMenuBody(viewModel: model)
-                .hideBackButton()
         }
     }
     

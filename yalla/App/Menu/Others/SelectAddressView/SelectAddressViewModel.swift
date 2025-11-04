@@ -21,6 +21,7 @@ class SelectAddressViewModel: BaseViewModel {
     @Published var addressList: [SelectAddressItem] = []
         
     @Published var selectedField: SelectAddressField = .to
+    @Published var searchFailed: Bool = false
     
     var isFromVisible: Bool = false
     var isToVisible: Bool = true
@@ -125,6 +126,7 @@ class SelectAddressViewModel: BaseViewModel {
     }
     
     func startSearching(_ field: SelectAddressField) {
+        self.searchFailed = false
         let text = field == .from ? self.fromAddressText : self.toAddressText
         debugPrint("Start searching \(field) \(text)")
         Task {
@@ -136,6 +138,10 @@ class SelectAddressViewModel: BaseViewModel {
             }
             try? await Task.sleep(nanoseconds: 500_000_000)
             await self.hideLoader()
+            
+            await MainActor.run {
+                self.searchFailed = self.addressList.isEmpty
+            }
         }
     }
     

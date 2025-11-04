@@ -35,7 +35,7 @@ struct ButtonModifier: ViewModifier {
             }, perform: {})
 
             content
-//                .allowsHitTesting(false)
+                .allowsHitTesting(false)
         }
     }
     

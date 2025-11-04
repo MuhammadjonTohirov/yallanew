@@ -18,13 +18,16 @@ struct SettingsLanguageView: View {
     }
     
     @State
-    private var selectedLanguage: String = "uz"
+    private var selectedLanguage = String()
 
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             languagesView
         }
         .padding(.horizontal)
+        .onAppear {
+            selectedLanguage = self.language
+        }
     }
     
     private var languagesView: some View {

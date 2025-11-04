@@ -29,7 +29,16 @@ enum CRUDPlaceStrings {
 struct CreateUpdatePlaceView: View {
     var addressItem: MyPlaceItem?
     
-    var pageTitle: String = "home".localize
+    var pageTitle: String {
+        switch addressType {
+        case .other:
+            "new.address".localize
+        case .home:
+            "home".localize
+        case .work:
+            "work".localize
+        }
+    }
     
     var addressType: MyAddressType = .other
     
@@ -42,6 +51,7 @@ struct CreateUpdatePlaceView: View {
     var body: some View {
         VStack {
             fieldsView
+                .padding(.top, 20.scaled)
             
             Spacer()
             
@@ -55,10 +65,10 @@ struct CreateUpdatePlaceView: View {
             .disabled(vm.isLoading)
             .padding(.bottom, AppParams.Padding.default)
         }
-        .keyboardDismissable()
+//        .keyboardDismissable()
         .sheet(isPresented: $vm.showPickAddress, content: {
             SelectAddressView(viewModel: vm.addressPickerModel)
-                .presentationDetents([.fraction(0.98)])
+                .presentationDragIndicator(.visible)
         })
         .navigationTitle(pageTitle)
         .padding(.horizontal, AppParams.Padding.default)
@@ -72,23 +82,30 @@ struct CreateUpdatePlaceView: View {
         
     private var fieldsView: some View {
         VStack(spacing: 10.scaled) {
-            YRoundedTextField {
-                YTextField(text: $vm.address, placeholder: "paste.address".localize, left: { // Введите адрес
-                    Circle()
-                        .stroke(lineWidth: 5)
-                        .frame(width: 14, height: 14, alignment: .center)
-                        .foregroundStyle(.iPrimary)
-                        .padding(.trailing, 10)
-                })
-                .disabled(true)
-                .padding(.horizontal, AppParams.Padding.default)
-                .frame(height: 50.scaled)
-                .onTapGesture {
-                    self.vm.showMapAddressPicker()
-                }
+            HStack {
+                Circle()
+                    .stroke(lineWidth: 5)
+                    .frame(width: 14, height: 14, alignment: .center)
+                    .foregroundStyle(.iPrimary)
+                    .padding(.trailing, 10)
+                
+                Text(vm.address.isEmpty ? "paste.address".localize : vm.address)
+                    .font(.bodyBaseMedium)
+                    .foregroundStyle(
+                        vm.address.isEmpty ? .iLabelSubtle : .iLabel
+                    )
+                
+                Spacer()
             }
-            .set(borderColor: .iBorderDisabled)
-            .onTapGesture {
+            .padding(.horizontal, AppParams.Padding.default)
+            .overlay(RoundedRectangle(cornerRadius: 10.scaled).foregroundStyle(.iBackground.opacity(0.01)))
+            .frame(height: 50.scaled)
+            .background(
+                RoundedRectangle(cornerRadius: 10.scaled)
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(.iBorderDisabled)
+            )
+            .onClick {
                 self.vm.showMapAddressPicker()
             }
 

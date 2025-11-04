@@ -37,6 +37,7 @@ class CreateUpdatePlaceViewModel: BaseViewModel {
         super.onAppear()
         addressPickerModel.set(delegate: self)
         trackFormChanges()
+        addressPickerModel.isToVisible = true
     }
     
     func set(addressItem: MyPlaceItem?) {
@@ -162,8 +163,11 @@ class CreateUpdatePlaceViewModel: BaseViewModel {
     }
     
     func showMapAddressPicker() {
-        self.addressPickerModel.isToVisible = true
         self.showPickAddress = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.addressPickerModel.isToVisible = true
+        }
     }
     
     func showAlert(_ message: String, theme: Theme) {

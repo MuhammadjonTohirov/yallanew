@@ -92,8 +92,7 @@ enum SideMenuRoute: @MainActor SceneDestination {
             TravelHistoryView()
                 .navigationBarTitleDisplayMode(.large)
         case .places:
-//            MyPlacesView()
-            EmptyView()
+            MyPlacesView()
         case .about:
             AboutApplicationView()
         case .becomeDriver:

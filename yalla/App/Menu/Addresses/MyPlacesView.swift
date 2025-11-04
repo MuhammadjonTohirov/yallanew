@@ -43,40 +43,74 @@ struct MyPlacesView: View {
             }
             .sharedBackgroundVisibility(visible: false)
         })
-        .appSheet(isPresented: .init(get: {viewModel.clickedPlace != nil}, set: { shown in if (!shown) {viewModel.clickedPlace = nil}}), sheetContent: {
-            VStack(spacing: 10.scaled) {
-                HStack {
-                    Image.icon("icon_edit_2")
-                    Text("update.address")
-                        .font(.bodyBaseMedium)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .frame(height: 60.scaled)
-                .padding(.horizontal, AppParams.Padding.default)
-                .onTapped(.iBackgroundSecondary) {
-                    
-                }
-                .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
-
-                HStack {
-                    Image.icon("icon_trash", color: Color.red)
-                    Text("delete.address".localize)
-                        .font(.bodyBaseMedium)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .frame(height: 60.scaled)
-                .padding(.horizontal, AppParams.Padding.default)
-                .onTapped(.iBackgroundSecondary) {
-                    
-                }
-                .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
+        .appSheet(isPresented: .init(get: {
+            viewModel.sheet != nil
+        }, set: { shown in
+            if !shown {
+                viewModel.sheet = nil
             }
-            .padding(.horizontal, AppParams.Padding.default)
+        }), title: viewModel.clickedPlace?.name ?? "", sheetContent: {
+            switch viewModel.sheet {
+            case .menu:
+                menuView
+            case .delete:
+                ConfirmationSheet(
+                    imageName: "icon_trash_bin",
+                    title: "attention".localize,
+                    bodyText: "want.to.delete.address".localize,
+                    buttonTitle: "yes.delete".localize,
+                    tapped: {
+                        viewModel.onClickDeletePlace()
+                    }
+                )
+            case .none:
+                EmptyView()
+            }
         })
         .onAppear {
             viewModel.onAppear()
             viewModel.setNavigator(navigator)
         }
+        .overlay(content: {
+            CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
+                .ignoresSafeArea()
+        })
+        .navigationBarTitleDisplayMode(.large)
+        .navigationDestination(for: MyPlacesRouter.self) { route in
+            route.scene
+                .environmentObject(navigator)
+        }
+    }
+    
+    private var menuView: some View {
+        VStack(spacing: 10.scaled) {
+            HStack {
+                Image.icon("icon_edit_2")
+                Text("update.address")
+                    .font(.bodyBaseMedium)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 60.scaled)
+            .padding(.horizontal, AppParams.Padding.default)
+            .onTapped(.iBackgroundSecondary) {
+                viewModel.onClickEditPlace()
+            }
+            .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
+
+            HStack {
+                Image.icon("icon_trash", color: Color.red)
+                Text("delete.address".localize)
+                    .font(.bodyBaseMedium)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 60.scaled)
+            .padding(.horizontal, AppParams.Padding.default)
+            .onTapped(.iBackgroundSecondary) {
+                viewModel.onClickDeletePlace()
+            }
+            .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
+        }
+        .padding(.horizontal, AppParams.Padding.default)
     }
     
     private var savedPlacesSection: some View {
