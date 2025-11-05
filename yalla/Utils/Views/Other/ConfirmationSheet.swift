@@ -37,7 +37,7 @@ struct ConfirmationSheet: View {
                     .foregroundStyle(.iLabelSubtle)
             }
             .padding(.top, AppParams.Padding.default)
-            
+            .padding(.horizontal, 32.scaled)
             SubmitButtonFactory.primary(
                 title: buttonTitle
             ) {

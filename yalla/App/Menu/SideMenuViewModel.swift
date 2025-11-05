@@ -126,9 +126,7 @@ final class SideMenuViewModel: SideMenuBodyProtocol {
     
     @MainActor
     private func setUserInfo(_ userInfo: UserInfo?) {
-        withAnimation {
-            self.userInfo = userInfo
-        }
+        self.userInfo = userInfo
     }
     
     deinit {
