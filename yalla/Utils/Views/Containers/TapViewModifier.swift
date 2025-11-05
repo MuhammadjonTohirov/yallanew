@@ -27,6 +27,7 @@ struct ButtonModifier: ViewModifier {
                     .foregroundStyle(backgroundColor)
             }
             .background(isPressed ? alternateColor(backgroundColor) : backgroundColor)
+            .controlSize(.mini)
             .onLongPressGesture(minimumDuration: 0, maximumDistance: .infinity, pressing: { pressing in
                 withAnimation(.easeInOut(duration: 0.3)) {
                     isPressed = pressing
@@ -107,6 +108,7 @@ extension View {
     func onTapped(_ background: Color = Color.background, tap: Color? = nil, action: @escaping () -> Void = {}) -> some View {
         self.modifier(ButtonModifier.init(backgroundColor: background, action: action))
     }
+    
     @ViewBuilder
     func customAlert(isPresented: Binding<Bool>, data: CustomAlertInputData?) -> some View {
         self.customAlert(isPresented: isPresented, title: data?.title ?? "", message: data?.message ?? "", actions: data?.actions ?? [])
@@ -119,6 +121,6 @@ extension View {
         .onTapped(.init(uiColor: .systemBackground), action: {
             print("GO")
         })
-        .frame(width: 200, height: 50)
+        .frame(width: 200)
         .cornerRadius(10)
 }

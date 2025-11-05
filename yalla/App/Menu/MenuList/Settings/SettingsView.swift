@@ -19,40 +19,35 @@ struct SettingsView: View {
     @State private var languageName: String = ""
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        ZStack {
             VStack(spacing: 0) {
                 row(
                     icon: "icon_language-square",
                     title: "app.language".localize,
                     detail: languageName
                 )
-                .onTapped(.background) {
+                .onTapped(.iBackgroundSecondary) {
                     self.showLang = true
                 }
-                   Divider()
+                .frame(height: 64.scaled)
+                
+                Divider()
+                    .padding(.leading, 100.scaled)
                 
                 row(
                     icon: "icon_mask",
                     title: "app.theme".localize,
                     detail: themeName
                 )
-                .onTapped(.background) {
+                .onTapped(.iBackgroundSecondary) {
                     self.showThem = true
                 }
+                .frame(height: 64.scaled)
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
-
-            Spacer()
         }
-        .frame(maxHeight: 120)
-        .background(content: {
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.iBackgroundSecondary)
-        })
-        .vertical(alignment: .top)
-        .padding(.horizontal)
-        .padding(.top)
+        .clipShape(RoundedRectangle(cornerRadius: 16.scaled))
+        .padding([.horizontal, .top], 20.scaled)
+        .scrollable()
         .onAppear {
             themeName = UserSettings.shared.theme?.name ?? ""
             languageName = Language.language(UserSettings.shared.language ?? "ru").name
@@ -98,10 +93,9 @@ struct SettingsView: View {
             Image(systemName: "chevron.right")
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(Color.iLabel)
+                .frame(width: 24.scaled)
         }
-        .padding(.vertical, 12)
-        .frame(maxHeight: 60)
-        .background(Color.iBackgroundSecondary)
+        .padding(.horizontal, 8)
     }
 }
 

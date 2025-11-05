@@ -21,19 +21,34 @@ public struct CoveredLoadingView: View {
     public var body: some View {
         Rectangle()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .foregroundStyle(Color.background.opacity(0.6))
+            .foregroundStyle(Color.init(hex: "#10182833").opacity(0.2))
             .ignoresSafeArea()
             .overlay {
                 VStack {
-                    LoadingIndicator(animation: .circleTrim, color: .label, size: .medium, speed: .normal)
+                    Circle()
+                        .frame(width: 70.scaled, height: 70.scaled)
+                        .foregroundStyle(.iBackground)
+                        .overlay {
+                            ProgressView()
+                                .tint(.iPrimary)
+                                .scaleEffect(1.5)
+                        }
                     
                     Text(message)
+                        .padding(8)
+                        .font(.bodyBaseMedium)
+                        .foregroundStyle(.iLabel)
                         .background {
                             Capsule()
-                                .foregroundStyle(Color.background)
+                                .foregroundStyle(Color.iBackground)
                                 .blur(radius: 10)
                         }
+                        .visibility(!message.isEmpty)
                 }
             }.opacity(isLoading ? 1 : 0)
     }
+}
+
+#Preview {
+    CoveredLoadingView(isLoading: .constant(true), message: "Please wait")
 }

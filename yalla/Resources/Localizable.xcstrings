@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@" : {
-
-    },
     "about.app" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -62,6 +59,35 @@
         }
       }
     },
+    "add.address.for.quick.call" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add address for quick call"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавьте адрес для быстрого вызова"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tez chaqirish uchun manzil qo'shing"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тез чақириш учун манзил қўшинг"
+          }
+        }
+      }
+    },
     "add.card" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -92,7 +118,62 @@
       }
     },
     "add.card.success" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Card has been added successfully"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта была успешно добавлена"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karta muvofaqiyatli qo’shildi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта мувофақиятли қўшилди"
+          }
+        }
+      }
+    },
+    "address.deleted.successfully" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address was successfully deleted"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адрес был успешно удален"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil muvofaqiyatli o'chirildi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Манзил мувофақиятли ўчирилди"
+          }
+        }
+      }
     },
     "app.language" : {
       "extractionState" : "manual",
@@ -206,6 +287,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Манзилда"
+          }
+        }
+      }
+    },
+    "attention" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attention"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Внимание"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diqqat"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Диққат"
           }
         }
       }
@@ -409,6 +519,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Бонусларни алмаштириш курси"
+          }
+        }
+      }
+    },
+    "camera.access.required" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera access required"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Требуется доступ к камере"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kameraga kirish huquqi talab qilinadi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Камерага кириш ҳуқуқи талаб қилинади"
           }
         }
       }
@@ -703,6 +842,35 @@
         }
       }
     },
+    "comment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Комментарий"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izoh"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изоҳ"
+          }
+        }
+      }
+    },
     "completed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -848,6 +1016,35 @@
         }
       }
     },
+    "create.address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить адрес"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil yaratish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Манзил яратиш"
+          }
+        }
+      }
+    },
     "dark" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -931,6 +1128,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ҳисобни ўчириш"
+          }
+        }
+      }
+    },
+    "delete.address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить адрес"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzilni o'chirish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Манзилни ўчириш"
           }
         }
       }
@@ -1109,6 +1335,35 @@
         }
       }
     },
+    "entrance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrance"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вход"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kirish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кириш"
+          }
+        }
+      }
+    },
     "executor.rating:" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1225,6 +1480,64 @@
         }
       }
     },
+    "flat_or_house" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home number"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Номер дома"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uy raqami"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уй рақами"
+          }
+        }
+      }
+    },
+    "from_location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From location"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Из точки"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shu yerdan"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шу йердан"
+          }
+        }
+      }
+    },
     "help" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1250,6 +1563,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ёрдам"
+          }
+        }
+      }
+    },
+    "home" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дом"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uy"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уй"
           }
         }
       }
@@ -1366,6 +1708,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Фамиля киритинг"
+          }
+        }
+      }
+    },
+    "ivalid.card.info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid card info"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неверные данные карты"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karta ma'lumotlari noto'g'ri"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта маълумотлари нотўғри"
           }
         }
       }
@@ -1544,6 +1915,35 @@
         }
       }
     },
+    "my.addresses" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My addresses"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мои адреса"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mening manzillarim"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Менинг манзилларим"
+          }
+        }
+      }
+    },
     "my.places" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1631,6 +2031,35 @@
         }
       }
     },
+    "new.address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый адрес"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yangi manzil"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Янги манзил"
+          }
+        }
+      }
+    },
     "news.and.notifs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1685,6 +2114,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Кейинги"
+          }
+        }
+      }
+    },
+    "no.address.found" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We could not find that address,\nplease try entering it correctly."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мы не нашли такой адрес,\nпопробуйте ввести правильно"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biz bunday manzilni topa olmadik,\nuni to'g'ri kiritishga harakat qiling."
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Биз бундай манзилни топа олмадик, \nуни тўғри киритишга ҳаракат қилинг. "
           }
         }
       }
@@ -1747,6 +2205,35 @@
         }
       }
     },
+    "order.delete.confirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes, delete order"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Да, удалить заказ"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ha, buyurtmani o‘chirish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳа, буюртмани ўчириш"
+          }
+        }
+      }
+    },
     "other.methods" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1772,6 +2259,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Бошқа усуллар"
+          }
+        }
+      }
+    },
+    "paste.address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paste the address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вставьте адрес"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzilni qo'ying"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мазнилни қўйинг"
           }
         }
       }
@@ -2733,6 +3249,35 @@
         }
       }
     },
+    "title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Название"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nomi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Номи"
+          }
+        }
+      }
+    },
     "trip.canceled.before.search" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2849,6 +3394,64 @@
         }
       }
     },
+    "trip.delete.confirmation.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this trip?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы действительно хотите удалить эту поездку?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haqiqatan ham ushbu safarni o‘chirmoqchimisiz?"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳақиқатдан ҳам ушбу сафарни ўчирмоқчимисиз?"
+          }
+        }
+      }
+    },
+    "trip.delete.warning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After deleting the trip, all data cannot be restored"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "После удаления поездки, восстановить все данные будет невозможно"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safar o‘chirildan so‘ng barcha ma’lumotlarni tiklab bo‘lmaydi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сафар ўчирилгандан сўнг барча маълумотларни тиклаб бўлмайди"
+          }
+        }
+      }
+    },
     "trip.details" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2903,6 +3506,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тариф"
+          }
+        }
+      }
+    },
+    "update.address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновить адрес"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzilni tahrirlash"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Манзилни таҳрирлаш"
           }
         }
       }
@@ -3081,6 +3713,35 @@
         }
       }
     },
+    "want.to.delete.address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you really want to delete this address?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы действительно хотите удалить этот адрес?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siz haqiqatan ham ushbu manzilni o'chirmoqchimisiz?"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сиз ҳақиқатан ҳам ушбу манзилни ўчирмоқчимисиз?"
+          }
+        }
+      }
+    },
     "want.to.delete.card" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3168,6 +3829,64 @@
         }
       }
     },
+    "where_to_go" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where to go"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Куда поедете?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qayerga borasiz?"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қайерга борасиз?"
+          }
+        }
+      }
+    },
+    "work" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Work"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Работа"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Иш"
+          }
+        }
+      }
+    },
     "yalla" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3197,6 +3916,35 @@
         }
       }
     },
+    "yes.delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes, delete"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Да, удалить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ha, o'chir"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳа,  ўчир"
+          }
+        }
+      }
+    },
     "you.have.n.cashback" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3222,95 +3970,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Бундай промо код мавжуд эмас"
-          }
-        }
-      }
-    },
-    "trip.delete.confirmation.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Are you sure you want to delete this trip?"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Вы действительно хотите удалить эту поездку?"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haqiqatan ham ushbu safarni o‘chirmoqchimisiz?"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ҳақиқатдан ҳам ушбу сафарни ўчирмоқчимисиз?"
-          }
-        }
-      }
-    },
-
-    "trip.delete.warning" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "After deleting the trip, all data cannot be restored"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "После удаления поездки, восстановить все данные будет невозможно"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Safar o‘chirildan so‘ng barcha ma’lumotlarni tiklab bo‘lmaydi"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Сафар ўчирилгандан сўнг барча маълумотларни тиклаб бўлмайди"
-          }
-        }
-      }
-    },
-
-    "order.delete.confirm" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes, delete order"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Да, удалить заказ"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ha, buyurtmani o‘chirish"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ҳа, буюртмани ўчириш"
           }
         }
       }

@@ -101,10 +101,10 @@ struct SideMenuBody: View {
             divider
             
             bonusesRow()
-            .padding(.horizontal, AppParams.Padding.default)
-            .onTapped(.iBackgroundSecondary) {
-                viewModel.onClick(menu: .bonuses)
-            }
+                .padding(.horizontal, AppParams.Padding.default)
+                .onTapped(.iBackgroundSecondary) {
+                    viewModel.onClick(menu: .bonuses)
+                }
             .visibility(viewModel.isDiscountVisible)
         }
         .background {

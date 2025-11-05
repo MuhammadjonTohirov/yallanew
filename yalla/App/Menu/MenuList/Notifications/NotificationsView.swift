@@ -57,8 +57,8 @@ struct NotificationsView: View {
                          .disabled(!viewModel.hasUnread || viewModel.isLoading)
 
                 }
-                
             }
+            .sharedBackgroundVisibility(visible: false)
         })
     }
     
@@ -106,5 +106,7 @@ struct NotificationsView: View {
 #Preview {
     UserSettings.shared.accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiMzgwZjk1Yjk2NTE3Nzg2ZjgzNWFkNzk3N2E5ZTdjNDQ1ZDFiMThjN2IxYmVhZjVjNjBkNjEyNGZhNWM0ZGI2NzkzNjhlMWJiZTZiYzA0NTAiLCJpYXQiOjE3NjE1NjAzMDcuNTgxOTEyLCJuYmYiOjE3NjE1NjAzMDcuNTgxOTE1LCJleHAiOjE3OTMwOTYzMDcuNTc4NDk0LCJzdWIiOiI1OTk4Iiwic2NvcGVzIjpbImNsaWVudCJdfQ.AlS8KYLeW55vM6A-4Z1c9wWwVj6ohlHo3_16LuemDA1yGaUht5t1vroUczW9rEoJvW2uvCfxtLonX1rMPJYuRBZeZ_ZuFOC0lhRBoYBe8-Fzuev1DHjibZfM168tvjYlKf_OIYUGsfURbwN4-H_gjLh7hn5v2OXCQlWS-bmd61G2jixWC1aIdPdOIpUerZFEZzvZ_dS6FouKh0xr2ZEsuUrvxwxt5Y14n2fUwQUQOVejWyKk54SgqjWL8gaAnI3SCsC5DfGYCbKziVofxhJhC6W31stf2FfEZj0-yp86aPoHASgQttoaNG_MVA5FYTf-0AVTtaoxFJuUz8WJAw5Bk2l9A64wTXLB6pR13VKlviGl3xTHJTCRzLRrtNHBn1dvxkBfZlgskerO83wCVOYlDRt5D4TkL0w-pVFJdWzcF4Z9H0-6dEisiClbnlhp5nV5V1LlqAPxSPkq6OcjI9PtEpdzLSoNmIlA9okDTjd8N8lKDLIDDWFZaDw38zSyJMqtDrZJWgJaUu9-WXrJ9dmGwXFrpZsvd3VE77owBZMCd0H_5Se7hMC4qY1jeYRpqwLvzP2IxWvgkY4sYw_sh1VGF2wk28VRP1ypAPGWSCS0oxXucZDfbD9yGT1jckBRW9hCXYPRGxH33foXHkk5jf6-0WuyiKABd4t6VoQ9Hofvq0U"
     UserSettings.shared.setupForTest()
-    return NotificationsView()
+    return NavigationView {
+        NotificationsView()
+    }
 }

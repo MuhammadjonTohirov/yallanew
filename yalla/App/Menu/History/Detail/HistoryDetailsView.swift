@@ -260,7 +260,7 @@ struct HistoryDetailsView: View {
                     .foregroundColor(.iLabel)
             }
             Spacer()
-            Text("\(item.taxi?.totalPrice?.asMoneySum ?? "0")")
+            Text(item.taxi?.totalPrice?.asMoneySum ?? "0")
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(.iLabel)
         }
@@ -293,7 +293,7 @@ struct HistoryDetailsView: View {
    
     private var emptyView: some View {
         VStack {
-            Image("icon_declined")
+            Image("img_declined")
                 .resizable()
                 .frame(width: 120, height: 120)
                 
