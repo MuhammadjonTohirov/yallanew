@@ -14,6 +14,8 @@ struct AppSheetModifier<SheetContent: View>: ViewModifier {
     @Binding var isPresented: Bool
     var title: String
     var sheetContent: () -> SheetContent
+    @Environment(\.colorScheme)
+    var scheme
     
     @State private var rect: CGRect?
     
@@ -54,7 +56,11 @@ struct AppSheetModifier<SheetContent: View>: ViewModifier {
                     .scrollIndicators(.hidden)
                 }
                 .scrollBounceBehavior(.basedOnSize)
-                .background(Color.background.ignoresSafeArea())
+                .onChange(of: scheme, perform: { newValue in
+                    debugPrint("Cscheme:", newValue)
+                })
+                .background(Color.background)
+                .preferredColorScheme(scheme)
                 .presentationDetents([.height(((rect?.height) ?? 0) + UIApplication.shared.safeArea.bottom)])
                 .presentationCornerRadius(radius)
                 .presentationDragIndicator(.visible)

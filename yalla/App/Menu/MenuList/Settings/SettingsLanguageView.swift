@@ -11,84 +11,61 @@ import YallaUtils
 import Core
 
 struct SettingsLanguageView: View {
-    @State private var language: String = UserSettings.shared.language ?? Language.russian.code {
-        didSet {
-            UserSettings.shared.language = language
-        }
-    }
+    @ObservedObject
+    var viewModel: SettingsViewModel
     
-    @State
-    private var selectedLanguage = String()
+    init(viewModel: SettingsViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             languagesView
         }
         .padding(.horizontal)
-        .onAppear {
-            selectedLanguage = self.language
-        }
     }
     
     private var languagesView: some View {
         VStack(spacing: 18.scaled) {
             LanguageRowView(language: LanguageUz(), selected: .init(get: {
-                selectedLanguage == LanguageUz().code
+                viewModel.selectedLanguage == LanguageUz().code
             }, set: { selected in
                 if selected {
                     selectLanguage(LanguageUz())
                 }
             }))
             
-            LanguageRowView(language: LanguageUzCryl(), selected: .init(get: {
-                selectedLanguage == LanguageUzCryl().code
-            }, set: { selected in
-                if selected {
-                    selectLanguage(LanguageUzCryl())
-                }
-            }))
+//            LanguageRowView(language: LanguageUzCryl(), selected: .init(get: {
+//                viewModel.selectedLanguage == LanguageUzCryl().code
+//            }, set: { selected in
+//                if selected {
+//                    selectLanguage(LanguageUzCryl())
+//                }
+//            }))
             
             LanguageRowView(language: LanguageRu(), selected: .init(get: {
-                selectedLanguage == LanguageRu().code
+                viewModel.selectedLanguage == LanguageRu().code
             }, set: { selected in
                 if selected {
                     selectLanguage(LanguageRu())
                 }
             }))
             
-            LanguageRowView(language: LanguageEn(), selected: .init(get: {
-                selectedLanguage == LanguageEn().code
-            }, set: { selected in
-                if selected {
-                    selectLanguage(LanguageEn())
-                }
-            }))
+//            LanguageRowView(language: LanguageEn(), selected: .init(get: {
+//                viewModel.selectedLanguage == LanguageEn().code
+//            }, set: { selected in
+//                if selected {
+//                    selectLanguage(LanguageEn())
+//                }
+//            }))
         }
     }
     
     private func selectLanguage(_ language: any LanguageProtocol) {
-        UserSettings.shared.language = language.code
-        
-        selectedLanguage = language.code
+        viewModel.setSelectLanguage(language.code)
     }
-    
-    
-    var headerView: some View {
-        ZStack {
-            Text("app.language".localize)
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundStyle(Color.label)
-            HStack {
-                DismissCircleButton()
-                    .padding(.leading)
-                Spacer()
-            }
-        }
-        .padding(.horizontal)
-    }
-    
 }
 
 #Preview {
-    SettingsLanguageView()
+    SettingsLanguageView(viewModel: .init())
 }

@@ -18,9 +18,10 @@ struct SideMenuBody: View {
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
+            
             VStack(spacing: 10) {
                 userInfo
-
+                    .padding(.top, -20.scaled)
                 sectionOne
                     .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
                 
@@ -33,7 +34,7 @@ struct SideMenuBody: View {
                 becomeDriverRow
                 
             }
-            .padding()
+            .padding([.horizontal, .bottom])
             .scrollable(axis: .vertical)
         }
         .onAppear {
@@ -42,11 +43,8 @@ struct SideMenuBody: View {
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    Task { @MainActor in
-                        viewModel.onClick(menu: .profile)
-                    }
-                }
-                label: {
+                    viewModel.onClick(menu: .profile)
+                } label: {
                     Image("icon_brush")
                         .renderingMode(.template)
                         .resizable()
@@ -57,37 +55,58 @@ struct SideMenuBody: View {
         })
     }
     
-    private var userInfo: some View {
-        ZStack {
-            VStack {
-                KFImage(viewModel.userInfo?.imageURL)
-                    .placeholder {
-                        Circle()
-                            .frame(width: 80.scaled, height: 80.scaled)
-                            .foregroundStyle(Color.iBackgroundTertiary)
-                            .overlay(content: {
-                                Image("icon_user")
-                                    .renderingMode(.template)
-                                    .foregroundStyle(.iLabel)
-                            })
-                    }
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 80.scaled, height: 80.scaled)
-                    .clipShape(Circle())
-                
-                VStack(alignment: .center, spacing: 2) {
-                    Text(viewModel.userInfo?.fullName ?? "Guest")
-                        .font(.titleLargeBold)
-                        .foregroundStyle(Color.iLabel)
-
-                    Text(viewModel.userInfo?.formattedPhone ?? "+998 (91) 123-45-67")
-                        .font(.bodySmallMedium)
-                        .foregroundStyle(Color.iLabel)
-                }
+    private var customHeader: some View {
+        HStack {
+            Button {
+                // action
+            } label: {
+                Image.icon("icon_back_smaller")
+                    .frame(width: 44, height: 44)
             }
-            .padding(.bottom, AppParams.Padding.large)
+            .applyGalssEffect
+
+            Spacer()
+            
+            Button {
+                // action
+            } label: {
+                Image.icon("icon_brush")
+                    .frame(width: 44, height: 44)
+            }
+            .applyGalssEffect
         }
+        .padding(.horizontal, AppParams.Padding.default)
+    }
+    
+    private var userInfo: some View {
+        VStack {
+            KFImage(viewModel.userInfo?.imageURL)
+                .placeholder {
+                    Circle()
+                        .frame(width: 80.scaled, height: 80.scaled)
+                        .foregroundStyle(Color.iBackgroundTertiary)
+                        .overlay(content: {
+                            Image("icon_user")
+                                .renderingMode(.template)
+                                .foregroundStyle(.iLabel)
+                        })
+                }
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 80.scaled, height: 80.scaled)
+                .clipShape(Circle())
+            
+            VStack(alignment: .center, spacing: 2) {
+                Text(viewModel.userInfo?.fullName ?? "Guest")
+                    .font(.titleLargeBold)
+                    .foregroundStyle(Color.iLabel)
+
+                Text(viewModel.userInfo?.formattedPhone ?? "+998 (91) 123-45-67")
+                    .font(.bodySmallMedium)
+                    .foregroundStyle(Color.iLabel)
+            }
+        }
+        .padding(.bottom, AppParams.Padding.large)
     }
     
     private var sectionOne: some View {
@@ -326,5 +345,7 @@ struct SideMenuBody: View {
 }
 
 #Preview {
-    SideMenuBody(viewModel: .init())
+    NavigationStack {
+        SideMenuBody(viewModel: .init())
+    }
 }

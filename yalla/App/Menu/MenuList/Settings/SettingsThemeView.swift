@@ -11,35 +11,27 @@ import YallaUtils
 import Core
 
 struct SettingsThemeView: View {
-    @State private var theme: AppTheme = UserSettings.shared.theme ?? .system {
-        didSet {
-            if UserSettings.shared.theme == theme {
-                return
-            }
-            
-            UserSettings.shared.theme = theme
-            UserSettings.shared.set(interfaceStyle: theme.style)
-        }
+    @ObservedObject var viewModel: SettingsViewModel
+    
+    init(viewModel: SettingsViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
         VStack(alignment: .center, spacing: 18) {
-            rowItem(icon: "icon_sun", title: AppTheme.system.name, isSelected: theme == .system) {
-                theme = .system
+            rowItem(icon: "icon_sun", title: AppTheme.light.name, isSelected: viewModel.theme == .light) {
+                viewModel.setSelectTheme(.light)
             }
             
-            rowItem(icon: "icon_moon", title: AppTheme.light.name, isSelected: theme == .light) {
-                theme = .light
+            rowItem(icon: "icon_moon", title: AppTheme.dark.name, isSelected: viewModel.theme == .dark) {
+                viewModel.setSelectTheme(.dark)
             }
             
-            rowItem(icon: "icon_theme_setting", title: AppTheme.dark.name, isSelected: theme == .dark) {
-                theme = .dark
+            rowItem(icon: "icon_theme_setting", title: AppTheme.system.name, isSelected: viewModel.theme == .system) {
+                viewModel.setSelectTheme(.system)
             }
         }
         .padding(.horizontal)
-        .onAppear {
-            theme = UserSettings.shared.theme ?? .system
-        }
     }
     
     var headerView: some View {
@@ -58,48 +50,21 @@ struct SettingsThemeView: View {
     }
     
     func rowItem(icon: String, title: String, isSelected: Bool, onClick: @escaping () -> Void) -> some View {
-       
-            VStack(alignment: .leading, spacing: 0) {
-               HStack (spacing: 10){
-                   Image.icon(icon)
-                       .frame(width: 24, height: 24)
-                   
-                    Text(title)
-                        .font(.system(size: 14, weight: .regular))
-                        .foregroundStyle(Color.label)
-                   
-                   
-                   Spacer()
-                   
-                   Circle()
-                       .frame(width: 30, height: 30)
-                       .foregroundStyle(isSelected ? Color.iPrimary : Color.background )
-                       .overlay {
-                           Image("icon_check")
-                               .renderingMode(.template)
-                               .foregroundStyle(.white)
-                    }
-                    .visibility(isSelected)
-                }
+        SelectableButtonContainer(action: onClick, content: {
+            HStack (spacing: 10){
+                Image.icon(icon)
+                    .frame(width: 24, height: 24)
+                
+                Text(title)
+                    .font(.bodySmallRegular)
+                    .foregroundStyle(Color.label)
             }
-
-        .padding(.horizontal, 10)
-        .onTapped(isSelected ? Color.iBackgroundSecondary : Color.background, action: onClick)
-        .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
-        .frame(height: 60)
-        .background(
-            ZStack {
-                if !isSelected {
-                    RoundedRectangle(cornerRadius: AppParams.Radius.default, style: .continuous)
-                        .stroke(Color.iBorderDisabled, lineWidth: 1)
-                }
-            }
-        )
-     }
+        }, isSelected: .init(get: {isSelected}, set: { val in debugPrint(val)}))
+    }
 }
 
 
 #Preview {
-    SettingsThemeView()
+    SettingsThemeView(viewModel: .init())
 }
 

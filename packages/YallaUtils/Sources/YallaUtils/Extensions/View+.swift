@@ -24,6 +24,15 @@ public extension View {
         }
         .buttonStyle(.plain)
     }
+    
+    @ViewBuilder
+    var applyGalssEffect: some View {
+        if #available(iOS 26.0, *) {
+            self.glassEffect()
+        } else {
+            self
+        }
+    }
 }
 
 
@@ -74,3 +83,25 @@ public extension View {
         self.frame(maxHeight: .infinity, alignment: alignment)
     }
 }
+
+public extension View {
+    @ViewBuilder
+    var circularButtonShape: some View {
+        if #available(iOS 17.0, *) {
+            self.buttonBorderShape(.circle)
+        } else {
+            self
+        }
+    }
+    
+    @ViewBuilder
+    var glassyButtonSyle: some View {
+        if #available(iOS 26.0, *) {
+            self
+                .buttonStyle(.glass)
+        } else {
+            self
+        }
+    }
+}
+

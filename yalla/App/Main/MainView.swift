@@ -98,8 +98,8 @@ struct MainView: View {
         // if iOS26 use icon_back
         if #available(iOS 26.0, *) {
             appearance.setBackIndicatorImage(
-                UIImage(named: "icon_back_smaller"),
-                transitionMaskImage: UIImage(named: "icon_back_smaller")
+                UIImage(named: "icon_back_smaller")?.withRenderingMode(.alwaysTemplate),
+                transitionMaskImage: UIImage(named: "icon_back_smaller")?.withRenderingMode(.alwaysTemplate)
             )
         } else {
             appearance.setBackIndicatorImage(

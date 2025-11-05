@@ -11,13 +11,13 @@ import YallaUtils
 import Core
 
 public struct SelectableButtonContainer<Content: View>: View {
-    let action: () -> Void
+    let action: (() -> Void)?
     let content: () -> Content
     
     @Binding
     var isSelected: Bool
     
-    public init(action: @escaping () -> Void, content: @escaping () -> Content, isSelected: Binding<Bool>) {
+    public init(action: (() -> Void)? = nil, content: @escaping () -> Content, isSelected: Binding<Bool>) {
         self.action = action
         self.content = content
         self._isSelected = isSelected
@@ -51,7 +51,11 @@ public struct SelectableButtonContainer<Content: View>: View {
                 .background(Color.iBackgroundSecondary.opacity(0.05))
         }
         .onClick {
-            isSelected.toggle()
+            if let action {
+                action()
+            } else {
+                isSelected.toggle()
+            }
         }
     }
 }
