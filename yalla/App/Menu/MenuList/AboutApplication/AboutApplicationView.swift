@@ -89,8 +89,13 @@ struct AboutApplicationView: View {
                         openPolicy()
                     })
 
-                Divider()
-                    .padding(.horizontal)
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundStyle(Color.iBackgroundSecondary)
+                    .overlay {
+                        Divider()
+                            .padding(.horizontal)
+                    }
 
                 rowItem(title: "user.agreement".localize)
                     .onTapped(Color.iBackgroundSecondary, action: {
@@ -115,8 +120,15 @@ struct AboutApplicationView: View {
                     .onTapped(Color.iBackgroundSecondary, action: {
                         openInstagram() 
                     })
-                Divider()
-                    .padding(.horizontal)
+
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundStyle(Color.iBackgroundSecondary)
+                    .overlay {
+                        Divider()
+                            .padding(.horizontal)
+                    }
+                
                 rowItem(icon: "image_telegramm", title: "Telegram")
                     .onTapped(Color.iBackgroundSecondary, action: {
                         openTelegram()

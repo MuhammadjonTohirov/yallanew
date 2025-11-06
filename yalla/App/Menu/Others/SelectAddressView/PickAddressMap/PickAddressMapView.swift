@@ -18,13 +18,6 @@ struct PickAddressMapView: View {
 
     var body: some View {
         ZStack {
-            //            backButton
-            //                .onClick {
-            //                    viewModel.onClickClose()
-            //                }
-            //                .position(.init(x: 50, y: 40))
-            //                .zIndex(3)
-            
             UniversalMapView(viewModel: viewModel.mapModel)
                 .opacity(!self.viewModel.isLoading ? 1 : 0)
             
@@ -36,6 +29,17 @@ struct PickAddressMapView: View {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.viewModel.focusToDesignatedLocation()
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Image("icon_back_smaller")
+                    .font(.system(size: 22))
+                    .foregroundStyle(Color.iLabel)
+                    .circularBackground(!isIOS26)
+                    .onClick {
+                        viewModel.onClickClose()
+                    }
             }
         }
     }

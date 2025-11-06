@@ -45,7 +45,7 @@ struct SelectAddressView: View {
                 }
                 value == .from ? self.viewModel.onSelectFromField() : self.viewModel.onSelectToField()
             })
-            .fullScreenCover(isPresented: $viewModel.showMap, content: {
+            .sheet(isPresented: $viewModel.showMap, content: {
                 PickAddressMapView(viewModel: self.viewModel.mapModel)
             })
             .onAppear {
@@ -101,16 +101,8 @@ struct SelectAddressView: View {
             }
         }
         .sheet(isPresented: $viewModel.showMap, content: {
-            NavigationView {
+            NavigationStack {
                 PickAddressMapView(viewModel: viewModel.mapModel)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
-                            Image.icon("icon_back_smaller")
-                                .onClick {
-                                    viewModel.showMap = false
-                                }
-                        }
-                    }
             }
         })
         .background {

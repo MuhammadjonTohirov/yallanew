@@ -21,7 +21,8 @@ struct SideMenuBody: View {
             
             VStack(spacing: 10) {
                 userInfo
-                    .padding(.top, -20.scaled)
+                    .padding(.top, (isIOS26 ? -20 : 0).scaled)
+                
                 sectionOne
                     .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
                 
