@@ -64,12 +64,12 @@ struct SideMenuBody: View {
                     .placeholder {
                         Circle()
                             .frame(width: 80.scaled, height: 80.scaled)
-                            .foregroundStyle(Color.iBackgroundTertiary)
+                            .foregroundStyle(Color.iBackgroundSecondary)
                             .overlay(content: {
                                 Image("icon_user")
-                                    .renderingMode(.template)
-                                    .foregroundStyle(.iLabel)
-                            })
+                                    .resizable()
+                                    .frame(width: 36, height: 36)
+                        })
                     }
                     .resizable()
                     .aspectRatio(contentMode: .fill)

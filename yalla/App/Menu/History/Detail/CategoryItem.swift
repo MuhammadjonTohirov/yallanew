@@ -7,31 +7,38 @@
 
 import SwiftUI
 import Core
+import YallaUtils
+
+enum CategoryKey: Equatable {
+    case all
+    case taxi
+    case cargo
+    case intercity
+}
 
 struct Category: Identifiable {
     let id = UUID()
     let icon: String
-    let title: String
+    let title: String 
+    let key: CategoryKey
 }
 
 // MARK: - Main View
 struct TripCategoryView: View {
-    @State private var selectedCategory: Category?
-    
+    @Binding var selected: CategoryKey
+    // All, Taxi, Cargo, Intercity (localization keys)
     private let categories: [Category] = [
-        Category(icon: "🕐", title: "Все"),
-        Category(icon: "🚕", title: "Такси"),
-        Category(icon: "🚚", title: "Грузовой"),
-        Category(icon: "📍", title: "Межгород")
+        Category(icon: "🕐", title: "category.all",       key: .all),
+        Category(icon: "🚕", title: "category.taxi",      key: .taxi),
+        Category(icon: "🚚", title: "category.cargo",     key: .cargo),
+        Category(icon: "📍", title: "category.intercity", key: .intercity)
     ]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             categoryScrollView
         }
-        .onAppear {
-            selectedCategory = categories.first
-        }
+        .onAppear { }
         .padding(.vertical)
     }
     
@@ -41,14 +48,14 @@ struct TripCategoryView: View {
                 ForEach(categories) { category in
                     CategoryButton(
                         category: category,
-                        isSelected: selectedCategory?.id == category.id
+                        isSelected: selected == category.key
                     ) {
-                        selectedCategory = category
+                        selected = category.key
                     }
                 }
             }
+            .padding(.horizontal,20)
         }
-        .padding(.horizontal)
     }
 }
 
@@ -64,7 +71,7 @@ struct CategoryButton: View {
                 Text(category.icon)
                     .font(.system(size: 20))
                 
-                Text(category.title)
+                Text(category.title.localize)
                     .font(.system(size: 17, weight: .medium))
             }
             .padding(.horizontal, 12)
@@ -82,9 +89,4 @@ struct CategoryButton: View {
     private var textColor: Color {
         isSelected ? .white : .primary
     }
-}
-
-// MARK: - Preview
-#Preview {
-    TripCategoryView()
 }

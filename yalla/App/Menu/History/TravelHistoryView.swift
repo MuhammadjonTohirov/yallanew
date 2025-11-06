@@ -16,15 +16,17 @@ struct TravelHistoryView: View {
     // MARK: - View State
     @State private var route: TravelHistoryRoute?
     @State private var showDetails: Bool = false
+    @State private var selectedCategory: CategoryKey = .all
 
     var body: some View {
+        
         PageableScrollView(title: "".localize, bottomThreshold: 200) {
             viewModel.loadNextPage()
-        } content: {
+        }
+        content: {
             LazyVStack(alignment: .leading, spacing: 0) {
-                
-                TripCategoryView()
-                
+                TripCategoryView(selected: $selectedCategory)
+
                 HistorySectionsListView(
                     sections: viewModel.sections,
                     onItemTap: { orderId in
@@ -34,9 +36,13 @@ struct TravelHistoryView: View {
                 
                 FooterLoadingView(isLoading: viewModel.isLoading || viewModel.hasNextPage)
             }
-            .padding(.horizontal, 20)
         }
         .opacity(viewModel.isLoading && viewModel.sections.isEmpty ? 0.6 : 1)
+        .onChange(of: selectedCategory) { newValue in
+            viewModel.setCategory(newValue)
+//TODO: update list belong to the category when api is ready to publish
+//            viewModel.refreshHistory()
+        }
         .navigationDestination(isPresented: $showDetails) {
             route?.screen
                 .onDisappear {
@@ -54,7 +60,6 @@ struct TravelHistoryView: View {
         route = .showDetails(orderId)
         showDetails = true
     }
-    
 }
 
 // MARK: - Loading Footer Component
@@ -95,6 +100,7 @@ struct HistorySectionsListView: View {
                         }
                 }
             }
+            .padding(.horizontal,20)
         }
     }
 }
