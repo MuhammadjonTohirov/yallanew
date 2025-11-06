@@ -27,26 +27,32 @@ enum CRUDPlaceStrings {
 }
 
 struct CreateUpdatePlaceView: View {
-    var addressItem: MyPlaceItem?
-    
     var pageTitle: String {
-        switch addressType {
+        if !vm.shouldCreate {
+            return "update.address".localize
+        }
+        
+        switch vm.addressType ?? .other {
         case .other:
-            "new.address".localize
+            return "new.address".localize
         case .home:
-            "home".localize
+            return "home".localize
         case .work:
-            "work".localize
+            return "work".localize
         }
     }
     
-    var addressType: MyAddressType = .other
-    
     private let errorMessage: CRUDPlaceStrings = .wantToDelete
     
-    @StateObject private var vm: CreateUpdatePlaceViewModel = .init()
+    @StateObject private var vm: CreateUpdatePlaceViewModel
     
     @Environment(\.dismiss) var dismiss
+    
+    init(
+        vm: CreateUpdatePlaceViewModel
+    ) {
+        self._vm = StateObject(wrappedValue: vm)
+    }
     
     var body: some View {
         VStack {
@@ -65,7 +71,6 @@ struct CreateUpdatePlaceView: View {
             .disabled(vm.isLoading)
             .padding(.bottom, AppParams.Padding.default)
         }
-//        .keyboardDismissable()
         .sheet(isPresented: $vm.showPickAddress, content: {
             SelectAddressView(viewModel: vm.addressPickerModel)
                 .presentationDragIndicator(.visible)
@@ -73,10 +78,7 @@ struct CreateUpdatePlaceView: View {
         .navigationTitle(pageTitle)
         .padding(.horizontal, AppParams.Padding.default)
         .onAppear {
-            vm.set(addressItem: addressItem)
-            vm.set(addressType: addressType)
             vm.onAppear()
-            vm.shouldCreate = self.addressItem == nil
         }
     }
         
@@ -144,5 +146,5 @@ struct CreateUpdatePlaceView: View {
 
 
 #Preview {
-    CreateUpdatePlaceView()
+    CreateUpdatePlaceView(vm: .init())
 }

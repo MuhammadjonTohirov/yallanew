@@ -12,6 +12,7 @@ public struct SubmitButton<Content: View>: View {
     var action: () -> Void
     var title: (() -> Content)?
     var backgroundColor: Color
+    var pressedColor: Color
     var height: CGFloat = 60
     
     private(set) var isLoading: Bool = false
@@ -20,6 +21,7 @@ public struct SubmitButton<Content: View>: View {
     
     public init(
         backgroundColor: Color? = nil,
+        pressedColor: Color? = nil,
         height: CGFloat = 60,
         label: (() -> Content)?,
         action: @escaping () -> Void
@@ -27,6 +29,7 @@ public struct SubmitButton<Content: View>: View {
         self.action = action
         self.title = label
         self.backgroundColor = backgroundColor ?? Color.init(uiColor: .label)
+        self.pressedColor = pressedColor ?? self.backgroundColor.opacity(0.7)
         self.height = height
     }
     
@@ -36,30 +39,30 @@ public struct SubmitButton<Content: View>: View {
                 (isLoading || !isEnabled) ? () : action()
             },
             label: {
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .foregroundStyle(backgroundColor)
+                Color.clear
             }
         )
+        .allowsHitTesting(!isLoading && isEnabled)
         .overlay {
             if let t = title?() {
                 t.allowsHitTesting(false)
+                    .opacity(isLoading ? 0 : 1)
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(CustomPressEffectButtonStyle.init(
+            normalColor: backgroundColor,
+            pressedColor: pressedColor
+        ))
         .overlay(content: {
             Rectangle()
                 .foregroundStyle(
-                    Color.white.opacity((isLoading || !isEnabled) ? 0.4 : 0)
+                    Color.white.opacity(!isEnabled ? 0.4 : 0)
                 )
                 .overlay {
-                    HStack {
-                        Spacer()
-                        
-                        ProgressView()
-                            .foregroundStyle(Color.white)
-                            .opacity(isLoading ? 1 : 0)
-                    }
-                    .padding(.horizontal, 16)
+                    ProgressView()
+                        .tint(.white)
+                        .opacity(isLoading ? 1 : 0)
+                        .scaleEffect(1.2)
                 }
         })
         .font(.system(size: 14, weight: .semibold))
@@ -79,5 +82,19 @@ public struct SubmitButton<Content: View>: View {
         var v = self
         v.isEnabled = isEnabled
         return v
+    }
+}
+
+struct CustomPressEffectButtonStyle: ButtonStyle {
+    var normalColor: Color
+    var pressedColor: Color
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(configuration.isPressed ? pressedColor : normalColor)
+            .foregroundStyle(.white)
+            .cornerRadius(10)
+            .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
     }
 }

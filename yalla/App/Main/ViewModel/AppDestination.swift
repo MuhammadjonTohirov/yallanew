@@ -53,7 +53,9 @@ enum AppDestination: Hashable, @MainActor ScreenRoute {
         case .auth:
             LoginView()
         case .test:
-            SelectAddressView.test
+            NavigationStack {
+                SettingsView()
+            }
         default:
             EmptyView()
         }

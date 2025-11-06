@@ -33,15 +33,21 @@ class CreateUpdatePlaceViewModel: BaseViewModel {
     private(set) var addressType: MyAddressType?
     private(set) var pickedLocation: CLLocation?
     
+    init(addressItem: MyPlaceItem? = nil, addressType: MyAddressType = .other) {
+        self.addressItem = addressItem
+        self.addressType = addressType
+        self.shouldCreate = addressItem == nil
+    }
+    
     override func onAppear() {
         super.onAppear()
         addressPickerModel.set(delegate: self)
         trackFormChanges()
         addressPickerModel.isToVisible = true
+        set(addressItem: addressItem)
     }
     
     func set(addressItem: MyPlaceItem?) {
-        self.addressItem = addressItem
         self.address = addressItem?.address ?? ""
         self.name = addressItem?.name ?? ""
         self.home = addressItem?.apartment ?? ""
@@ -51,10 +57,6 @@ class CreateUpdatePlaceViewModel: BaseViewModel {
         if let addressItem {
             self.pickedLocation = .init(latitude: addressItem.lat, longitude: addressItem.lng)
         }
-    }
-    
-    func set(addressType: MyAddressType) {
-        self.addressType = addressType
     }
     
     func onSubmit(completion: @escaping (Bool) -> Void) {

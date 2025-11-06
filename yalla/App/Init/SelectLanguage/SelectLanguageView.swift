@@ -120,13 +120,13 @@ struct SelectLanguageView: View {
                 }
             }))
             
-            LanguageRowView(language: LanguageUzCryl(), selected: .init(get: {
-                selectedLanguage == LanguageUzCryl().code
-            }, set: { selected in
-                if selected {
-                    selectLanguage(LanguageUzCryl())
-                }
-            }))
+//            LanguageRowView(language: LanguageUzCryl(), selected: .init(get: {
+//                selectedLanguage == LanguageUzCryl().code
+//            }, set: { selected in
+//                if selected {
+//                    selectLanguage(LanguageUzCryl())
+//                }
+//            }))
             
             LanguageRowView(language: LanguageRu(), selected: .init(get: {
                 selectedLanguage == LanguageRu().code
@@ -136,13 +136,13 @@ struct SelectLanguageView: View {
                 }
             }))
             
-            LanguageRowView(language: LanguageEn(), selected: .init(get: {
-                selectedLanguage == LanguageEn().code
-            }, set: { selected in
-                if selected {
-                    selectLanguage(LanguageEn())
-                }
-            }))
+//            LanguageRowView(language: LanguageEn(), selected: .init(get: {
+//                selectedLanguage == LanguageEn().code
+//            }, set: { selected in
+//                if selected {
+//                    selectLanguage(LanguageEn())
+//                }
+//            }))
         }
     }
     
