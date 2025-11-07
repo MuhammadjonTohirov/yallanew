@@ -34,6 +34,7 @@ enum AppDestination: Hashable, @MainActor ScreenRoute {
     case home
     case language
     case loading
+    case onboarding
     case pin
     case permissions
     case notificationRequest
@@ -52,6 +53,8 @@ enum AppDestination: Hashable, @MainActor ScreenRoute {
             PermissionsView()
         case .auth:
             LoginView()
+        case .onboarding:
+            OnboardingView()
         case .test:
             NavigationStack {
                 SettingsView()

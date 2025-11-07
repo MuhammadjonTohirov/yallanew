@@ -24,8 +24,9 @@ actor InitialLoadingViewModel: ObservableObject {
             _ = await NotificationPermissionManager.shared.checkStatus()
 
             let isLanguageSelected = UserSettings.shared.isLanguageSelected ?? false
-            let didShowPermissions = await OnboardingFlags.didShowPermissions
-            let hasAccessToken = UserSettings.shared.accessToken?.nilIfEmpty != nil
+            let didShowPermissions = await UserSettings.shared.didShowPermissions
+            let didShowOnboarding = await UserSettings.shared.didShowOnboarding
+//            let hasAccessToken = UserSettings.shared.accessToken?.nilIfEmpty != nil
             
             await MainActor.run {
                 if let isForTest = ProcessInfo.processInfo.environment["testUI"], isForTest.lowercased() == "yes" {
@@ -39,14 +40,21 @@ actor InitialLoadingViewModel: ObservableObject {
                     mainModel?.navigate(to: .language)
                     return
                 }
+                
                 if !didShowPermissions {
                     mainModel?.navigate(to: .permissions)
                     return
                 }
-                if !hasAccessToken {
-                    mainModel?.navigate(to: .auth)
+                
+                if !didShowOnboarding {
+                    mainModel?.navigate(to: .onboarding)
                     return
                 }
+//
+//                if !hasAccessToken {
+//                    mainModel?.navigate(to: .auth)
+//                    return
+//                }
                 mainModel?.navigate(to: .home)
             }
         }

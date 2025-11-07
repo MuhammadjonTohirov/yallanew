@@ -170,7 +170,8 @@ struct RegisterProfileView: View {
             displayedComponents: .date,
             label: { EmptyView() }
         )
-        .datePickerStyle(.graphical)
+        .labelsHidden()
+        .datePickerStyle(.wheel)
    }
 }
 

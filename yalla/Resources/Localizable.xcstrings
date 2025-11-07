@@ -1016,6 +1016,35 @@
         }
       }
     },
+    "continue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Davom etish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Давом этиш"
+          }
+        }
+      }
+    },
     "create.address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2205,6 +2234,238 @@
         }
       }
     },
+    "onboarding.page1.detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Order a ride – Yalla will find the nearest driver instantly in just a couple of seconds."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закажи поездку — за пару секунд Yalla найдёт ближайшего водителя моментально."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yo'l haqini to'lang — Yalla bir necha soniya ichida eng yaqin haydovchini darhol topadi."
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Йўл ҳақини тўланг — Ялла бир неча сония ичида энг яқин ҳайдовчини дарҳол топади. "
+          }
+        }
+      }
+    },
+    "onboarding.page1.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fast and convenient"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Быстро и удобно"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tez va qulay"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тез ва қулай"
+          }
+        }
+      }
+    },
+    "onboarding.page2.detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every driver at Yalla undergoes a background check and has a high rating."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Каждый водитель в Yalla проходит проверку и имеет высокий рейтинг."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Har bir Yalla haydovchisi tekshiriladi va yuqori baholanadi."
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳар бир Ялла ҳайдовчиси текширилади ва юқори баҳоланади. "
+          }
+        }
+      }
+    },
+    "onboarding.page2.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Driver reliability"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Надёжность водителей"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haydovchining ishonchliligi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳайдовчининг ишончлилиги"
+          }
+        }
+      }
+    },
+    "onboarding.page3.detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find out the cost before the trip begins – no hidden fees or surprises."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Узнай стоимость до начала поездки — без скрытых платежей и сюрпризов."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sayohatingizdan oldin narxni bilib oling — yashirin to'lovlar yoki kutilmagan hodisalar yo'q."
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Саёҳатингиздан олдин нархни билиб олинг — яширин тўловлар ёки кутилмаган ҳодисалар йўқ. "
+          }
+        }
+      }
+    },
+    "onboarding.page3.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transparent pricing"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прозрачная цена"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shaffof narxlar"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шаффоф нархлар"
+          }
+        }
+      }
+    },
+    "onboarding.page4.detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pay however you like – by card or cash.\nIt's all simple with Yalla."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Плати, как удобно — картой или наличными.\nВсё просто с Yalla."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yo'l haqingizni to'lang — karta yoki naqd pul orqali.\nYalla bilan bu oson."
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Йўл ҳақингизни тўланг — карта ёки нақд пул орқали. \nЯлла билан бу осон. "
+          }
+        }
+      }
+    },
+    "onboarding.page4.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convenient payment"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удобная оплата"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qulay to'lov"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қулай тўлов"
+          }
+        }
+      }
+    },
     "order.delete.confirm" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3129,6 +3390,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Созламалар"
+          }
+        }
+      }
+    },
+    "skip" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пропустить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O’tkazish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ўтказиш"
           }
         }
       }
