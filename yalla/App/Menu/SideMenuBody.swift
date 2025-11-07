@@ -56,6 +56,37 @@ struct SideMenuBody: View {
         })
     }
     
+    private var userInfo: some View {
+        ZStack {
+            VStack {
+                KFImage(viewModel.userInfo?.imageURL)
+                    .placeholder {
+                        Circle()
+                            .frame(width: 80.scaled, height: 80.scaled)
+                            .foregroundStyle(Color.iBackgroundSecondary)
+                            .overlay(content: {
+                                Image("icon_user")
+                                    .resizable()
+                                    .frame(width: 36, height: 36)
+                        })
+                    }
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 80.scaled, height: 80.scaled)
+                    .clipShape(Circle())
+                
+                VStack(alignment: .center, spacing: 2) {
+                    Text(viewModel.userInfo?.fullName ?? "Guest")
+                        .font(.titleLargeBold)
+                        .foregroundStyle(Color.iLabel)
+                    
+                    Text(viewModel.userInfo?.formattedPhone ?? "+998 (91) 123-45-67")
+                        .font(.bodySmallMedium)
+                        .foregroundStyle(Color.iLabel)
+                }
+            }
+        }
+    }
     private var customHeader: some View {
         HStack {
             Button {
@@ -78,38 +109,7 @@ struct SideMenuBody: View {
         }
         .padding(.horizontal, AppParams.Padding.default)
     }
-    
-    private var userInfo: some View {
-        VStack {
-            KFImage(viewModel.userInfo?.imageURL)
-                .placeholder {
-                    Circle()
-                        .frame(width: 80.scaled, height: 80.scaled)
-                        .foregroundStyle(Color.iBackgroundTertiary)
-                        .overlay(content: {
-                            Image("icon_user")
-                                .renderingMode(.template)
-                                .foregroundStyle(.iLabel)
-                        })
-                }
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 80.scaled, height: 80.scaled)
-                .clipShape(Circle())
-            
-            VStack(alignment: .center, spacing: 2) {
-                Text(viewModel.userInfo?.fullName ?? "Guest")
-                    .font(.titleLargeBold)
-                    .foregroundStyle(Color.iLabel)
-
-                Text(viewModel.userInfo?.formattedPhone ?? "+998 (91) 123-45-67")
-                    .font(.bodySmallMedium)
-                    .foregroundStyle(Color.iLabel)
-            }
-        }
-        .padding(.bottom, AppParams.Padding.large)
-    }
-    
+        
     private var sectionOne: some View {
         VStack(spacing: 0) {
             paymentTypeRow()

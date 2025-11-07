@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0534E2DF2EBB5A720018FDD2 /* MapPack in Frameworks */ = {isa = PBXBuildFile; productRef = 0534E2DE2EBB5A720018FDD2 /* MapPack */; };
 		05F735702EB0E3DC006FE02B /* SQBCardScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 05F7356F2EB0E3DC006FE02B /* SQBCardScanner */; };
 		521A84222EAF9F9300DF1244 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 521A84212EAF9F9300DF1244 /* SwiftMessages */; };
 		5267884F2E9E629D0004CB10 /* NetworkMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 5267884E2E9E629D0004CB10 /* NetworkMonitor */; };
@@ -19,7 +20,6 @@
 		5275198F2E98C93E002C726B /* IldamSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5275198E2E98C93E002C726B /* IldamSDK */; };
 		527519912E98C93E002C726B /* NetworkLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 527519902E98C93E002C726B /* NetworkLayer */; };
 		527519932E98C93E002C726B /* YallaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 527519922E98C93E002C726B /* YallaKit */; };
-		5295F4802EB889A700D0EF86 /* MapPack in Frameworks */ = {isa = PBXBuildFile; productRef = 5295F47F2EB889A700D0EF86 /* MapPack */; };
 		52EAE1C22EA20B8E005C9E1E /* YallaUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 52EAE1C12EA20B8E005C9E1E /* YallaUtils */; };
 /* End PBXBuildFile section */
 
@@ -85,7 +85,7 @@
 				526788542E9E66170004CB10 /* FirebaseCrashlytics in Frameworks */,
 				5275198F2E98C93E002C726B /* IldamSDK in Frameworks */,
 				521A84222EAF9F9300DF1244 /* SwiftMessages in Frameworks */,
-				5295F4802EB889A700D0EF86 /* MapPack in Frameworks */,
+				0534E2DF2EBB5A720018FDD2 /* MapPack in Frameworks */,
 				527519932E98C93E002C726B /* YallaKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,7 +237,7 @@
 				52EAE1C12EA20B8E005C9E1E /* YallaUtils */,
 				521A84212EAF9F9300DF1244 /* SwiftMessages */,
 				05F7356F2EB0E3DC006FE02B /* SQBCardScanner */,
-				5295F47F2EB889A700D0EF86 /* MapPack */,
+				0534E2DE2EBB5A720018FDD2 /* MapPack */,
 			);
 			productName = yalla;
 			productReference = 527519772E98C76E002C726B /* yalla.app */;
@@ -278,7 +278,7 @@
 				526788502E9E66170004CB10 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				526788572E9E66300004CB10 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				05F7356E2EB0E3DC006FE02B /* XCRemoteSwiftPackageReference "Card-scanner-SQB" */,
-				5295F47E2EB889A700D0EF86 /* XCRemoteSwiftPackageReference "IMap" */,
+				0534E2DD2EBB5A720018FDD2 /* XCRemoteSwiftPackageReference "imap" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 527519782E98C76E002C726B /* Products */;
@@ -598,6 +598,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0534E2DD2EBB5A720018FDD2 /* XCRemoteSwiftPackageReference "imap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MuhammadjonTohirov/imap";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		05F7356E2EB0E3DC006FE02B /* XCRemoteSwiftPackageReference "Card-scanner-SQB" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Khushnid/Card-scanner-SQB.git";
@@ -630,17 +638,14 @@
 				kind = branch;
 			};
 		};
-		5295F47E2EB889A700D0EF86 /* XCRemoteSwiftPackageReference "IMap" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MuhammadjonTohirov/IMap";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0534E2DE2EBB5A720018FDD2 /* MapPack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0534E2DD2EBB5A720018FDD2 /* XCRemoteSwiftPackageReference "imap" */;
+			productName = MapPack;
+		};
 		05F7356F2EB0E3DC006FE02B /* SQBCardScanner */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 05F7356E2EB0E3DC006FE02B /* XCRemoteSwiftPackageReference "Card-scanner-SQB" */;
@@ -698,11 +703,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5275198B2E98C93E002C726B /* XCRemoteSwiftPackageReference "yallakit" */;
 			productName = YallaKit;
-		};
-		5295F47F2EB889A700D0EF86 /* MapPack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5295F47E2EB889A700D0EF86 /* XCRemoteSwiftPackageReference "IMap" */;
-			productName = MapPack;
 		};
 		52EAE1C12EA20B8E005C9E1E /* YallaUtils */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -17,6 +17,7 @@ class TravelHistoryViewModel: ObservableObject {
     @Published private(set) var sections: [TravelHistorySection] = []
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var hasNextPage: Bool = false
+    @Published private(set) var selectedCategory: CategoryKey = .all
     
     // MARK: - Private Properties
     private var currentPage: Int = 1
@@ -33,6 +34,10 @@ class TravelHistoryViewModel: ObservableObject {
         currentPage = 1
         sections = []
         loadHistory()
+    }
+    
+    func setCategory(_ category: CategoryKey) {
+        selectedCategory = category
     }
     
     func loadNextPage() {
@@ -55,6 +60,7 @@ class TravelHistoryViewModel: ObservableObject {
         
         Task {
             Logging.l(tag: "TravelHistory", "page: \(currentPage) loadHistory")
+            // TODO: When backend supports it, pass the selectedCategory to the request
             let history = await MainNetworkService.shared.loadHistory(page: currentPage, limit: pageLimit)
             
             await MainActor.run {

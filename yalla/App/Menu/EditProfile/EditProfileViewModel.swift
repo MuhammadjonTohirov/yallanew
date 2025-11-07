@@ -23,6 +23,7 @@ enum EditProfileSheetRoute: String, Identifiable, Hashable, Equatable {
     case deleteAccount
     case logout
     case changePhoto
+    case deletePhoto
     case datePicker
     
     var title: String {
@@ -33,6 +34,9 @@ enum EditProfileSheetRoute: String, Identifiable, Hashable, Equatable {
             return "logout".localize
         case .changePhoto:
             return "change.photo".localize
+        case .deletePhoto:
+            return "delete.photo".localize
+            
         default:
             return ""
         }
@@ -55,6 +59,9 @@ actor EditProfileViewModel: ObservableObject {
     
     @MainActor
     @Published var birthDateValue: String?
+    
+    @MainActor
+    @Published var isSaveEnabled: Bool = false
 
     @MainActor
     @Published var selectedImage: UIImage? = nil
@@ -90,6 +97,7 @@ actor EditProfileViewModel: ObservableObject {
         
         await setupBirthDateChange()
         await setupData()
+        await setupSaveButtonObserver()
     }
     
     @MainActor
@@ -108,7 +116,7 @@ actor EditProfileViewModel: ObservableObject {
     
     @MainActor
     func isFormValid() -> Bool {
-        !firstName.isNilOrEmpty
+        !firstName.isNilOrEmpty && isSaveEnabled
     }
     
     @MainActor
@@ -193,11 +201,93 @@ actor EditProfileViewModel: ObservableObject {
         }
         .store(in: &cancellables)
     }
+    
+    private func setupSaveButtonObserver() {
+        Publishers.CombineLatest4($firstName, $lastName, $birthDateValue, $gender)
+            .sink { [weak self] first, last, bd, gender in
+                guard let self else { return }
+                Task { @MainActor in
+                    let original = self.userInfo
+                    let initialFirst = original?.givenNames ?? ""
+                    let initialLast = original?.surName ?? ""
+                    let initialBirth = original?.birthday ?? ""
+                    let initialGender = Gender(rawValue: original?.gender ?? "")
+
+                    let currentBirth = bd ?? ""
+                    let changed = (first != initialFirst) ||
+                                  (last != initialLast) ||
+                                  (currentBirth != initialBirth) ||
+                                  (gender != initialGender)
+                    self.isSaveEnabled = changed
+                }
+            }
+            .store(in: &cancellables)
+    }
 }
 
-// MARK: Actions
 
 extension EditProfileViewModel {
+    @MainActor
+    func changePhoto(_ image: UIImage) {
+        isLoading = true
+        selectedImage = image
+
+        Task.detached { [weak self] in
+            guard let self else { return }
+            do {
+                let ok = try await self.interactor?.updatePhoto(
+                    image: image,
+                    name: self.firstName,
+                    surName: self.lastName,
+                    gender: self.gender,
+                    birthDate: self.birthDateValue
+                ) ?? false
+                await MainActor.run {
+                    self.isLoading = false
+                }
+                if ok {
+                    let info = try await self.interactor?.userInfo()
+                    await MainActor.run {
+                        self.userInfo = info
+                    }
+                }
+            } catch {
+                await self.onUpdateFailure(error: error.serverMessage)
+                await MainActor.run { self.isLoading = false }
+            }
+        }
+    }
+
+    @MainActor
+    func deletePhoto() {
+        isLoading = true
+        selectedImage = nil
+
+        Task.detached { [weak self] in
+            guard let self else { return }
+            do {
+                let ok = try await self.interactor?.removePhoto(
+                    name: self.firstName,
+                    surName: self.lastName,
+                    gender: self.gender,
+                    birthDate: self.birthDateValue
+                ) ?? false
+                await MainActor.run {
+                    self.isLoading = false
+                }
+                if ok {
+                    let info = try await self.interactor?.userInfo()
+                    await MainActor.run {
+                        self.userInfo = info
+                    }
+                }
+            } catch {
+                await self.onUpdateFailure(error: error.serverMessage)
+                await MainActor.run { self.isLoading = false }
+            }
+        }
+    }
+
     @MainActor
     func onClickBirthday() {
         UIApplication.shared.dismissKeyboard()

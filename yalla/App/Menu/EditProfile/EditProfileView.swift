@@ -26,6 +26,9 @@ struct EditProfileView: View {
     @State
     private var showPhotoLibrary = false
     
+    @State
+    private var showDeletePhotoAlert = false
+    
     init(viewModel: EditProfileViewModel = .init(interactor: EditProfileInteractor())) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -57,6 +60,8 @@ struct EditProfileView: View {
                     }
             }
         })
+        .navigationTitle("edit.profile".localize)
+        
         .appSheet(
             isPresented: .init(
                 get: {
@@ -87,14 +92,14 @@ struct EditProfileView: View {
         )
         .sheet(isPresented: $showCamera) {
             CameraView(selectedImage: $viewModel.selectedImage) { image in
-                viewModel.selectedImage = image
                 viewModel.sheetRoute = nil
+                viewModel.changePhoto(image)
             }
         }
         .sheet(isPresented: $showPhotoLibrary) {
             PhotoLibraryView(selectedImage: $viewModel.selectedImage) { image in
-                viewModel.selectedImage = image
                 viewModel.sheetRoute = nil
+                viewModel.changePhoto(image)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -103,6 +108,12 @@ struct EditProfileView: View {
         }
         .onAppear {
             viewModel.setNavigator(navigator)
+        }
+        .alert("want.delete.photo".localize, isPresented: $showDeletePhotoAlert) {
+            Button("delete.photo".localize, role: .destructive) {
+                viewModel.deletePhoto()
+            }
+            Button("cancel".localize, role: .cancel) {}
         }
     }
     
@@ -257,7 +268,17 @@ struct EditProfileView: View {
                     viewModel.sheetRoute = nil
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         showPhotoLibrary = true
+                }
+                    
+            }
+            
+            rowItemView(image: Image.icon("icon_dark_trash"), text: "delete.photo".localize)
+                .onTapGesture {
+                    viewModel.sheetRoute = nil
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        showDeletePhotoAlert = true
                     }
+                    
                 }
         }
         .padding(.horizontal, 16.scaled)
