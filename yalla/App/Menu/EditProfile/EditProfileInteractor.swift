@@ -13,6 +13,9 @@ protocol EditProfileInteractorProtocol: Sendable {
     func userInfo() async throws -> UserInfo?
     func updateProfile(image: UIImage, name: String, surName: String?, gender: Gender?, birthDate: String?) async throws -> Bool
     func updateProfile(imageUrl: String, name: String, surName: String?, gender: Gender?, birthDate: String?) async throws -> Bool
+    // Image-only actions
+    func updatePhoto(image: UIImage, name: String, surName: String?, gender: Gender?, birthDate: String?) async throws -> Bool
+    func removePhoto(name: String, surName: String?, gender: Gender?, birthDate: String?) async throws -> Bool
 }
 
 struct EditProfileInteractor: EditProfileInteractorProtocol {
@@ -59,6 +62,48 @@ struct EditProfileInteractor: EditProfileInteractorProtocol {
         )
 
         return success
+    }
+
+    // MARK: - Image-only helpers
+    func updatePhoto(image: UIImage, name: String, surName: String? = nil, gender: Gender? = nil, birthDate: String? = nil) async throws -> Bool {
+        guard var imageData = image.jpegData(compressionQuality: 0.8) else {
+            throw NetworkError.custom(message: "img.conversion.error".localize, code: 0)
+        }
+
+        if imageData.count >= 4 * 1024 * 1024 {
+            if let compressedData = imageCompressor(maxFileSize: 4 * 1024 * 1024, image) {
+                imageData = compressedData
+            }
+        }
+
+        let result = await AuthService.shared.changeAvatar(profileAvatar: imageData)
+
+        if let imageUrl = result.result?.image {
+
+            return try await AuthService.shared.updateProfile(
+                request: ProfileUpdateRequest(
+                    givenNames: name,
+                    surname: surName,
+                    birthday: birthDate,
+                    gender: gender ?? Gender.none,
+                    image: imageUrl
+                )
+            )
+        }
+
+        return false
+    }
+
+    func removePhoto(name: String, surName: String? = nil, gender: Gender? = nil, birthDate: String? = nil) async throws -> Bool {
+        return try await AuthService.shared.updateProfile(
+            request: ProfileUpdateRequest(
+                givenNames: name,
+                surname: surName,
+                birthday: birthDate,
+                gender: gender ?? Gender.none,
+                image: "-"
+            )
+        )
     }
 }
 

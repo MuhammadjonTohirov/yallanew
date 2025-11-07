@@ -4230,7 +4230,7 @@
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ҳа,  ўчир"
+            "value" : "Ҳа, ўчир"
           }
         }
       }
@@ -4262,6 +4262,132 @@
             "value" : "Бундай промо код мавжуд эмас"
           }
         }
+      }
+    },
+    "delete.photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete photo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить фото"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rasmni o‘chirish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Расмни ўчириш"
+          }
+        }
+      }
+    },
+    "want.delete.photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete the photo?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы уверены, что хотите удалить фото?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haqiqatan ham rasmni o‘chirmoqchimisiz?"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳақиқатдан ҳам расмни ўчирмоқчимисиз?"
+          }
+        }
+      }
+    },
+    "edit.profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit profile"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактировать профиль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilni tahrirlash"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профилни таҳрирлаш"
+          }
+        }
+      }
+    },
+    "category.all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Все" } },
+        "uz" : { "stringUnit" : { "state" : "translated", "value" : "Barchasi" } },
+        "uz-Cyrl" : { "stringUnit" : { "state" : "translated", "value" : "Барчаси" } }
+      }
+    },
+
+    "category.taxi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Taxi" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Такси" } },
+        "uz" : { "stringUnit" : { "state" : "translated", "value" : "Taksi" } },
+        "uz-Cyrl" : { "stringUnit" : { "state" : "translated", "value" : "Такси" } }
+      }
+    },
+
+    "category.cargo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cargo" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Грузовой" } },
+        "uz" : { "stringUnit" : { "state" : "translated", "value" : "Yuk tashish" } },
+        "uz-Cyrl" : { "stringUnit" : { "state" : "translated", "value" : "Юк ташиш" } }
+      }
+    },
+
+    "category.intercity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Intercity" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Межгород" } },
+        "uz" : { "stringUnit" : { "state" : "translated", "value" : "Shaharlararo" } },
+        "uz-Cyrl" : { "stringUnit" : { "state" : "translated", "value" : "Шахарлараро" } }
       }
     }
   },

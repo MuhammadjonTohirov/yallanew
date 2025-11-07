@@ -142,7 +142,6 @@ struct HistoryDetailsView: View {
             }
             else {
                 emptyView
-                    
             }
         }
     }
