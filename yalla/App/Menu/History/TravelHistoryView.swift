@@ -40,14 +40,15 @@ struct TravelHistoryView: View {
         .opacity(viewModel.isLoading && viewModel.sections.isEmpty ? 0.6 : 1)
         .onChange(of: selectedCategory) { newValue in
             viewModel.setCategory(newValue)
+            
 //TODO: update list belong to the category when api is ready to publish
-//            viewModel.refreshHistory()
+            //viewModel.refreshHistory()
         }
         .navigationDestination(isPresented: $showDetails) {
             route?.screen
                 .onDisappear {
                     route = nil
-                }
+            }
         }
 //        .standardLoader(isLoading: viewModel.isLoading && viewModel.sections.isEmpty)
         
