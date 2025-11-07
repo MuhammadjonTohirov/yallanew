@@ -13,7 +13,7 @@ import Core
 import IldamSDK
 import MapPack
 
-class SelectAddressViewModel: BaseViewModel {
+class SelectAddressViewModel: ObservableObject {
     @Published var fromAddressText: String = ""
     @Published var toAddressText: String = ""
     
@@ -57,24 +57,30 @@ class SelectAddressViewModel: BaseViewModel {
         self.isToVisible = toLocation != nil
     }
     
-    override func onAppear() {
-        super.onAppear()
+    private var didAppear: Bool = false
+    
+    func onAppear() {
+        shouldDismiss = false
         mapModel.set(delegate: self)
+        
+        if didAppear {
+           return
+        }
+        
+        didAppear = true
         setupAddressText()
     }
     
     private func setupAddressText() {
-        self.fromAddress = self.input?.fromLocation
-        self.toAddress = self.input?.toLocation
-        
-        self.fromAddressText = self.fromAddress?.address ?? ""
-        self.toAddressText = self.toAddress?.address ?? ""
-        
-        self.setupObservers()
-    }
-    
-    private func setupObservers() {
         Task {
+            await MainActor.run {
+                self.fromAddress = self.input?.fromLocation
+                self.toAddress = self.input?.toLocation
+                
+                self.fromAddressText = self.fromAddress?.address ?? ""
+                self.toAddressText = self.toAddress?.address ?? ""
+            }
+            
             await self.setupWithSecondaryAddress()
         }
     }
@@ -257,7 +263,7 @@ class SelectAddressViewModel: BaseViewModel {
         isLoading = false
     }
     
-    override func onDisappear() {
+    func onDisappear() {
         if input?.toLocation == nil, let new = toAddress {
             self.delegate?.onSelect(model: self, toAddress: new.address, toCoordinate: new.coordinate)
         } else if let from = self.input?.toLocation {

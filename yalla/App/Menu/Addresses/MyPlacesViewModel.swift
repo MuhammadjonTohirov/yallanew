@@ -29,9 +29,18 @@ enum MyPlacesRouter: SceneDestination {
     var scene: some View {
         switch self {
         case .addPlace(let type):
-            CreateUpdatePlaceView(addressType: type)
+            CreateUpdatePlaceView(
+                vm: .init(
+                    addressType: type
+                )
+            )
         case .updatePlace(let item):
-            CreateUpdatePlaceView(addressItem: item)
+            CreateUpdatePlaceView(
+                vm: .init(
+                    addressItem: item,
+                    addressType: item.type ?? .other
+                )
+            )
         }
     }
 }

@@ -15,9 +15,7 @@ struct LanguageRowView: View {
     @Binding var selected: Bool
     
     var body: some View {
-        SelectableButtonContainer.init(action: {
-            
-        }, content: {
+        SelectableButtonContainer.init(content: {
             HStack {
                 image(for: language)?
                     .resizable()

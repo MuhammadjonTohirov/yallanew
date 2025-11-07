@@ -48,54 +48,31 @@ struct AboutApplicationView: View {
             ], center: startPoint, startRadius: 0, endRadius: 300)
             .ignoresSafeArea()
             
-            VStack {
-                headerView
-                
-                containView
-            }
+            headerView
+                .vertical(alignment: .top)
+            
+            containView
+                .vertical(alignment: .bottom)
         }
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
     }
     
     private var headerView: some View {
-        VStack(alignment: .center, spacing: 20) {
-            HStack {
-                SubmitButton(
-                    backgroundColor: Color.iBackgroundSecondary) {
-                        
-                    Image.icon("icon_backarrow", size: CGSize(width: 18, height: 18))
-                    }
-                
-                action: {
-                    dismiss()
-                }
-            }
-            .frame(width: 42, height: 42)
-            .cornerRadius(21, corners: .allCorners)
-            .horizontal(alignment: .leading)
-            .padding(.leading)
-            
+        VStack(alignment: .center, spacing: 40.scaled) {
             Image("splash_logo")
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 120, height: 80)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 160.scaled, height: 89.scaled)
             
-            
-            VStack(spacing: 4) {
-                
+            VStack(spacing: 4.scaled) {
                 Text("yalla".localize)
-                    .font(.system(size: 22, weight: .bold))
+                    .font(.titleLargeBold)
                     .foregroundColor(.white)
                 
                 Text(verbatim: "Version: 1.21")
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.bodySmallMedium)
                     .foregroundColor(.white.opacity(0.9))
             }
-            .vertical(alignment: .bottom)
-            
         }
-        .frame(height: 280)
-        .padding(.bottom,20)
     }
     
     private var footer: some View {
@@ -112,8 +89,13 @@ struct AboutApplicationView: View {
                         openPolicy()
                     })
 
-                Divider()
-                    .padding(.horizontal)
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundStyle(Color.iBackgroundSecondary)
+                    .overlay {
+                        Divider()
+                            .padding(.horizontal)
+                    }
 
                 rowItem(title: "user.agreement".localize)
                     .onTapped(Color.iBackgroundSecondary, action: {
@@ -138,8 +120,15 @@ struct AboutApplicationView: View {
                     .onTapped(Color.iBackgroundSecondary, action: {
                         openInstagram() 
                     })
-                Divider()
-                    .padding(.horizontal)
+
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundStyle(Color.iBackgroundSecondary)
+                    .overlay {
+                        Divider()
+                            .padding(.horizontal)
+                    }
+                
                 rowItem(icon: "image_telegramm", title: "Telegram")
                     .onTapped(Color.iBackgroundSecondary, action: {
                         openTelegram()
@@ -166,18 +155,17 @@ struct AboutApplicationView: View {
     }
     
     private var containView: some View {
-        Rectangle()
-            .transition(.push(from: .bottom).combined(with: .identity))
-            .foregroundStyle(Color.background)
-            .cornerRadius(40, corners: [.topLeft, .topRight])
-            .overlay(content: {
-                footer
-            })
-            .ignoresSafeArea()
+        footer
+            .padding(.top, 32.scaled)
+            .background {
+                RoundedRectangle(cornerRadius: AppParams.Radius.large.scaled)
+                    .ignoresSafeArea()
+                    .foregroundStyle(Color.background)
+            }
     }
     
     func rowItem(icon: String? = nil, title: String) -> some View {
-        HStack(spacing: 20) {
+        HStack(spacing: 6.scaled) {
             if let icon = icon {
                 Image(icon)
                     .renderingMode(.original)
@@ -187,7 +175,7 @@ struct AboutApplicationView: View {
             }
 
             Text(title)
-                .font(.system(size: 18, weight: .regular))
+                .font(.bodyLargeMedium)
                 .foregroundColor(.iLabel)
                 .lineLimit(1)
 

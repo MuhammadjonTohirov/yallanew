@@ -918,13 +918,13 @@
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Qo‘ng‘iroq qilish"
+            "value" : "Qo‘ng‘iroq"
           }
         },
         "uz-Cyrl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Қўнғироқ қилиш"
+            "value" : "Қўнғироқ"
           }
         }
       }

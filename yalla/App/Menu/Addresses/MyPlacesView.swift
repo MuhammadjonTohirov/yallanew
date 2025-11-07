@@ -30,18 +30,18 @@ struct MyPlacesView: View {
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 Circle()
-                    .frame(width: 42.scaled, height: 42.scaled)
+                    .frame(width: 36.scaled, height: 36.scaled)
                     .foregroundStyle(.iPrimary)
                     .overlay {
-                        Button {
-                            viewModel.onClickAddNewPlace(type: .other)
-                        } label: {
-                            Image(systemName: "plus")
-                                .foregroundStyle(.white)
-                        }
+                        Image(systemName: "plus")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundStyle(.white)
+                    }
+                    .onTapGesture {
+                        viewModel.onClickAddNewPlace(type: .other)
                     }
             }
-            .sharedBackgroundVisibility(visible: false)
+//            .sharedBackgroundVisibility(visible: false)
         })
         .appSheet(isPresented: .init(get: {
             viewModel.sheet != nil
@@ -242,9 +242,17 @@ struct MyPlacesView: View {
     }
 }
 
-#Preview {
-    NavigationView {
-        MyPlacesView()
-            .environmentObject(Navigator())
+private struct MyPlacesPreview: View {
+    @StateObject private var navigator: Navigator = .init()
+    
+    var body: some View {
+        NavigationStack(path: $navigator.path) {
+            MyPlacesView()
+                .environmentObject(navigator)
+        }
     }
+}
+
+#Preview {
+    MyPlacesPreview()
 }

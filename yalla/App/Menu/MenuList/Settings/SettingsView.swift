@@ -9,14 +9,11 @@ import SwiftUI
 import IldamSDK
 import YallaUtils
 import Core
+import Combine
 
 struct SettingsView: View {
-    @State private var showLang: Bool = false
-    @State private var showThem: Bool = false
-    @State private var showDeleteAccount: Bool = false
-    @State private var showAccountDeleted: Bool = false
-    @State private var themeName: String = ""
-    @State private var languageName: String = ""
+    @StateObject
+    var viewModel: SettingsViewModel = .init()
     
     var body: some View {
         ZStack {
@@ -24,48 +21,48 @@ struct SettingsView: View {
                 row(
                     icon: "icon_language-square",
                     title: "app.language".localize,
-                    detail: languageName
+                    detail: viewModel.selectedLanguage
                 )
-                .onTapped(.iBackgroundSecondary) {
-                    self.showLang = true
-                }
+                .onTapped(.iBackgroundSecondary, action: viewModel.onClickLanguage)
                 .frame(height: 64.scaled)
-                
-                Divider()
-                    .padding(.leading, 100.scaled)
-                
+
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundStyle(.iBackgroundSecondary)
+                    .overlay {
+                        Divider()
+                            .padding(.leading, 42.scaled)
+                    }
+
                 row(
                     icon: "icon_mask",
                     title: "app.theme".localize,
-                    detail: themeName
+                    detail: viewModel.theme.name
                 )
-                .onTapped(.iBackgroundSecondary) {
-                    self.showThem = true
-                }
+                .onTapped(.iBackgroundSecondary, action: viewModel.onClickTheme)
                 .frame(height: 64.scaled)
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: 16.scaled))
         .padding([.horizontal, .top], 20.scaled)
         .scrollable()
-        .onAppear {
-            themeName = UserSettings.shared.theme?.name ?? ""
-            languageName = Language.language(UserSettings.shared.language ?? "ru").name
-        }
         .appSheet(
-            isPresented: $showLang,
+            isPresented: $viewModel.showLanguage,
             title: "app.language".localize
         ) {
-            SettingsLanguageView()
+            SettingsLanguageView(viewModel: viewModel)
         }
         .appSheet(
-            isPresented: $showThem,
+            isPresented: $viewModel.showTheme,
             title: "app.theme".localize
         ) {
-            SettingsThemeView()
+            SettingsThemeView(viewModel: viewModel)
         }
         .navigationTitle("settings".localize)
         .navigationBarTitleDisplayMode(.large)
+        .onAppear {
+            viewModel.onAppear()
+        }
     }
     
     func row(icon: String, title: String, detail: String = "") -> some View {
@@ -78,12 +75,12 @@ struct SettingsView: View {
             // Text content
             VStack(alignment: .leading, spacing: 2) {
                 Text(title.localize)
-                    .font(.system(size: 16, weight: .regular))
+                    .font(.bodyLargeMedium)
                     .foregroundStyle(Color.primary)
                 
                 if !detail.isEmpty {
                     Text(detail)
-                        .font(.system(size: 13, weight: .regular))
+                        .font(.bodyCaptionMedium)
                         .foregroundStyle(Color.iLabel)
                 }
             }

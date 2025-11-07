@@ -18,9 +18,11 @@ struct SideMenuBody: View {
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
+            
             VStack(spacing: 10) {
                 userInfo
-
+                    .padding(.top, (isIOS26 ? -20 : 0).scaled)
+                
                 sectionOne
                     .clipShape(RoundedRectangle(cornerRadius: AppParams.Radius.default))
                 
@@ -33,7 +35,7 @@ struct SideMenuBody: View {
                 becomeDriverRow
                 
             }
-            .padding()
+            .padding([.horizontal, .bottom])
             .scrollable(axis: .vertical)
         }
         .onAppear {
@@ -42,11 +44,8 @@ struct SideMenuBody: View {
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    Task { @MainActor in
-                        viewModel.onClick(menu: .profile)
-                    }
-                }
-                label: {
+                    viewModel.onClick(menu: .profile)
+                } label: {
                     Image("icon_brush")
                         .renderingMode(.template)
                         .resizable()
@@ -80,16 +79,37 @@ struct SideMenuBody: View {
                     Text(viewModel.userInfo?.fullName ?? "Guest")
                         .font(.titleLargeBold)
                         .foregroundStyle(Color.iLabel)
-
+                    
                     Text(viewModel.userInfo?.formattedPhone ?? "+998 (91) 123-45-67")
                         .font(.bodySmallMedium)
                         .foregroundStyle(Color.iLabel)
                 }
             }
-            .padding(.bottom, AppParams.Padding.large)
         }
     }
-    
+    private var customHeader: some View {
+        HStack {
+            Button {
+                // action
+            } label: {
+                Image.icon("icon_back_smaller")
+                    .frame(width: 44, height: 44)
+            }
+            .applyGalssEffect
+
+            Spacer()
+            
+            Button {
+                // action
+            } label: {
+                Image.icon("icon_brush")
+                    .frame(width: 44, height: 44)
+            }
+            .applyGalssEffect
+        }
+        .padding(.horizontal, AppParams.Padding.default)
+    }
+        
     private var sectionOne: some View {
         VStack(spacing: 0) {
             paymentTypeRow()
@@ -326,5 +346,7 @@ struct SideMenuBody: View {
 }
 
 #Preview {
-    SideMenuBody(viewModel: .init())
+    NavigationStack {
+        SideMenuBody(viewModel: .init())
+    }
 }
