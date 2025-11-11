@@ -106,7 +106,16 @@ struct ButtonModifier: ViewModifier {
 
 extension View {
     func onTapped(_ background: Color = Color.background, tap: Color? = nil, action: @escaping () -> Void = {}) -> some View {
-        self.modifier(ButtonModifier.init(backgroundColor: background, action: action))
+//        self.modifier(ButtonModifier.init(backgroundColor: background, action: action))
+        Button.init {
+            action()
+        } label: {
+            self
+        }
+        .buttonStyle(HoveredButtonStyle(
+            normalColor: background
+        ))
+        .padding(0)
     }
     
     @ViewBuilder

@@ -16,6 +16,10 @@ struct SettingsView: View {
     var viewModel: SettingsViewModel = .init()
     
     var body: some View {
+        innerBody
+    }
+    
+    var innerBody: some View {
         ZStack {
             VStack(spacing: 0) {
                 row(

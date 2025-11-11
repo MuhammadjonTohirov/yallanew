@@ -11,19 +11,11 @@ import YallaUtils
 
 struct HomeServicesCard: View {
     struct Service: Identifiable, Equatable {
-        let id: UUID
+        var id: UUID = UUID()
         let title: String
         let backgroundImageName: String
+        let logoImageName: String
         
-        init(
-            id: UUID = UUID(),
-            title: String,
-            backgroundImageName: String
-        ) {
-            self.id = id
-            self.title = title
-            self.backgroundImageName = backgroundImageName
-        }
     }
     
     let services: [Service]
@@ -49,6 +41,7 @@ struct HomeServicesCard: View {
                 serviceButton(for: service)
             }
         }
+        .scrollable(axis: .horizontal)
     }
     
     private func serviceButton(for service: Service) -> some View {
@@ -82,9 +75,10 @@ struct HomeServicesCard: View {
 #Preview {
     HomeServicesCard(
         services: [
-            .init(title: "Межгород", backgroundImageName: "img_bg_intercity"),
-            .init(title: "Почта", backgroundImageName: "img_bg_post"),
-            .init(title: "Доставка", backgroundImageName: "img_bg_delivery")
+            .init(title: "Межгород", backgroundImageName: "img_bg_intercity", logoImageName: "img_pins_left"),
+            .init(title: "Почта", backgroundImageName: "img_bg_post", logoImageName: "img_mail_left"),
+            .init(title: "Доставка", backgroundImageName: "img_bg_delivery", logoImageName: "img_box_left"),
+            .init(title: "taxi".localize, backgroundImageName: "img_bg_taxi", logoImageName: "img_car_left"),
         ],
         onServiceSelected: { _ in }
     )

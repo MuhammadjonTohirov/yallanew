@@ -60,7 +60,7 @@ struct PaymentMethodsInteractor: PaymentMethodsInteractorProtocol {
     }
     
     func userInfo() async throws -> UserInfo? {
-        MeInfoProvider.shared.userInfo
+        await MeInfoProvider.shared.userInfo
     }
     
     func delete(card: String) async throws -> Bool {
@@ -93,7 +93,7 @@ struct PaymentMethodsMockInteractor: PaymentMethodsInteractorProtocol {
     }
     
     func userInfo() async throws -> UserInfo? {
-        MeInfoProvider.shared.userInfo
+        await MeInfoProvider.shared.userInfo
     }
     
     func delete(card: String) async throws -> Bool {

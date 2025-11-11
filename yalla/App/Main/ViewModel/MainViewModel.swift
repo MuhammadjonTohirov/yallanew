@@ -13,7 +13,8 @@ import Core
 import YallaUtils
 
 protocol MainViewRouter: ObservableObject {
-    func navigate(to destination: AppDestination)
+    @discardableResult
+    func navigate(to destination: AppDestination) -> Bool
     func showNetworkFailure() async
     func showServerFailure() async
 }
@@ -78,10 +79,17 @@ final class MainViewModel: MainViewRouter {
 }
 
 extension MainViewModel {
-    func navigate(to destination: AppDestination) {
+    @discardableResult
+    func navigate(to destination: AppDestination) -> Bool {
+        if destination == self.route {
+            return false
+        }
+        
         Task { @MainActor in
             self.route = destination
         }
+        
+        return true
     }
 }
 

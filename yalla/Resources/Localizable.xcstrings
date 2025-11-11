@@ -175,6 +175,35 @@
         }
       }
     },
+    "allow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разрешить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruxsat"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рухсат"
+          }
+        }
+      }
+    },
     "app.language" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -316,6 +345,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Диққат"
+          }
+        }
+      }
+    },
+    "auth" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authentication"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Авторизоваться"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tizimga kirish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тизимга кириш"
           }
         }
       }
@@ -784,6 +842,122 @@
         }
       }
     },
+    "category.all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barchasi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барчаси"
+          }
+        }
+      }
+    },
+    "category.cargo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грузовой"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yuk tashish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Юк ташиш"
+          }
+        }
+      }
+    },
+    "category.intercity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intercity"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Межгород"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shaharlararo"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шахарлараро"
+          }
+        }
+      }
+    },
+    "category.taxi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taxi"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Такси"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taksi"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Такси"
+          }
+        }
+      }
+    },
     "change.photo" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1219,6 +1393,35 @@
         }
       }
     },
+    "delete.photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete photo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить фото"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rasmni o‘chirish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Расмни ўчириш"
+          }
+        }
+      }
+    },
     "driver" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1273,6 +1476,122 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ўзгартириш"
+          }
+        }
+      }
+    },
+    "edit.profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit profile"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактировать профиль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilni tahrirlash"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профилни таҳрирлаш"
+          }
+        }
+      }
+    },
+    "enabel.location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable location"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Включите местоположение"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joylashuvni faollashtiring"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жойлашувни фаоллаштиринг"
+          }
+        }
+      }
+    },
+    "enable.gps" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable\nGPS"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Включить\nGPS"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPS-ni yoqish"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPS-ни ёқиш"
+          }
+        }
+      }
+    },
+    "enable.location.detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please provide your geolocation \nfor accurate service."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Предоставльте свою геолокацию \nдля точного вызова"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aniq xizmat ko'rsatish uchun iltimos, geolokatsiyangizni taqdim eting."
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аниқ хизмат кўрсатиш учун илтимос,  геолокациянгизни тақдим этинг. "
           }
         }
       }
@@ -1853,6 +2172,64 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Рақамингизга тасдиқлаш коди билан СМС юборилади. "
+          }
+        }
+      }
+    },
+    "login.req.descr" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It takes several minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Это займет всего пару минут"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu bir necha daqiqa oladi "
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu bir necha daqiqa oladi"
+          }
+        }
+      }
+    },
+    "login.req.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To continue you need to be signed in"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чтобы продолжить \nвам необходимо авторизоваться"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Davom etish uchun tizimga kirish kerak"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Davom etish uchun tizimga kirish kerak "
           }
         }
       }
@@ -3945,6 +4322,35 @@
         }
       }
     },
+    "want.delete.photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete the photo?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы уверены, что хотите удалить фото?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haqiqatan ham rasmni o‘chirmoqchimisiz?"
+          }
+        },
+        "uz-Cyrl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ҳақиқатдан ҳам расмни ўчирмоқчимисиз?"
+          }
+        }
+      }
+    },
     "want.logout" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4262,132 +4668,6 @@
             "value" : "Бундай промо код мавжуд эмас"
           }
         }
-      }
-    },
-    "delete.photo" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete photo"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Удалить фото"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rasmni o‘chirish"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Расмни ўчириш"
-          }
-        }
-      }
-    },
-    "want.delete.photo" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Are you sure you want to delete the photo?"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Вы уверены, что хотите удалить фото?"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haqiqatan ham rasmni o‘chirmoqchimisiz?"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ҳақиқатдан ҳам расмни ўчирмоқчимисиз?"
-          }
-        }
-      }
-    },
-    "edit.profile" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit profile"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Редактировать профиль"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profilni tahrirlash"
-          }
-        },
-        "uz-Cyrl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Профилни таҳрирлаш"
-          }
-        }
-      }
-    },
-    "category.all" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Все" } },
-        "uz" : { "stringUnit" : { "state" : "translated", "value" : "Barchasi" } },
-        "uz-Cyrl" : { "stringUnit" : { "state" : "translated", "value" : "Барчаси" } }
-      }
-    },
-
-    "category.taxi" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Taxi" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Такси" } },
-        "uz" : { "stringUnit" : { "state" : "translated", "value" : "Taksi" } },
-        "uz-Cyrl" : { "stringUnit" : { "state" : "translated", "value" : "Такси" } }
-      }
-    },
-
-    "category.cargo" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cargo" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Грузовой" } },
-        "uz" : { "stringUnit" : { "state" : "translated", "value" : "Yuk tashish" } },
-        "uz-Cyrl" : { "stringUnit" : { "state" : "translated", "value" : "Юк ташиш" } }
-      }
-    },
-
-    "category.intercity" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Intercity" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Межгород" } },
-        "uz" : { "stringUnit" : { "state" : "translated", "value" : "Shaharlararo" } },
-        "uz-Cyrl" : { "stringUnit" : { "state" : "translated", "value" : "Шахарлараро" } }
       }
     }
   },

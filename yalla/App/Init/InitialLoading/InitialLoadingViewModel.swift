@@ -29,6 +29,10 @@ actor InitialLoadingViewModel: ObservableObject {
 //            let hasAccessToken = UserSettings.shared.accessToken?.nilIfEmpty != nil
             
             await MainActor.run {
+                if UserSettings.shared.isMockEnabled {
+                    MeInfoProvider.setupForMock()
+                }
+                
                 if let isForTest = ProcessInfo.processInfo.environment["testUI"], isForTest.lowercased() == "yes" {
                     print("isForTest value: \(isForTest)")
                     mainModel?.navigate(to: .test)
@@ -41,16 +45,16 @@ actor InitialLoadingViewModel: ObservableObject {
                     return
                 }
                 
+                if !didShowOnboarding {
+                    mainModel?.navigate(to: .onboarding)
+                    return
+                }
+                
                 if !didShowPermissions {
                     mainModel?.navigate(to: .permissions)
                     return
                 }
                 
-                if !didShowOnboarding {
-                    mainModel?.navigate(to: .onboarding)
-                    return
-                }
-//
 //                if !hasAccessToken {
 //                    mainModel?.navigate(to: .auth)
 //                    return

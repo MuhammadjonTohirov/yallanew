@@ -39,3 +39,9 @@ extension UserSettings {
         }
     }
 }
+
+extension UserSettings {
+    var isMockEnabled: Bool {
+        ProcessInfo.processInfo.environment["isMock"] == "yes"
+    }
+}

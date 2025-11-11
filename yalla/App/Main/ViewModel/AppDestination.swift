@@ -57,7 +57,7 @@ enum AppDestination: Hashable, @MainActor ScreenRoute {
             OnboardingView()
         case .test:
             NavigationStack {
-                SettingsView()
+                HomeMapView()
             }
         default:
             EmptyView()
