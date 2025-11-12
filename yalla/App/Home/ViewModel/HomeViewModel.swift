@@ -13,6 +13,7 @@ import MapPack
 
 actor HomeViewModel: ObservableObject {
     var navigator: Navigator?
+    
     @MainActor
     @Published
     private(set) var map: HomeMapViewModel?
@@ -22,6 +23,8 @@ actor HomeViewModel: ObservableObject {
     private(set) var sheetModel: HomeIdleSheetViewModel?
     
     private(set) var interactor: any HomeInteractorProtocol
+    
+    private var didAppear: Bool = false
     
     init(interactor: any HomeInteractorProtocol = HomeInteractorFactory.create()) {
         self.interactor = interactor
@@ -35,10 +38,13 @@ actor HomeViewModel: ObservableObject {
     }
     
     func onAppear() {
+        if didAppear { return }; didAppear = true
         
         Task { @MainActor in
+            await HomePropertiesHolder.shared.setup()
             self.sheetModel = .init()
             self.map = .init()
+            self.map?.setDelegate(self)
         }
         
         self.syncPrerequisitesIfNeeded()

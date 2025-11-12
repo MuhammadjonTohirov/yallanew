@@ -22,6 +22,7 @@ struct HomeView: View {
             ZStack {
                 if let map = viewModel.map {
                     HomeMapView(viewModel: map)
+                        .environmentObject(viewModel)
                 }
                 
                 innerBody

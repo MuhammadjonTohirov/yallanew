@@ -9,6 +9,7 @@ import Foundation
 import MapPack
 import Combine
 import YallaUtils
+import SwiftUI
 internal import _LocationEssentials
 
 final class HomeMapViewModel: ObservableObject {
@@ -18,24 +19,49 @@ final class HomeMapViewModel: ObservableObject {
     @MainActor
     @Published var geoPermission: LocationAuthorizationStatus?
     
+    @Published
+    @MainActor
+    private(set) var bottomEdge: CGFloat = 0
+    
+    weak private(set)
+    var delegate: HomeMapViewModelDelegate?
+    
+    private var didAppear: Bool = false
+    
     init() {
         
+    }
+    
+    func onAppear() {
+        if didAppear { return }; didAppear = true
+        
+        // DO something on appear
+        setup()
+        focusToCurrentLocation() // needs to be removed later
     }
     
     func setup() {
         map.set(hasAddressPicker: true)
         map.set(hasAddressView: true)
+        map.setInteractionDelegate(self)
         map.showUserLocation(true)
         
         locationPermissionSetup()
     }
-    
-    func setBottomEdge(_ height: CGFloat) {
-        self.map.setEdgeInsets(.init(top: 0, left: 0, bottom: height, right: 0, animated: true, onEnd: nil))
-    }
 }
 
 extension HomeMapViewModel {
+    // MARK: Set Actions
+    @MainActor
+    func setBottomEdge(_ height: CGFloat) {
+        self.bottomEdge = height
+        self.map.setEdgeInsets(.init(top: 0, left: 0, bottom: height, right: 0, animated: true, onEnd: nil))
+    }
+    
+    func setDelegate(_ delegate: HomeMapViewModelDelegate) {
+        self.delegate = delegate
+    }
+    
     // MARK: Actions
     
     // focus to current location

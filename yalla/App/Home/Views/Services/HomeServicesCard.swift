@@ -41,6 +41,7 @@ struct HomeServicesCard: View {
                 serviceButton(for: service)
             }
         }
+        .padding(.horizontal, 20)
         .scrollable(axis: .horizontal)
     }
     

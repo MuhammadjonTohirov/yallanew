@@ -71,10 +71,6 @@ struct HomeIdleSheetHeader: View {
         .onAppear {
             offset = 0
             opacity = 1
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.input = HomeIdleHeaderCustomInput(image: "img_mail_left", title: "mail".localize)
-            }
         }
     }
 }

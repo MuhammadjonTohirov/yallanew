@@ -15,6 +15,12 @@ struct HomeMapView: View {
     @StateObject
     private var viewModel: HomeMapViewModel = .init()
     
+    @StateObject
+    private var valueHolder: HomePropertiesHolder = .shared
+    
+    @EnvironmentObject
+    private var homeModel: HomeViewModel
+    
     @Environment(\.colorScheme)
     private var colorScheme: ColorScheme
     
@@ -25,36 +31,41 @@ struct HomeMapView: View {
     var body: some View {
         ZStack {
             map
-            sheetHeader
+            actionsView
+                .position(
+                    x: UIApplication.shared.screenFrame.width / 2,
+                    y: UIApplication.shared.screenFrame.height - viewModel.bottomEdge - UIApplication.shared.safeArea.top - UIApplication.shared.safeArea.bottom - 60)
         }
         .onChange(of: viewModel.geoPermission) { newValue in
             guard let newValue else { return }
             debugPrint(newValue.isAuthorized )
         }
+        .onChange(of: valueHolder.bottomSheetHeight, perform: { newValue in
+            viewModel.setBottomEdge(newValue)
+        })
         .onAppear {
-            viewModel.setup()
             Task {
                 try await Task.sleep(for: .milliseconds(400))
                 
-                viewModel.focusToCurrentLocation()
+                viewModel.onAppear()
             }
         }
         .onAppear {
             YallaAlertManager.shared.colorScheme = colorScheme == .dark ? .dark : .light
-            
-            
         }
         .onChange(of: colorScheme) { newValue in
             YallaAlertManager.shared.colorScheme = newValue == .dark ? .dark : .light
         }
     }
     
-    private var sheetHeader: some View {
+    private var actionsView: some View {
         HStack {
             Spacer()
             focusButton
                 .padding(AppParams.Padding.default.scaled)
         }
+        .opacity(!valueHolder.isBottomSheetMinimized ? 1 : 0)
+        .animation(.spring(duration: 0.2), value: valueHolder.isBottomSheetMinimized)
     }
     
     private var focusButton: some View {
@@ -74,4 +85,5 @@ struct HomeMapView: View {
 
 #Preview {
     HomeMapView()
+        .environmentObject(HomeViewModel())
 }
