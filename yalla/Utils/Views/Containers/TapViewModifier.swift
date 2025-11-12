@@ -115,7 +115,6 @@ extension View {
         .buttonStyle(HoveredButtonStyle(
             normalColor: background
         ))
-        .padding(0)
     }
     
     @ViewBuilder

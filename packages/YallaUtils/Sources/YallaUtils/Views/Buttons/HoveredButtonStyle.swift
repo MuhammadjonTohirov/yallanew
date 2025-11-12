@@ -23,7 +23,6 @@ public struct HoveredButtonStyle: ButtonStyle {
                     .background(normalColor)
                     .foregroundStyle(configuration.isPressed ? alternateColor(normalColor) : normalColor)
             )
-            .foregroundStyle(.white)
             .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
     }
     

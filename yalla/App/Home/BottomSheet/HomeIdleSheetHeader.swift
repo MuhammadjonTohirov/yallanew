@@ -53,8 +53,6 @@ struct HomeIdleSheetHeader: View {
                     .frame(width: 42.scaled, height: 30.scaled)
                     .offset(x: offset)
                     .opacity(opacity)
-                    .animation(.spring, value: offset)
-                    .animation(.spring, value: opacity)
                     .mask {
                         Capsule()
                             .frame(width: 42.scaled, height: 30.scaled)
@@ -67,10 +65,13 @@ struct HomeIdleSheetHeader: View {
             
             Spacer()
         }
-        .id(input.image)
         .onAppear {
-            offset = 0
-            opacity = 1
+            if opacity < 1 {
+                withAnimation(.spring(duration: 0.3)) {
+                    self.offset = 0
+                    self.opacity = 1
+                }
+            }
         }
     }
 }

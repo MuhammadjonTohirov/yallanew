@@ -11,7 +11,7 @@ import YallaUtils
 import Core
 import MapPack
 
-actor HomeViewModel: ObservableObject {
+final class HomeViewModel: ObservableObject {
     var navigator: Navigator?
     
     @MainActor
@@ -19,8 +19,11 @@ actor HomeViewModel: ObservableObject {
     private(set) var map: HomeMapViewModel?
     
     @Published
-    @MainActor
+    var showAddressPicker: Bool = false
+    
     private(set) var sheetModel: HomeIdleSheetViewModel?
+    
+    var selectAddressViewModel: SelectAddressViewModel?
     
     private(set) var interactor: any HomeInteractorProtocol
     
@@ -39,9 +42,9 @@ actor HomeViewModel: ObservableObject {
     
     func onAppear() {
         if didAppear { return }; didAppear = true
-        
+        Logging.l(tag: "HomeViewModel", "onAppear")
         Task { @MainActor in
-            await HomePropertiesHolder.shared.setup()
+            HomePropertiesHolder.shared.setup()
             self.sheetModel = .init()
             self.map = .init()
             self.map?.setDelegate(self)
@@ -56,7 +59,7 @@ extension HomeViewModel {
     
     func showMenu() async {
         guard await interactor.hasUser() else {
-            await showLoginRequiredAlert()
+            showLoginRequiredAlert()
             return
         }
         
@@ -67,15 +70,6 @@ extension HomeViewModel {
             menuViewModel.setNavigator(navigator)
             navigator.push(HomeRoute.menu(model: menuViewModel))
         }
-    }
-    
-    func onClickFromLocation() async {
-        guard await interactor.hasUser() else {
-            await showLoginRequiredAlert()
-            return
-        }
-        
-        // TODO: - handle on click from location
     }
     
     @MainActor

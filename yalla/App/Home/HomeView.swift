@@ -40,12 +40,15 @@ struct HomeView: View {
                     .environmentObject(navigator)
             }
             .appSheet(isPresented: $viewModel.loginRequiredAlert) { authRequiredSheet }
+            .sheet(isPresented: $viewModel.showAddressPicker) {
+                if let vm = viewModel.selectAddressViewModel {
+                    SelectAddressView(viewModel: vm)
+                }
+            }
         }
         .onAppear {
-            Task { @MainActor in
-                await viewModel.onAppear()
-                await viewModel.setNavigator(navigator)
-            }
+            viewModel.onAppear()
+            viewModel.setNavigator(navigator)
         }
     }
     
@@ -61,10 +64,6 @@ struct HomeView: View {
             Spacer()
         }
     }
-}
-
-extension HomeView {
-    
 }
 
 #Preview {

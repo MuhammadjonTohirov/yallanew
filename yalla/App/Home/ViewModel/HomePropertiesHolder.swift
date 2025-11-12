@@ -7,56 +7,55 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
-actor HomePropertiesHolder: ObservableObject, Sendable {
-    static let shared: HomePropertiesHolder = .init()
-    
-    @Published
-    @MainActor
-    var bottomSheetHeight: CGFloat = .zero
-    
-    @Published
-    @MainActor
-    var isBottomSheetMinimized: Bool = false
-    
-    @Published
-    @MainActor
-    private var rawIsBottomSheetMinimized: Bool = false
-    
-    var cancellables: Set<AnyCancellable> = []
-    
+@MainActor
+final class HomePropertiesHolder: ObservableObject {
+    static let shared = HomePropertiesHolder()
+
+    // MARK: - Public published states (only these re-render)
+    @Published var bottomSheetHeight: CGFloat = .zero
+    @Published var isBottomSheetMinimized: Bool = false
+
+    // MARK: - Private
+    private let rawIsBottomSheetMinimizedSubject = PassthroughSubject<Bool, Never>()
+    private var cancellables: Set<AnyCancellable> = []
+
+    // MARK: - Setup
     func setup() {
         setupIsBottomSheetMinimizedObserver()
     }
-    
+
     private func setupIsBottomSheetMinimizedObserver() {
-        $rawIsBottomSheetMinimized
+        rawIsBottomSheetMinimizedSubject
+            .removeDuplicates()
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .sink { [weak self] value in
-                guard let self else { return }
-                Task { @MainActor in
-                    self.setBottomSheetMinimized(value)
-                }
+                self?.setBottomSheetMinimized(value)
             }
             .store(in: &cancellables)
     }
-    
-    @MainActor
+
+    // MARK: - Internal helpers
     private func setBottomSheetMinimized(_ isMinimized: Bool) {
-        self.isBottomSheetMinimized = isMinimized
+        guard isBottomSheetMinimized != isMinimized else { return }
+
+        withAnimation(.spring(duration: 0.3)) {
+            self.isBottomSheetMinimized = isMinimized
+        }
     }
-    
-    @MainActor
+
+    // MARK: - Public interface (keep original naming)
     func set(isBottomSheetMinimized: Bool) {
         if isBottomSheetMinimized {
+            // immediate collapse (like before)
             self.setBottomSheetMinimized(true)
         }
-        self.rawIsBottomSheetMinimized = isBottomSheetMinimized
+        // send through subject instead of @Published
+        self.rawIsBottomSheetMinimizedSubject.send(isBottomSheetMinimized)
     }
-    
-    @MainActor
+
     func setBottomSheetHeight(_ height: CGFloat) {
         self.bottomSheetHeight = height
     }
 }
-

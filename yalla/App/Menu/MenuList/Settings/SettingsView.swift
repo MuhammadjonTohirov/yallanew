@@ -27,8 +27,8 @@ struct SettingsView: View {
                     title: "app.language".localize,
                     detail: viewModel.selectedLanguage
                 )
-                .onTapped(.iBackgroundSecondary, action: viewModel.onClickLanguage)
                 .frame(height: 64.scaled)
+                .onTapped(.iBackgroundSecondary, action: viewModel.onClickLanguage)
 
                 Rectangle()
                     .frame(height: 1)
@@ -43,8 +43,8 @@ struct SettingsView: View {
                     title: "app.theme".localize,
                     detail: viewModel.theme.name
                 )
-                .onTapped(.iBackgroundSecondary, action: viewModel.onClickTheme)
                 .frame(height: 64.scaled)
+                .onTapped(.iBackgroundSecondary, action: viewModel.onClickTheme)
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: 16.scaled))

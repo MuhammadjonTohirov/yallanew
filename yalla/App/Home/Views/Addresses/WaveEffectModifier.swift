@@ -44,6 +44,7 @@ struct WaveEffectModifier: ViewModifier {
             .readRect(rect: $objectSize)
             .background {
                 circularwaveBackground()
+                    .allowsHitTesting(false)
             }
     }
     

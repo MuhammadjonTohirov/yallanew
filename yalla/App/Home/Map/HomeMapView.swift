@@ -43,18 +43,17 @@ struct HomeMapView: View {
         .onChange(of: valueHolder.bottomSheetHeight, perform: { newValue in
             viewModel.setBottomEdge(newValue)
         })
+        .onChange(of: colorScheme) { newValue in
+            YallaAlertManager.shared.colorScheme = newValue == .dark ? .dark : .light
+        }
         .onAppear {
+            YallaAlertManager.shared.colorScheme = colorScheme == .dark ? .dark : .light
+            
             Task {
                 try await Task.sleep(for: .milliseconds(400))
                 
                 viewModel.onAppear()
             }
-        }
-        .onAppear {
-            YallaAlertManager.shared.colorScheme = colorScheme == .dark ? .dark : .light
-        }
-        .onChange(of: colorScheme) { newValue in
-            YallaAlertManager.shared.colorScheme = newValue == .dark ? .dark : .light
         }
     }
     

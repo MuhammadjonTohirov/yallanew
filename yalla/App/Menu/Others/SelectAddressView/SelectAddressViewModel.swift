@@ -37,13 +37,14 @@ class SelectAddressViewModel: ObservableObject {
     
     private(set) weak var delegate: SelectAddressDelegate?
     private(set) var mapModel = PickAddressViewModel()
-    
+    private(set) var interactor: any SelectAddressInteractorProtocol
     private var cancellabels = Set<AnyCancellable>()
     
     init(
         fromLocation: SelectAddressItem? = nil,
         toLocation: SelectAddressItem? = nil,
-        focusedField: SelectAddressField = .to
+        focusedField: SelectAddressField = .to,
+        interactor: any SelectAddressInteractorProtocol = SelectAddressInteractorFactory.create()
     ) {
         self.input = .init(
             fromLocation: fromLocation,
@@ -55,6 +56,7 @@ class SelectAddressViewModel: ObservableObject {
         
         self.isFromVisible = fromLocation != nil
         self.isToVisible = toLocation != nil
+        self.interactor = interactor
     }
     
     private var didAppear: Bool = false
@@ -152,18 +154,10 @@ class SelectAddressViewModel: ObservableObject {
     }
     
     private func setupWithSearchAddress(query: String) async {
-        let _addresses = await MainNetworkService.shared.loadAddress(text: query)
+        let _addresses = try? await interactor.searchAddresses(query: query)
         
         Task { @MainActor in
-            set(addressList: _addresses?.compactMap {
-                SelectAddressItem(
-                    id: $0.addressId ?? -1,
-                    name: $0.addressName,
-                    address: $0.name ?? "",
-                    coordinate: .init(latitude: $0.lat, longitude: $0.lng),
-                    distance: $0.distance
-                )
-            })
+            set(addressList: _addresses)
         }
     }
     
@@ -180,7 +174,7 @@ class SelectAddressViewModel: ObservableObject {
             return
         }
         
-        guard let _addresses = try? await FetchSecondaryAddressUseCaseImpl().fetch(
+        guard let _addresses = try? await interactor.fetchSecondaryAddresses(
             lat: location.coordinate.latitude,
             lng: location.coordinate.longitude
         ) else {
@@ -188,15 +182,7 @@ class SelectAddressViewModel: ObservableObject {
         }
         
         Task { @MainActor in
-            set(addressList: _addresses.map {
-                SelectAddressItem(
-                    id: $0.uniqueId,
-                    name: $0.addressName,
-                    address: $0.name ?? "",
-                    coordinate: .init(latitude: $0.lat, longitude: $0.lng),
-                    distance: $0.distance
-                )
-            })
+            set(addressList: _addresses)
         }
     }
     

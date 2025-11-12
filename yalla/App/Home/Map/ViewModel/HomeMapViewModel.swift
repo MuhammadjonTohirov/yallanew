@@ -10,6 +10,8 @@ import MapPack
 import Combine
 import YallaUtils
 import SwiftUI
+import IldamSDK
+import Core
 internal import _LocationEssentials
 
 final class HomeMapViewModel: ObservableObject {
@@ -23,16 +25,22 @@ final class HomeMapViewModel: ObservableObject {
     @MainActor
     private(set) var bottomEdge: CGFloat = 0
     
+    var pickedLocation: AddressResponse?
+
     weak private(set)
     var delegate: HomeMapViewModelDelegate?
     
+    var interactor: any HomeMapInteractorProtocol
+    
     private var didAppear: Bool = false
     
-    init() {
-        
+    init(interactor: any HomeMapInteractorProtocol = HomeMapInteractorFactory.create()) {
+        self.interactor = interactor
     }
     
     func onAppear() {
+        map.setInteractionDelegate(self)
+        
         if didAppear { return }; didAppear = true
         
         // DO something on appear
@@ -43,7 +51,6 @@ final class HomeMapViewModel: ObservableObject {
     func setup() {
         map.set(hasAddressPicker: true)
         map.set(hasAddressView: true)
-        map.setInteractionDelegate(self)
         map.showUserLocation(true)
         
         locationPermissionSetup()
@@ -55,7 +62,8 @@ extension HomeMapViewModel {
     @MainActor
     func setBottomEdge(_ height: CGFloat) {
         self.bottomEdge = height
-        self.map.setEdgeInsets(.init(top: 0, left: 0, bottom: height, right: 0, animated: true, onEnd: nil))
+        let bottomPadding = UIApplication.shared.safeArea.bottom + height 
+        self.map.setEdgeInsets(.init(top: UIApplication.shared.safeArea.top, left: 0, bottom: bottomPadding, right: 0, animated: true, onEnd: nil))
     }
     
     func setDelegate(_ delegate: HomeMapViewModelDelegate) {
@@ -95,7 +103,7 @@ extension HomeMapViewModel {
     
     private func onLocationPermissionChanged(with status: LocationAuthorizationStatus) {
         Task { @MainActor in
-            self.geoPermission = .denied
+            self.geoPermission = status
         }
     }
 }
