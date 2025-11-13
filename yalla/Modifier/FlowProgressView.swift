@@ -9,21 +9,21 @@ struct ColoredStripedBarDemo: View {
         VStack(spacing: 16) {
             FlowProgressView(
                 progress: progress,
-                trackColor: .iBackgroundSecondary,
                 fillGradient: LinearGradient(
                     colors: [.red, .iPrimaryDark],
-                    startPoint: .leading, endPoint: .trailing
-                ),
-                stripeColor: .iBackgroundSecondary.opacity(0.20),
-                stripeWidth: 7,
-                stripeGap: 7,
-                stripeAngle: 30,
-                direction: .leftToRight,
-                speed: 40,
-                showMarker: true,
-                markerSizeFactor: 2,
-                markerYOffset: 0,
-                markerImageName: "icon_gold_coin"
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .frame(height: 14)
+            
+            FlowProgressView(
+                progress: progress,
+                fillGradient: LinearGradient(
+                    colors: [.blue, .purple],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
             )
             .frame(height: 14)
 
@@ -37,30 +37,27 @@ struct ColoredStripedBarDemo: View {
     }
 }
 
-// MARK: - Striped Progress Bar (time-driven stripes like your sample)
+// MARK: - Striped Progress Bar (refactored with defaults)
 struct FlowProgressView: View {
     enum Direction { case leftToRight, rightToLeft }
 
-    // Value (0...1 expected here)
-    var progress: Double
+    // REQUIRED parameters
+    let progress: Double
+    let fillGradient: LinearGradient
 
-    // Visuals
-    var trackColor: Color
-    var fillGradient: LinearGradient
-    var stripeColor: Color
-    var stripeWidth: CGFloat
-    var stripeGap: CGFloat
-    var stripeAngle: CGFloat
-
-    // Motion
-    var direction: Direction
-    var speed: CGFloat                     // points/sec
-
-    // Marker
-    var showMarker: Bool = true
-    var markerSizeFactor: CGFloat = 0.7
-    var markerYOffset: CGFloat = -6
-    var markerImageName: String? = nil
+    // OPTIONAL parameters with defaults
+    var trackColor: Color = .iBackgroundSecondary
+    var stripeColor: Color = Color.iBackgroundSecondary.opacity(0.20)
+    var stripeWidth: CGFloat = 7
+    var stripeGap: CGFloat = 7
+    var stripeAngle: CGFloat = 30
+    var direction: Direction = .leftToRight
+    var speed: CGFloat = 40
+    var showMarker: Bool = false
+    var markerSizeFactor: CGFloat = 2
+    var markerYOffset: CGFloat = 0
+    var markerImageName: String? = ""
+    var height: Double = 14
 
     var body: some View {
         GeometryReader { geo in
@@ -109,15 +106,16 @@ struct FlowProgressView: View {
                     }
                 }
         }
+        .frame(height: height)
     }
 }
 
-// MARK: - Canvas with TimelineView (matches your sample’s approach)
+// MARK: - Canvas with TimelineView (matches your sample's approach)
 private struct StripesCanvasTimeDriven: View {
     var speed: CGFloat                 // points/sec
     var stripeWidth: CGFloat
     var stripeGap: CGFloat
-    var angle: CGFloat                 // degrees; positive = “/” slant
+    var angle: CGFloat                 // degrees; positive = "/" slant
     var color: Color
     var direction: FlowProgressView.Direction = .leftToRight
 
