@@ -112,9 +112,6 @@ enum SideMenuRoute: @MainActor SceneDestination {
             EditProfileView()
         case .cancelOrderReason(_):
             EmptyView()
-//            CancelOrder(completion: completion)
-//        case .rideInfo(let delegate):
-//            RideDetailsView(delegate: delegate)
         case .notifications:
             NotificationsView()
         case .custom(let view):
