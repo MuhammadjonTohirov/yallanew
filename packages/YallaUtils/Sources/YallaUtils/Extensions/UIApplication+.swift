@@ -47,6 +47,14 @@ extension UIApplication {
         safeArea.top > 51
     }
     
+    var colorScheme: UIUserInterfaceStyle {
+        guard let activeView = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else {
+            return .light
+        }
+        
+        return activeView.overrideUserInterfaceStyle
+    }
+    
     func dismissKeyboard() {
         guard let activeView = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else {
             return

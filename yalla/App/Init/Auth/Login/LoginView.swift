@@ -14,39 +14,42 @@ struct LoginView: View {
     @State private var focus: Bool = false
     @FocusState private var isFocused: Bool
     @StateObject var viewModel: LoginViewModel = .init()
+    
+    @EnvironmentObject var navigator: Navigator
+    
     var body: some View {
-        NavigationStack {
-            ZStack {
-                RadialGradient(stops: [
-                    .init(color: .iPrimaryLite.opacity(1), location: 0),
-                    .init(color: .iPrimaryDark.opacity(1), location: 1),
-                ], center: .top, startRadius: 0, endRadius: 300)
-                .ignoresSafeArea()
-                
-                innerBody
-            }
-            .navigationDestination(isPresented: $viewModel.pushRoute) {
-                viewModel.route?.screen
-                    .environmentObject(viewModel)
-            }
-
-            .sheet(isPresented: $viewModel.presentOTP) {
-                if let vm = viewModel.otpViewModelForSheet {
-                    NavigationStack {
-                        SecurityCodeInputView(viewModel: vm)
-                            .navigationBarTitleDisplayMode(.inline)
-                            .toolbar {
-                                ToolbarItem(placement: .topBarLeading) {
-                                    DismissCircleButton()
-                                }
+        ZStack {
+            RadialGradient(stops: [
+                .init(color: .iPrimaryLite.opacity(1), location: 0),
+                .init(color: .iPrimaryDark.opacity(1), location: 1),
+            ], center: .top, startRadius: 0, endRadius: 300)
+            .ignoresSafeArea()
+            
+            innerBody
+        }
+        .navigationDestination(for: AuthRoute.self) { route in
+            route.scene
+                .environmentObject(viewModel)
+        }
+        .sheet(isPresented: $viewModel.presentOTP) {
+            if let vm = viewModel.otpViewModelForSheet {
+                NavigationStack {
+                    SecurityCodeInputView(viewModel: vm)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarLeading) {
+                                DismissCircleButton()
                             }
-                    }
-                    .presentationDetents([.large])
-                    .presentationDragIndicator(.visible)
-                    .presentationCornerRadius(40)
-                    .interactiveDismissDisabled(false)
+                        }
                 }
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
+                .presentationCornerRadius(40)
+                .interactiveDismissDisabled(false)
             }
+        }
+        .onAppear {
+            viewModel.setNavigator(navigator)
         }
     }
     
@@ -123,6 +126,7 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
+        .environmentObject(Navigator())
         .onAppear {
             UserSettings.shared.language = Language.russian.code
         }

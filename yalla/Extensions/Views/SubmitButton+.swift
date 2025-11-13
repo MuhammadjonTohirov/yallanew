@@ -48,5 +48,4 @@ struct SubmitButtonFactory {
     SubmitButtonFactory.secondary(title: "OK") {
         debugPrint("Come on")
     }
-//    .set(isLoading: true)
 }

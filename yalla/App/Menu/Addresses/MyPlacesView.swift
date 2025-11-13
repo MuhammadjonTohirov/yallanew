@@ -88,6 +88,7 @@ struct MyPlacesView: View {
                 Image.icon("icon_edit_2")
                 Text("update.address")
                     .font(.bodyBaseMedium)
+                    .foregroundStyle(.iLabel)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 60.scaled)
@@ -101,6 +102,7 @@ struct MyPlacesView: View {
                 Image.icon("icon_trash", color: Color.red)
                 Text("delete.address".localize)
                     .font(.bodyBaseMedium)
+                    .foregroundStyle(.iLabel)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 60.scaled)

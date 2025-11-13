@@ -1,5 +1,5 @@
 {
-  "originHash" : "f10e740bf7139419bae0d39848763ff3eb333805844b1e67ea2f859938dcfbb6",
+  "originHash" : "43304296ab64285532619d24ea5457c05484c5a01cc1bd5e4a967eabb2100e86",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -106,7 +106,7 @@
       "location" : "https://github.com/MuhammadjonTohirov/imap",
       "state" : {
         "branch" : "main",
-        "revision" : "f40bf1801d11d77bbc058e608aa6f77347b95693"
+        "revision" : "5f98a8ece73f99a57f617293635313ef2530b836"
       }
     },
     {

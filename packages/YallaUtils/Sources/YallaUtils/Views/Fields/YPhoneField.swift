@@ -69,7 +69,6 @@ public struct YPhoneField: View, TextFieldProtocol {
             text: $text,
             onEditingChanged: { changed in
                 onEditingChanged(changed)
-                print("\(changed) \(text)")
             },
             
             onCommit: onCommit

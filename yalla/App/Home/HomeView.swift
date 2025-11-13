@@ -12,7 +12,7 @@ import Core
 
 struct HomeView: View {
     @StateObject
-    private var viewModel: HomeViewModel = .init()
+    var viewModel: HomeViewModel = .init()
     
     @StateObject
     private var navigator: Navigator = .init()
@@ -20,12 +20,16 @@ struct HomeView: View {
     var body: some View {
         NavigationStack(path: $navigator.path) {
             ZStack {
-                Image("image_map_example")
-                    .resizable()
-                    .frame(width: UIApplication.shared.screenFrame.width)
-                    .ignoresSafeArea()
+                if let map = viewModel.map {
+                    HomeMapView(viewModel: map)
+                        .environmentObject(viewModel)
+                }
                 
                 innerBody
+                
+                if let sheetModel = viewModel.sheetModel {
+                    HomeIdelBottomSheet(viewModel: sheetModel, homeModel: self.viewModel)
+                }
             }
             .navigationDestination(for: HomeRoute.self) { route in
                 route.scene
@@ -35,8 +39,15 @@ struct HomeView: View {
                 route.scene
                     .environmentObject(navigator)
             }
+            .appSheet(isPresented: $viewModel.loginRequiredAlert) { authRequiredSheet }
+            .sheet(isPresented: $viewModel.showAddressPicker) {
+                if let vm = viewModel.selectAddressViewModel {
+                    SelectAddressView(viewModel: vm)
+                }
+            }
         }
         .onAppear {
+            viewModel.onAppear()
             viewModel.setNavigator(navigator)
         }
     }
@@ -44,21 +55,13 @@ struct HomeView: View {
     var innerBody: some View {
         VStack {
             HomeHeaderView(onClickMenu: {
-                viewModel.showMenu()
+                Task { @MainActor in
+                    await viewModel.showMenu()
+                }
             })
             .padding(.horizontal, AppParams.Padding.default)
             
             Spacer()
-            
-            HomeIdelBottomSheet()
-                .padding(.top, 28.scaled)
-                .background()
-                .cornerRadius(AppParams.Radius.large.scaled, corners: [.topLeft, .topRight])
-                .background(
-                    RoundedRectangle(cornerRadius: AppParams.Radius.large.scaled)
-                        .ignoresSafeArea()
-                        .foregroundStyle(Color.background)
-                )
         }
     }
 }

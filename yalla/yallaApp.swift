@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import Core
+import YallaUtils
 import Firebase
 import IldamSDK
 
@@ -16,8 +17,11 @@ struct yallaApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @UIApplicationDelegateAdaptor(ApplicationDelegate.self) var delegate
     @StateObject private var settingsStore: SettingsStore = .shared
+    @Environment(\.colorScheme)
+    private var colorScheme: ColorScheme
     
     let viewModel = MainViewModel(route: .loading)
+    
     var body: some Scene {
         WindowGroup {
             MainView(viewModel: viewModel)
@@ -38,6 +42,10 @@ struct yallaApp: App {
                 .preferredColorScheme(
                     .init(.init(rawValue: settingsStore.theme) ?? UIUserInterfaceStyle.unspecified)
                 )
+                .onChange(of: colorScheme) { newValue in
+                    debugPrint("Color scheme changed to \(newValue == .dark ? "dark" : "light")")
+                    YallaUtils.YallaAlertManager.shared.colorScheme = newValue == .dark ? .dark : .light
+                }
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {

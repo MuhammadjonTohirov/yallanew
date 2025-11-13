@@ -26,6 +26,9 @@ struct SelectAddressView: View {
     private var isAnythingSearched: Bool {
         !viewModel.fromAddressText.isEmpty || !viewModel.toAddressText.isEmpty
     }
+    
+    @State
+    private var headerRect: CGRect = .zero
         
     var body: some View {
         innerBody
@@ -62,11 +65,7 @@ struct SelectAddressView: View {
     }
     
     private var addressListView: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            fieldsView
-                .padding(.horizontal, AppParams.Padding.large)
-                .padding(.top, AppParams.Padding.default)
-
+        ZStack(alignment: .leading) {
             ZStack {
                 LazyVStack(spacing: 0) {
                     ForEach(viewModel.addressList) { address in
@@ -76,15 +75,15 @@ struct SelectAddressView: View {
                             detail: address.name ?? "",
                             distance: address.distanceString
                         )
+                        .frame(height: 60)
                         .onTapped {
                             self.viewModel.onSelect(address: address)
                             self.dismiss.callAsFunction()
                         }
-                        .frame(height: 60)
                     }
                 }
+                .padding(.top, headerRect.height + 10)
                 .scrollable()
-                .padding(.top, 10)
                 .opacity(viewModel.isLoading ? 0 : 1)
                 .background {
                     RoundedRectangle(cornerRadius: 20)
@@ -94,11 +93,23 @@ struct SelectAddressView: View {
 
                 AddressSearchingLoadingView(isLoading: viewModel.isLoading)
                     .animation(.easeInOut(duration: 0.2), value: viewModel.isLoading)
-                    .padding(.top, 20)
+                    .padding(.top, headerRect.height + 10)
                     .scrollable()
                     .id(viewModel.isLoading ? "loading" : "")
                     .opacity(viewModel.isLoading ? 1 : 0)
             }
+            
+            fieldsView
+                .padding(.horizontal, AppParams.Padding.large)
+                .padding(.top, AppParams.Padding.default + 10)
+                .readRect { rect in
+                    headerRect = rect
+                }
+                .background(
+                    .iBackground,
+                    in: RoundedRectangle(cornerRadius: 8, style: .continuous)
+                )
+                .vertical(alignment: .top)
         }
         .sheet(isPresented: $viewModel.showMap, content: {
             NavigationStack {
