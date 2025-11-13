@@ -64,17 +64,19 @@ class SelectAddressViewModel: ObservableObject {
     func onAppear() {
         shouldDismiss = false
         mapModel.set(delegate: self)
-        
+
         if didAppear {
            return
         }
         
         didAppear = true
         setupAddressText()
+        Logging.l(tag: "SelectAddressViewModel", "onAppear")
     }
     
     private func setupAddressText() {
-        Task {
+        Task.detached { [weak self] in
+            guard let self else { return }
             await MainActor.run {
                 self.fromAddress = self.input?.fromLocation
                 self.toAddress = self.input?.toLocation
@@ -165,15 +167,11 @@ class SelectAddressViewModel: ObservableObject {
         var location: CLLocation!
         
         location = (selectedField == .from ? self.fromAddress?.coordinate : self.toAddress?.coordinate)
-        
-        if location == nil, let pickedLocation = await TaxiOrderConfigProvider.shared.config.from?.location {
-            location = pickedLocation
-        }
-        
+
         guard let location else {
             return
         }
-        
+
         guard let _addresses = try? await interactor.fetchSecondaryAddresses(
             lat: location.coordinate.latitude,
             lng: location.coordinate.longitude
@@ -250,6 +248,7 @@ class SelectAddressViewModel: ObservableObject {
     }
     
     func onDisappear() {
+        didAppear = false
         if input?.toLocation == nil, let new = toAddress {
             self.delegate?.onSelect(model: self, toAddress: new.address, toCoordinate: new.coordinate)
         } else if let from = self.input?.toLocation {

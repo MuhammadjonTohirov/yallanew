@@ -10,7 +10,8 @@ import IldamSDK
 import Core
 
 extension HomeViewModel: SelectAddressDelegate {
-    func onClickToButton() {
+    @MainActor
+    func onClickToButton() async {
         guard let currentLocation = self.map?.pickedLocation,
               let currentAddress = currentLocation.name.nilIfEmpty
         else {
@@ -19,10 +20,10 @@ extension HomeViewModel: SelectAddressDelegate {
         
         var toAddress: SelectAddressItem?
         
-//        if let second = model.route.first {
-//            toAddress = .init(id: second.id,address: second.address, coordinate: second.location)
-//        }
-        
+        if let second = await TaxiOrderConfigProvider.shared.config.allPoints.last {
+            toAddress = .init(id: second.id,address: second.address, coordinate: second.location)
+        }
+
         self.selectAddressViewModel = .init(
             fromLocation: .init(
                 address: currentAddress,

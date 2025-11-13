@@ -18,8 +18,14 @@ extension HomeMapViewModel: UniversalMapViewModelDelegate {
         Task {
             do {
                 let location = try await interactor.fetchAddress(at: location)
+                
+                if let location {
+                    await TaxiOrderConfigProvider.shared.set(addressResponse: location)
+                }
+                
                 await MainActor.run {
                     self.pickedLocation = location
+                    
                     if let location {
                         self.map.set(addressViewInfo: .init(name: location.name, location: location.coord))
                     }
@@ -42,3 +48,12 @@ extension HomeMapViewModel: UniversalMapViewModelDelegate {
     }
 }
 
+private extension TaxiOrderConfigProviderProtocol {
+    func set(selectAddress resp: SelectAddressItem) async {
+        await self.set(from: resp.routePoint)
+    }
+    
+    func set(addressResponse resp: AddressResponse) async {
+        await self.set(from: resp.gpoint)
+    }
+}

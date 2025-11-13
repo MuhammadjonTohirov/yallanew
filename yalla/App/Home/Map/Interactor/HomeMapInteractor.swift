@@ -10,11 +10,11 @@ import IldamSDK
 import CoreLocation
 
 protocol HomeMapInteractorProtocol {
-    func fetchAddress(at location: CLLocation) async throws -> AddressResponse?
+    mutating func fetchAddress(at location: CLLocation) async throws -> AddressResponse?
 }
 
 struct HomeMapInteractor: HomeMapInteractorProtocol {
-    func fetchAddress(at location: CLLocation) async throws -> AddressResponse? {
+    mutating func fetchAddress(at location: CLLocation) async throws -> AddressResponse? {
         try await GetAddressUseCaseWrapper().fetchAddress(at: location.coordinate)
     }
 }

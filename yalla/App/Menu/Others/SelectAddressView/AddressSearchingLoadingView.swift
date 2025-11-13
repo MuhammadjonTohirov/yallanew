@@ -18,6 +18,9 @@ struct AddressSearchingLoadingView: View {
     
     private var loadingView: some View {
         VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .center) {
+                ProgressView()
+            }.frame(maxWidth: .infinity)
             rowItem
                 .redacted(reason: .placeholder)
             rowItem
@@ -41,7 +44,7 @@ struct AddressSearchingLoadingView: View {
                     .frame(width: 161, height: 16)
             }
         }
-        .foregroundStyle(Color.iLabel.opacity(0.2))
+        .foregroundStyle(Color.iLabel.opacity(0.1))
         .frame(height: 60)
     }
 }

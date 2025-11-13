@@ -40,7 +40,7 @@ final class HomeMapViewModel: ObservableObject {
     
     func onAppear() {
         map.setInteractionDelegate(self)
-        
+
         if didAppear { return }; didAppear = true
         
         // DO something on appear
@@ -49,6 +49,7 @@ final class HomeMapViewModel: ObservableObject {
     }
     
     func setup() {
+        
         map.set(hasAddressPicker: true)
         map.set(hasAddressView: true)
         map.showUserLocation(true)

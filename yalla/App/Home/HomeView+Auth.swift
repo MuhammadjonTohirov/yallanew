@@ -28,9 +28,7 @@ extension HomeView {
             }
             
             SubmitButtonFactory.primary(title: "auth".localize) {
-                Task { @MainActor in
-                    await viewModel.showAuth()
-                }
+                viewModel.showAuth()
             }
             .padding([.horizontal], AppParams.Padding.default.scaled)
             .padding(.top, AppParams.Padding.extraLarge.scaled)
