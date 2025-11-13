@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0534E2DF2EBB5A720018FDD2 /* MapPack in Frameworks */ = {isa = PBXBuildFile; productRef = 0534E2DE2EBB5A720018FDD2 /* MapPack */; };
+		05A1B4572EC5F342005C8A13 /* YallaSlidingSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 05A1B4562EC5F342005C8A13 /* YallaSlidingSheet */; };
 		05F735702EB0E3DC006FE02B /* SQBCardScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 05F7356F2EB0E3DC006FE02B /* SQBCardScanner */; };
 		521A84222EAF9F9300DF1244 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 521A84212EAF9F9300DF1244 /* SwiftMessages */; };
 		5267884F2E9E629D0004CB10 /* NetworkMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 5267884E2E9E629D0004CB10 /* NetworkMonitor */; };
@@ -83,6 +84,7 @@
 				526788602E9E68F40004CB10 /* FirebaseAnalytics in Frameworks */,
 				526788522E9E66170004CB10 /* FirebaseCore in Frameworks */,
 				526788542E9E66170004CB10 /* FirebaseCrashlytics in Frameworks */,
+				05A1B4572EC5F342005C8A13 /* YallaSlidingSheet in Frameworks */,
 				5275198F2E98C93E002C726B /* IldamSDK in Frameworks */,
 				521A84222EAF9F9300DF1244 /* SwiftMessages in Frameworks */,
 				0534E2DF2EBB5A720018FDD2 /* MapPack in Frameworks */,
@@ -238,6 +240,7 @@
 				521A84212EAF9F9300DF1244 /* SwiftMessages */,
 				05F7356F2EB0E3DC006FE02B /* SQBCardScanner */,
 				0534E2DE2EBB5A720018FDD2 /* MapPack */,
+				05A1B4562EC5F342005C8A13 /* YallaSlidingSheet */,
 			);
 			productName = yalla;
 			productReference = 527519772E98C76E002C726B /* yalla.app */;
@@ -645,6 +648,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0534E2DD2EBB5A720018FDD2 /* XCRemoteSwiftPackageReference "imap" */;
 			productName = MapPack;
+		};
+		05A1B4562EC5F342005C8A13 /* YallaSlidingSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = YallaSlidingSheet;
 		};
 		05F7356F2EB0E3DC006FE02B /* SQBCardScanner */ = {
 			isa = XCSwiftPackageProductDependency;
