@@ -14,10 +14,20 @@ import CoreLocation
 protocol MeInfoProviderProtocol: Sendable {
     // Make the getter async so actor conformers are valid and callers must await.
     var userInfo: YallaKit.UserInfo? { get async }
+    
+    @discardableResult
+    func syncUserInfo() async throws -> YallaKit.UserInfo?
 }
 
-final class MeInfoProvider: MeInfoProviderProtocol {
-    static let shared: MeInfoProvider = .init()
+final class MeMockInfoProvider: MeInfoProvider {
+    override func syncUserInfo() async throws -> UserInfo? {
+        setUserInfo(.mock)
+        return .mock
+    }
+}
+
+class MeInfoProvider: MeInfoProviderProtocol {
+    static var shared: MeInfoProviderProtocol = MeInfoProvider.init()
     
     var userInfo: YallaKit.UserInfo?
     
@@ -34,5 +44,11 @@ final class MeInfoProvider: MeInfoProviderProtocol {
         let info = await AuthService.shared.getUserInfo()
         setUserInfo(info?.userInfo)
         return info?.userInfo
+    }
+}
+
+extension MeInfoProvider {
+    static func setupForMock() {
+        MeInfoProvider.shared = MeMockInfoProvider()
     }
 }

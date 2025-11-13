@@ -8,44 +8,83 @@
 import Foundation
 import Combine
 import YallaUtils
-import SwiftUI
+import Core
+import MapPack
 
-enum HomeRoute: SceneDestination {
-    var id: String { "\(self)" }
-    
-    case menu(model: SideMenuViewModel)
-    
-    @MainActor
-    var scene: some View {
-        switch self {
-        case .menu(let model):
-            SideMenuBody(viewModel: model)
-        }
-    }
-    
-    static func ==(lhs: HomeRoute, rhs: HomeRoute) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
-actor HomeViewModel: ObservableObject {
-    @MainActor
+final class HomeViewModel: ObservableObject {
     var navigator: Navigator?
     
     @MainActor
+    @Published
+    private(set) var map: HomeMapViewModel?
+    
+    @Published
+    var showAddressPicker: Bool = false
+    
+    private(set) var sheetModel: HomeIdleSheetViewModel?
+    
+    var selectAddressViewModel: SelectAddressViewModel?
+    
+    private(set) var interactor: any HomeInteractorProtocol
+    
+    private var didAppear: Bool = false
+    
+    init(interactor: any HomeInteractorProtocol = HomeInteractorFactory.create()) {
+        self.interactor = interactor
+    }
+    
+    @MainActor
+    @Published var loginRequiredAlert: Bool = false
+    
     func setNavigator(_ navigator: Navigator) {
         self.navigator = navigator
     }
     
-    @MainActor
-    func showMenu() {
+    func onAppear() {
+        if didAppear { return }; didAppear = true
+        Logging.l(tag: "HomeViewModel", "onAppear")
+        Task { @MainActor in
+            HomePropertiesHolder.shared.setup()
+            self.sheetModel = .init()
+            self.map = .init()
+            self.map?.setDelegate(self)
+        }
+        
+        self.syncPrerequisitesIfNeeded()
+    }
+}
+
+extension HomeViewModel {
+    // MARK: - Actions
+    
+    func showMenu() async {
+        guard await interactor.hasUser() else {
+            showLoginRequiredAlert()
+            return
+        }
+        
         guard let navigator else { return }
-        let menuViewModel = SideMenuViewModel()
-        menuViewModel.setNavigator(navigator)
-        navigator.push(HomeRoute.menu(model: menuViewModel))
+
+        Task { @MainActor in
+            let menuViewModel = SideMenuViewModel()
+            menuViewModel.setNavigator(navigator)
+            navigator.push(HomeRoute.menu(model: menuViewModel))
+        }
+    }
+    
+    @MainActor
+    private func showLoginRequiredAlert() {
+        loginRequiredAlert = true
+    }
+}
+
+extension HomeViewModel {
+    // MARK: Auth
+    func showAuth() {
+        let _navigator = navigator
+        Task { @MainActor in
+            loginRequiredAlert = false
+            _navigator?.push(HomeRoute.auth)
+        }
     }
 }

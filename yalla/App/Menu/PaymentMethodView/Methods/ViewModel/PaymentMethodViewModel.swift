@@ -54,9 +54,9 @@ actor PaymentMethodsViewModel: ObservableObject {
     @MainActor
     var bonus: Float = 0
     
-    private var interactor: (any PaymentMethodsInteractorProtocol)
+    private let interactor: (any PaymentMethodsInteractorProtocol)
     
-    init(interactor: (any PaymentMethodsInteractorProtocol) = PaymentMethodsMockInteractor()) {
+    init(interactor: any PaymentMethodsInteractorProtocol = PaymentMethdosInteractorFactory.create()) {
         self.interactor = interactor
     }
     

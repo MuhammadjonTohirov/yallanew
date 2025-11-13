@@ -17,12 +17,12 @@
 		<key>Associations (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>11</integer>
 		</dict>
 		<key>MapLibreTest (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>9</integer>
 		</dict>
 		<key>MyPlayground (Playground) 1.xcscheme</key>
 		<dict>
@@ -37,7 +37,7 @@
 		<key>MyPlayground (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>13</integer>
 		</dict>
 		<key>Promises (Playground) 1.xcscheme</key>
 		<dict>
@@ -52,7 +52,7 @@
 		<key>Promises (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>10</integer>
 		</dict>
 		<key>Tour (Playground) 1.xcscheme</key>
 		<dict>
@@ -67,7 +67,7 @@
 		<key>Tour (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>12</integer>
 		</dict>
 		<key>TransactionObserver (Playground) 1.xcscheme</key>
 		<dict>
@@ -82,12 +82,17 @@
 		<key>TransactionObserver (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>14</integer>
 		</dict>
 		<key>yalla.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>yallaMock.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>yallaTestUI.xcscheme_^#shared#^_</key>
 		<dict>

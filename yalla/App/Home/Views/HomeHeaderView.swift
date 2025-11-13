@@ -10,7 +10,11 @@ import SwiftUI
 import YallaUtils
 
 struct HomeHeaderView: View {
+    @StateObject
+    private var valueHolder: HomePropertiesHolder = .shared
+    
     var onClickMenu: () -> Void = { }
+    
     var body: some View {
         HStack {
             Button(action: {
@@ -34,10 +38,12 @@ struct HomeHeaderView: View {
                 }
             })
             .glassyButtonSyle
+            
             Spacer()
             
             HomeBonusCapsule()
         }
+        .opacity(valueHolder.isBottomSheetMinimized ? 0 : 1)
     }
 }
 

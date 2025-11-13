@@ -49,7 +49,7 @@ public struct SubmitButton<Content: View>: View {
                     .opacity(isLoading ? 0 : 1)
             }
         }
-        .buttonStyle(CustomPressEffectButtonStyle.init(
+        .buttonStyle(PrimaryButtonEffect.init(
             normalColor: backgroundColor,
             pressedColor: pressedColor
         ))
@@ -85,7 +85,7 @@ public struct SubmitButton<Content: View>: View {
     }
 }
 
-struct CustomPressEffectButtonStyle: ButtonStyle {
+struct PrimaryButtonEffect: ButtonStyle {
     var normalColor: Color
     var pressedColor: Color
 

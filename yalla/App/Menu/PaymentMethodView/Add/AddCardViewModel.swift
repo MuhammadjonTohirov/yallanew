@@ -23,7 +23,7 @@ class AddCardViewModel: ObservableObject {
     private var key: String = ""
     private let interactor: any AddCardInteractorProtocol
     
-    init(interactor: any AddCardInteractorProtocol = AddCardMockInteractor()) {
+    init(interactor: any AddCardInteractorProtocol = AddCardInteractorFactory.create()) {
         self.interactor = interactor
     }
 

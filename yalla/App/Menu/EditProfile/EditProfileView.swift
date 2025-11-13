@@ -247,11 +247,12 @@ struct EditProfileView: View {
             }, set: { date in
                 viewModel.birthDate = date
             }),
-            in: ...Date(),
+            in: Date().before(years: 100)...Date(),
             displayedComponents: .date,
-            label: { EmptyView() }
+            label: { EmptyView().frame(width: 0) }
         )
-        .datePickerStyle(.graphical)
+        .labelsHidden()
+        .datePickerStyle(.wheel)
     }
     private var photoPickSheetView: some View {
         VStack(alignment: .leading, spacing: 10.scaled) {

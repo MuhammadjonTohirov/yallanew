@@ -105,3 +105,13 @@ public extension View {
     }
 }
 
+extension View {
+    @ViewBuilder
+    func visibility(_ isVisible: Bool) -> some View {
+        if isVisible {
+            self
+        } else {
+            EmptyView()
+        }
+    }
+}

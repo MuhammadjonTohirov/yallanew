@@ -11,8 +11,9 @@ import Core
 import YallaKit
 import Combine
 import IldamSDK
+import YallaUtils
 
-enum AuthRoute: @MainActor ScreenRoute, Hashable {
+enum AuthRoute: Hashable, SceneDestination {
     static func == (lhs: AuthRoute, rhs: AuthRoute) -> Bool {
         lhs.id == rhs.id
     }
@@ -22,35 +23,26 @@ enum AuthRoute: @MainActor ScreenRoute, Hashable {
     }
     
     var id: String {
-        switch self {
-        case .registerProfile:
-            return "registerProfile"
-        case .confirmOTP:
-            return "confirmOTP"
-        }
+        "\(self)"
     }
     
-    case registerProfile
     case confirmOTP(vm: OTPViewModel)
+    case register
     
+    @MainActor
     @ViewBuilder
-    var screen: some View {
+    var scene: some View {
         switch self {
-        case .registerProfile:
-            EmptyView()
         case .confirmOTP(let vm):
             SecurityCodeInputView(viewModel: vm)
+        case .register:
+            RegisterProfileView()
         }
     }
 }
 
 class LoginViewModel: ObservableObject {
-    // Route used for non-OTP flows (e.g., register)
-    var route: AuthRoute? {
-        didSet {
-            pushRoute = route != nil
-        }
-    }
+    private var navigator: Navigator?
     
     @Published var pushRoute = false
     
@@ -76,6 +68,10 @@ class LoginViewModel: ObservableObject {
     }
     
     private var otpCode: Int = -1
+    
+    func setNavigator(_ navigator: Navigator?) {
+        self.navigator = navigator
+    }
     
     func sendOTP() {
         guard !phoneNumber.isEmpty else {
@@ -128,30 +124,26 @@ class LoginViewModel: ObservableObject {
         self.presentOTP = true
     }
     
+    @MainActor
     private func onSuccessConfirmOTP(_ isNewClient: Bool) {
-        DispatchQueue.main.async {
-            // Dismiss OTP sheet before next navigation
-            self.presentOTP = false
-            
-            if isNewClient {
-                Logging.l(tag: "AuthViewModel", "Show register profile (new \(isNewClient))")
-                self.showRegister()
-            } else {
-                self.showMain()
-            }
+        self.presentOTP = false
+        
+        if isNewClient {
+            Logging.l(tag: "AuthViewModel", "Show register profile (new \(isNewClient))")
+            self.showRegister()
+        } else {
+            self.showMain()
         }
     }
     
+    @MainActor
     private func showMain() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-            mainModel?.navigate(to: .home)
-        }
+        mainModel?.navigate(to: .loading)
     }
     
+    @MainActor
     private func showRegister() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.route = .registerProfile
-        }
+        navigator?.push(AuthRoute.register)
     }
     
     @MainActor

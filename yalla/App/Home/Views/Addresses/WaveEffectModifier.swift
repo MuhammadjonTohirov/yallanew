@@ -23,16 +23,17 @@ struct WaveEffectModifier: ViewModifier {
         if colorScheme == .dark {
             return .init(hex: "#2B2C37")
         } else {
-            return .init(hex: "#F2F2F2")
+            return .white
         }
     }
     
     private var toColor: Color {
-        if colorScheme == .dark {
-            return .init(hex: "#21222B")
-        } else {
-            return .white
-        }
+//        if colorScheme == .dark {
+//            return .init(hex: "#21222B")
+//        } else {
+//            return .secondaryBackground
+//        }
+        .secondaryBackground
     }
     
     var largeningPercentage: CGFloat = 0.6
@@ -42,11 +43,12 @@ struct WaveEffectModifier: ViewModifier {
         content
             .readRect(rect: $objectSize)
             .background {
-                fiveLayerCircularBackground()
+                circularwaveBackground()
+                    .allowsHitTesting(false)
             }
     }
     
-    private func fiveLayerCircularBackground() -> some View {
+    private func circularwaveBackground() -> some View {
         ZStack {
             ForEach(0..<waveCount, id: \.self) {
                 self.circleBackground(layerIndex: $0)
@@ -77,7 +79,7 @@ struct WaveEffectModifierPreview: View {
     var body: some View {
         Image("icon_x")
             .readRect(rect: $objectSize)
-            .background()
+            .background(.clear)
             .cornerRadius(objectSize.width / 2, corners: .allCorners)
             .modifier(WaveEffectModifier())
     }

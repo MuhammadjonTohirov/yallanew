@@ -92,8 +92,8 @@ final class PermissionsViewModel: ObservableObject {
         case .location:
             currentPermission = .notification
         case .notification:
-            OnboardingFlags.didShowPermissions = true
-            mainModel?.navigate(to: .auth)
+            UserSettings.shared.didShowPermissions = true
+            mainModel?.navigate(to: .loading)
         }
     }
     
@@ -121,8 +121,8 @@ final class PermissionsViewModel: ObservableObject {
         switch status {
         case .authorized, .denied:
             await MainActor.run {
-                OnboardingFlags.didShowPermissions = true
-                mainModel?.navigate(to: .auth)
+                UserSettings.shared.didShowPermissions = true
+                mainModel?.navigate(to: .loading)
             }
         case .notDetermined:
             hasError = true

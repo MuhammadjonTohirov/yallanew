@@ -291,7 +291,9 @@ struct SideMenuBody: View {
             }
             
             Image(systemName: "chevron.right")
+                .renderingMode(.template)
                 .font(.system(size: 14))
+                .foregroundStyle(Color.iLabel)
         }
         .frame(height: 60)
         .overlay {

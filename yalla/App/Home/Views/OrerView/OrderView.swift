@@ -75,7 +75,7 @@ struct OrderView: View {
                     Image.icon("icon_add_circle")
                         .aspectRatio(contentMode: .fill)
                             
-                    Text("Заказать еще")
+                    Text(verbatim: "Заказать еще")
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(Color.iLabel)
                     
